@@ -250,20 +250,20 @@
     }
     .slide-headline {
       font-family: 'Poppins', sans-serif; font-weight: 700;
-      font-size: 22px; line-height: 1.25; color: var(--cf-charcoal);
-      margin-bottom: 18px; letter-spacing: -0.3px;
+      font-size: 20px; line-height: 1.25; color: var(--cf-charcoal);
+      margin-bottom: 14px; letter-spacing: -0.3px;
     }
     .slide-headline.hero {
       font-size: 30px; font-weight: 800; line-height: 1.12; margin-bottom: 12px;
       letter-spacing: -0.5px;
     }
     .slide-sub {
-      font-family: 'Montserrat', sans-serif; font-size: 14px;
-      color: var(--cf-grey-600); line-height: 1.55; margin-bottom: 20px; margin-top: -8px;
+      font-family: 'Montserrat', sans-serif; font-size: 13px;
+      color: var(--cf-grey-600); line-height: 1.5; margin-bottom: 14px; margin-top: -6px;
     }
     .q-label {
       font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      color: var(--cf-charcoal); margin-bottom: 12px; margin-top: 0;
+      color: var(--cf-charcoal); margin-bottom: 10px; margin-top: 0;
       letter-spacing: 0.1px; text-align: left; line-height: 1.35;
     }
     .q-divider { height: 1px; background: var(--cf-grey-200); margin: 14px 0; }
@@ -273,9 +273,9 @@
       position: relative;
       background: var(--cf-white);
       border: 1.5px solid var(--cf-grey-200);
-      border-radius: 14px;
-      padding: 16px 16px 14px 18px;
-      margin-bottom: 14px;
+      border-radius: 12px;
+      padding: 14px 14px 12px 16px;
+      margin-bottom: 12px;
       text-align: left;
       box-shadow: 0 1px 3px rgba(0,0,0,0.03);
       overflow: hidden;
@@ -294,17 +294,17 @@
     .q-block .slider-val { text-align: left; font-size: 16px; }
 
     /* -- CHOICES (mobile: single column, bigger touch) -- */
-    .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; text-align: left; }
-    .choices.g2 { display: flex; flex-direction: column; gap: 8px; }   /* always 1-col on mobile */
+    .choices { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; text-align: left; }
+    .choices.g2 { display: flex; flex-direction: column; gap: 6px; }   /* always 1-col on mobile */
     .choice {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 12px 14px;
       border: 1.5px solid var(--cf-grey-200); border-radius: 12px;
       cursor: pointer;
       background: rgba(255,255,255,0.88);
       width: 100%; user-select: none;
       transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
-      min-height: 52px;
+      min-height: 48px;
     }
     .choice:active { background: var(--cf-purple-wash); border-color: var(--cf-purple); }
     .choice.selected {
@@ -326,10 +326,10 @@
       border-top: none; border-left: none; transform: rotate(45deg);
     }
     .ct {
-      font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 500;
-      color: var(--cf-grey-800); line-height: 1.35;
+      font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 500;
+      color: var(--cf-grey-800); line-height: 1.4;
     }
-    .ct .sub { display: block; font-size: 12px; font-weight: 400; color: var(--cf-grey-600); margin-top: 2px; }
+    .ct .sub { display: block; font-size: 11px; font-weight: 400; color: var(--cf-grey-600); margin-top: 2px; }
 
     /* -- SCALE -- */
     .scale-wrap { margin-bottom: 14px; }
@@ -736,9 +736,9 @@
   <!-- HERO -->
   <div class="slide active" id="slide-hero" data-sec="0">
     <div class="slide-body">
-      <div class="slide-tag">A note from Cityfurnish</div>
-      <h1 class="slide-headline hero">You've been with us for a while. Let's actually listen.</h1>
-      <p class="slide-sub">Five minutes. Your words shape what we build next.</p>
+      <div class="slide-tag">From Cityfurnish</div>
+      <h1 class="slide-headline hero">You've been with us a while. Tell us how we're doing.</h1>
+      <p class="slide-sub">5 minutes. Your answers help us improve.</p>
     </div>
     <div class="slide-actions">
       <button class="btn-next" onclick="next()">Let's do this &#8594;</button>
@@ -749,16 +749,16 @@
   <div class="slide" id="slide-q1" data-sec="1">
     <div class="slide-body">
       <div class="slide-tag">Section 1 &middot; Your Setup</div>
-      <h2 class="slide-headline">What's Cityfurnish doing in your home right now?</h2>
+      <h2 class="slide-headline">What do you rent from us?</h2>
       <div class="choices g2" id="q1-ch">
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="bedroom">           <span class="dot"></span><span class="ct">Bedroom furniture<span class="sub">Beds, wardrobes, side tables</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="living-room">       <span class="dot"></span><span class="ct">Living room<span class="sub">Sofas, TV units, coffee tables</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="dining">            <span class="dot"></span><span class="ct">Dining furniture<span class="sub">Tables &amp; chairs</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="study">             <span class="dot"></span><span class="ct">Study / home office<span class="sub">Desks, chairs, bookshelves</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="storage">           <span class="dot"></span><span class="ct">Storage<span class="sub">Chests, shelving, organisers</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="kitchen-appliances"><span class="dot"></span><span class="ct">Kitchen appliances<span class="sub">Microwave, refrigerator, etc.</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="laundry">           <span class="dot"></span><span class="ct">Laundry appliance<span class="sub">Washing machine</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q1" value="entertainment">     <span class="dot"></span><span class="ct">Entertainment<span class="sub">TV, speakers</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="bedroom">           <span class="dot"></span><span class="ct">Bedroom<span class="sub">Bed, wardrobe, side tables</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="living-room">       <span class="dot"></span><span class="ct">Living room<span class="sub">Sofa, TV unit, table</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="dining">            <span class="dot"></span><span class="ct">Dining<span class="sub">Table, chairs</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="study">             <span class="dot"></span><span class="ct">Study<span class="sub">Desk, chair, shelves</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="storage">           <span class="dot"></span><span class="ct">Storage<span class="sub">Shelves, drawers</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="kitchen-appliances"><span class="dot"></span><span class="ct">Kitchen<span class="sub">Fridge, microwave</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="laundry">           <span class="dot"></span><span class="ct">Washing machine</span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="entertainment">     <span class="dot"></span><span class="ct">TV &amp; speakers</span></label>
         <label class="choice is-cb"><input type="checkbox" name="q1" value="mattress">          <span class="dot"></span><span class="ct">Mattress</span></label>
         <label class="choice is-cb"><input type="checkbox" name="q1" value="other">             <span class="dot"></span><span class="ct">Something else</span></label>
       </div>
@@ -773,19 +773,19 @@
   <div class="slide" id="slide-q2q4" data-sec="1">
     <div class="slide-body">
       <div class="slide-tag">Section 1 &middot; Your Setup</div>
-      <h2 class="slide-headline">A couple of quick things about you</h2>
+      <h2 class="slide-headline">About you</h2>
       <div class="q-block">
-        <div class="q-label">How long have you been with us?</div>
+        <div class="q-label">How long with us?</div>
         <div class="choices" id="q2-ch">
-          <label class="choice"><input type="radio" name="q2" value="18m-2y"><span class="dot"></span><span class="ct">18 months to 2 years</span></label>
-          <label class="choice"><input type="radio" name="q2" value="2-3y">  <span class="dot"></span><span class="ct">2 to 3 years</span></label>
-          <label class="choice"><input type="radio" name="q2" value="3-4y">  <span class="dot"></span><span class="ct">3 to 4 years</span></label>
-          <label class="choice"><input type="radio" name="q2" value="4-5y">  <span class="dot"></span><span class="ct">4 to 5 years</span></label>
-          <label class="choice"><input type="radio" name="q2" value="5y+">   <span class="dot"></span><span class="ct">More than 5 years &#128081;</span></label>
+          <label class="choice"><input type="radio" name="q2" value="18m-2y"><span class="dot"></span><span class="ct">1.5 - 2 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="2-3y">  <span class="dot"></span><span class="ct">2 - 3 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="3-4y">  <span class="dot"></span><span class="ct">3 - 4 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="4-5y">  <span class="dot"></span><span class="ct">4 - 5 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="5y+">   <span class="dot"></span><span class="ct">5+ years &#128081;</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">How much of your home is ours?</div>
+        <div class="q-label">How much of your home is from us?</div>
         <div class="slider-wrap">
           <div class="slider-val" id="sliderVal">About 50% of my home is Cityfurnish</div>
           <input type="range" class="cf-slider" id="q4sl" min="0" max="100" value="50" oninput="updateSlider(this.value)">
@@ -803,16 +803,16 @@
   <div class="slide" id="slide-q3" data-sec="1">
     <div class="slide-body">
       <div class="slide-tag">Section 1 &middot; Your Setup</div>
-      <h2 class="slide-headline">If you could fix one thing about our products, what would it be?</h2>
-      <p class="slide-sub">Pick as many as feel true.</p>
+      <h2 class="slide-headline">What can we make better?</h2>
+      <p class="slide-sub">Pick all that apply.</p>
       <div class="choices" id="q3-ch">
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="modern-designs"> <span class="dot"></span><span class="ct">More modern designs<span class="sub">Trendier styles, fresher aesthetics</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="premium">        <span class="dot"></span><span class="ct">More premium products<span class="sub">Higher-end pieces, designer-grade brands</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="build-quality"> <span class="dot"></span><span class="ct">Better build quality<span class="sub">Sturdier construction that lasts longer</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="less-wear">     <span class="dot"></span><span class="ct">Less wear and tear<span class="sub">Items that look closer to brand new</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="customisation"> <span class="dot"></span><span class="ct">More personalisation<span class="sub">More colour, fabric, and size choices</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="more-variety">  <span class="dot"></span><span class="ct">More variety in your categories<span class="sub">Wider selection in what we already offer</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q3" value="new-categories"><span class="dot"></span><span class="ct">New product categories<span class="sub">Things we don't rent yet but you wish we did</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="modern-designs"> <span class="dot"></span><span class="ct">Modern designs<span class="sub">Fresher, trendier looks</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="premium">        <span class="dot"></span><span class="ct">Premium products<span class="sub">Higher-end, designer pieces</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="build-quality"> <span class="dot"></span><span class="ct">Better build<span class="sub">Sturdier, lasts longer</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="less-wear">     <span class="dot"></span><span class="ct">Less wear &amp; tear<span class="sub">Closer to brand new</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="customisation"> <span class="dot"></span><span class="ct">More choices<span class="sub">Colour, fabric, size</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="more-variety">  <span class="dot"></span><span class="ct">More variety<span class="sub">In the categories we have</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="new-categories"><span class="dot"></span><span class="ct">New categories<span class="sub">Things we don't offer yet</span></span></label>
       </div>
     </div>
     <div class="slide-actions">
@@ -825,15 +825,15 @@
   <div class="slide" id="slide-q5" data-sec="1">
     <div class="slide-body">
       <div class="slide-tag">Section 1 &middot; Your Setup</div>
-      <h2 class="slide-headline">What made you choose renting over buying?</h2>
+      <h2 class="slide-headline">Why rent instead of buy?</h2>
       <div class="choices" id="q5-ch">
-        <label class="choice"><input type="radio" name="q5" value="upfront-cost">    <span class="dot"></span><span class="ct">Didn't want to spend a big lump sum</span></label>
-        <label class="choice"><input type="radio" name="q5" value="flexibility">     <span class="dot"></span><span class="ct">I like the flexibility to return or upgrade</span></label>
-        <label class="choice"><input type="radio" name="q5" value="mobile-life">     <span class="dot"></span><span class="ct">I move around &mdash; ownership doesn't make sense</span></label>
-        <label class="choice"><input type="radio" name="q5" value="better-products"> <span class="dot"></span><span class="ct">Access to nicer things than I could afford to buy</span></label>
-        <label class="choice"><input type="radio" name="q5" value="no-maintenance">  <span class="dot"></span><span class="ct">No stress about repairs &mdash; that's your department</span></label>
-        <label class="choice"><input type="radio" name="q5" value="simpler">         <span class="dot"></span><span class="ct">Just simpler than buying and dealing with delivery</span></label>
-        <label class="choice"><input type="radio" name="q5" value="environment">     <span class="dot"></span><span class="ct">Better for the environment</span></label>
+        <label class="choice"><input type="radio" name="q5" value="upfront-cost">    <span class="dot"></span><span class="ct">Saves money upfront</span></label>
+        <label class="choice"><input type="radio" name="q5" value="flexibility">     <span class="dot"></span><span class="ct">Flexibility to swap or return</span></label>
+        <label class="choice"><input type="radio" name="q5" value="mobile-life">     <span class="dot"></span><span class="ct">I move around a lot</span></label>
+        <label class="choice"><input type="radio" name="q5" value="better-products"> <span class="dot"></span><span class="ct">Better stuff than I could buy</span></label>
+        <label class="choice"><input type="radio" name="q5" value="no-maintenance">  <span class="dot"></span><span class="ct">No repair stress</span></label>
+        <label class="choice"><input type="radio" name="q5" value="simpler">         <span class="dot"></span><span class="ct">Simpler than buying</span></label>
+        <label class="choice"><input type="radio" name="q5" value="environment">     <span class="dot"></span><span class="ct">Better for the planet</span></label>
         <label class="choice"><input type="radio" name="q5" value="other" onchange="toggleQ5Other()"><span class="dot"></span><span class="ct">Something else</span></label>
       </div>
       <input type="text" class="cf-input" id="q5-other-in" placeholder="Tell us in your own words" style="display:none;">
@@ -849,16 +849,16 @@
     <div class="slide-body">
       <div class="int-card">
         <div class="i-tag">Coming up</div>
-        <h2>Now let's talk about the actual stuff at your place.</h2>
-        <p>We'll only ask about categories you actually have &mdash; keep it real.</p>
+        <h2>Now, about the stuff you rent.</h2>
+        <p>Just the categories you actually rent.</p>
         <div class="int-divider"></div>
-        <h2 style="margin-top:0;">Then two quick sections to go.</h2>
-        <p>What drives your rental decisions, and what you wish we actually stocked.</p>
+        <h2 style="margin-top:0;">Then two short sections.</h2>
+        <p>What matters to you, and what you wish we had.</p>
       </div>
     </div>
     <div class="slide-actions">
       <button class="btn-back" onclick="prev()">&#8592;</button>
-      <button class="btn-next" onclick="next()">Let's get into it &#8594;</button>
+      <button class="btn-next" onclick="next()">Let's go &#8594;</button>
     </div>
   </div>
 
@@ -866,18 +866,18 @@
   <div class="slide" id="slide-a" data-sec="2" data-cat="storage">
     <div class="slide-body">
       <div class="slide-tag">Section 2 &middot; Storage</div>
-      <h2 class="slide-headline">Is your storage doing the job?</h2>
+      <h2 class="slide-headline">How's your storage?</h2>
       <div class="q-block">
-        <div class="q-label">Enough room?</div>
+        <div class="q-label">Enough space?</div>
         <div class="choices" id="a1-ch">
-          <label class="choice"><input type="radio" name="a1" value="way-more">   <span class="dot"></span><span class="ct">Way more than I need</span></label>
-          <label class="choice"><input type="radio" name="a1" value="about-right"><span class="dot"></span><span class="ct">About right</span></label>
-          <label class="choice"><input type="radio" name="a1" value="bit-tight">  <span class="dot"></span><span class="ct">A bit tight, but managing</span></label>
-          <label class="choice"><input type="radio" name="a1" value="not-enough"> <span class="dot"></span><span class="ct">Not enough &mdash; constantly running out</span></label>
+          <label class="choice"><input type="radio" name="a1" value="way-more">   <span class="dot"></span><span class="ct">Plenty</span></label>
+          <label class="choice"><input type="radio" name="a1" value="about-right"><span class="dot"></span><span class="ct">Just right</span></label>
+          <label class="choice"><input type="radio" name="a1" value="bit-tight">  <span class="dot"></span><span class="ct">A bit tight</span></label>
+          <label class="choice"><input type="radio" name="a1" value="not-enough"> <span class="dot"></span><span class="ct">Not enough</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">How often do you end up cramming things in?</div>
+        <div class="q-label">How often does it overflow?</div>
         <div class="scale-wrap">
           <div class="scale-row" id="a2-sc">
             <button class="sb" onclick="pickScale('a2',1,'a2-sc')">1</button>
@@ -890,7 +890,7 @@
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">Overall rating</div>
+        <div class="q-label">Rate it</div>
         <div class="star-wrap">
           <div class="star-row" id="a3-st"></div>
           <div class="star-ends"><span>Not happy</span><span>Love them</span></div>
@@ -907,18 +907,18 @@
   <div class="slide" id="slide-b" data-sec="2" data-cat="appliances">
     <div class="slide-body">
       <div class="slide-tag">Section 2 &middot; Appliances</div>
-      <h2 class="slide-headline">How are the appliances holding up?</h2>
+      <h2 class="slide-headline">How are the appliances?</h2>
       <div class="q-block">
-        <div class="q-label">Did we have what you needed?</div>
+        <div class="q-label">Found what you needed?</div>
         <div class="choices" id="b1-ch">
-          <label class="choice"><input type="radio" name="b1" value="found-all">  <span class="dot"></span><span class="ct">Found everything &mdash; no gaps</span></label>
-          <label class="choice"><input type="radio" name="b1" value="found-most"> <span class="dot"></span><span class="ct">Found most things, a couple were missing</span></label>
-          <label class="choice"><input type="radio" name="b1" value="big-gaps">   <span class="dot"></span><span class="ct">Some pretty big gaps</span></label>
-          <label class="choice"><input type="radio" name="b1" value="limited">    <span class="dot"></span><span class="ct">Selection felt quite limited</span></label>
+          <label class="choice"><input type="radio" name="b1" value="found-all">  <span class="dot"></span><span class="ct">Everything</span></label>
+          <label class="choice"><input type="radio" name="b1" value="found-most"> <span class="dot"></span><span class="ct">Most things</span></label>
+          <label class="choice"><input type="radio" name="b1" value="big-gaps">   <span class="dot"></span><span class="ct">A few gaps</span></label>
+          <label class="choice"><input type="radio" name="b1" value="limited">    <span class="dot"></span><span class="ct">Limited selection</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">Daily performance</div>
+        <div class="q-label">How well do they work?</div>
         <div class="scale-wrap">
           <div class="scale-row" id="b2-sc">
             <button class="sb" onclick="pickScale('b2',1,'b2-sc')">1</button>
@@ -941,18 +941,18 @@
   <div class="slide" id="slide-c" data-sec="2" data-cat="dining">
     <div class="slide-body">
       <div class="slide-tag">Section 2 &middot; Tables &amp; Chairs</div>
-      <h2 class="slide-headline">Tables and chairs &mdash; how are they really?</h2>
+      <h2 class="slide-headline">How are your tables &amp; chairs?</h2>
       <div class="q-block">
-        <div class="q-label">Any quality issues?</div>
+        <div class="q-label">Any issues?</div>
         <div class="choices" id="c1-ch">
-          <label class="choice"><input type="radio" name="c1" value="no-issues">     <span class="dot"></span><span class="ct">No issues &mdash; solid and well-made</span></label>
-          <label class="choice"><input type="radio" name="c1" value="minor">         <span class="dot"></span><span class="ct">Minor things, nothing major</span></label>
-          <label class="choice"><input type="radio" name="c1" value="noticeable">    <span class="dot"></span><span class="ct">Noticeable issues I've gotten used to</span></label>
-          <label class="choice"><input type="radio" name="c1" value="clear-problems"><span class="dot"></span><span class="ct">Clear problems I'd love fixed</span></label>
+          <label class="choice"><input type="radio" name="c1" value="no-issues">     <span class="dot"></span><span class="ct">No issues</span></label>
+          <label class="choice"><input type="radio" name="c1" value="minor">         <span class="dot"></span><span class="ct">Small issues</span></label>
+          <label class="choice"><input type="radio" name="c1" value="noticeable">    <span class="dot"></span><span class="ct">Noticeable issues</span></label>
+          <label class="choice"><input type="radio" name="c1" value="clear-problems"><span class="dot"></span><span class="ct">Big issues</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">Happy with look and feel?</div>
+        <div class="q-label">Like how they look?</div>
         <div class="scale-wrap">
           <div class="scale-row" id="c2-sc">
             <button class="sb" onclick="pickScale('c2',1,'c2-sc')">1</button>
@@ -975,18 +975,18 @@
   <div class="slide" id="slide-d" data-sec="2" data-cat="living">
     <div class="slide-body">
       <div class="slide-tag">Section 2 &middot; Sofas &amp; Beds</div>
-      <h2 class="slide-headline">The big ones. Tell us the truth.</h2>
+      <h2 class="slide-headline">Sofa &amp; bed</h2>
       <div class="q-block">
-        <div class="q-label">Did it fit the way you pictured?</div>
+        <div class="q-label">Fits your space?</div>
         <div class="choices" id="d1-ch">
-          <label class="choice"><input type="radio" name="d1" value="perfect">    <span class="dot"></span><span class="ct">Perfectly &mdash; exactly as expected</span></label>
-          <label class="choice"><input type="radio" name="d1" value="mostly-fine"><span class="dot"></span><span class="ct">Mostly fine, slightly off</span></label>
-          <label class="choice"><input type="radio" name="d1" value="rearranged"> <span class="dot"></span><span class="ct">Had to rearrange quite a bit</span></label>
-          <label class="choice"><input type="radio" name="d1" value="didnt-fit">  <span class="dot"></span><span class="ct">Didn't really fit the way I'd hoped</span></label>
+          <label class="choice"><input type="radio" name="d1" value="perfect">    <span class="dot"></span><span class="ct">Fits perfectly</span></label>
+          <label class="choice"><input type="radio" name="d1" value="mostly-fine"><span class="dot"></span><span class="ct">Mostly fits</span></label>
+          <label class="choice"><input type="radio" name="d1" value="rearranged"> <span class="dot"></span><span class="ct">Had to rearrange</span></label>
+          <label class="choice"><input type="radio" name="d1" value="didnt-fit">  <span class="dot"></span><span class="ct">Doesn't fit well</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">Comfort and build quality</div>
+        <div class="q-label">Comfort &amp; build</div>
         <div class="scale-wrap">
           <div class="scale-row" id="d2-sc">
             <button class="sb" onclick="pickScale('d2',1,'d2-sc')">1</button>
@@ -1009,27 +1009,27 @@
   <div class="slide" id="slide-e" data-sec="2" data-cat="mattress">
     <div class="slide-body">
       <div class="slide-tag">Section 2 &middot; Mattress</div>
-      <h2 class="slide-headline">Sleep is everything. Be honest.</h2>
+      <h2 class="slide-headline">How's your mattress?</h2>
       <div class="q-block">
-        <div class="q-label">Does it actually feel right?</div>
+        <div class="q-label">How does it feel?</div>
         <div class="choices" id="e1-ch">
-          <label class="choice"><input type="radio" name="e1" value="great">           <span class="dot"></span><span class="ct">Genuinely good sleep every night</span></label>
-          <label class="choice"><input type="radio" name="e1" value="comfortable">     <span class="dot"></span><span class="ct">Comfortable enough, I don't think about it</span></label>
-          <label class="choice"><input type="radio" name="e1" value="limited-options"> <span class="dot"></span><span class="ct">Okay, but not what I'd choose</span></label>
-          <label class="choice"><input type="radio" name="e1" value="not-comfortable"> <span class="dot"></span><span class="ct">Not that comfortable &mdash; I've had to adapt</span></label>
+          <label class="choice"><input type="radio" name="e1" value="great">           <span class="dot"></span><span class="ct">Great sleep</span></label>
+          <label class="choice"><input type="radio" name="e1" value="comfortable">     <span class="dot"></span><span class="ct">Comfortable enough</span></label>
+          <label class="choice"><input type="radio" name="e1" value="limited-options"> <span class="dot"></span><span class="ct">Okay, not ideal</span></label>
+          <label class="choice"><input type="radio" name="e1" value="not-comfortable"> <span class="dot"></span><span class="ct">Uncomfortable</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">More variety would help?</div>
+        <div class="q-label">Want more options?</div>
         <div class="choices" id="e2-ch">
-          <label class="choice"><input type="radio" name="e2" value="yes">         <span class="dot"></span><span class="ct">Yes &mdash; more variety would've helped</span></label>
-          <label class="choice"><input type="radio" name="e2" value="maybe">       <span class="dot"></span><span class="ct">A few more options would be nice</span></label>
-          <label class="choice"><input type="radio" name="e2" value="enough">      <span class="dot"></span><span class="ct">What was available was enough</span></label>
-          <label class="choice"><input type="radio" name="e2" value="didnt-think"> <span class="dot"></span><span class="ct">Didn't think about it at the time</span></label>
+          <label class="choice"><input type="radio" name="e2" value="yes">         <span class="dot"></span><span class="ct">Yes, more please</span></label>
+          <label class="choice"><input type="radio" name="e2" value="maybe">       <span class="dot"></span><span class="ct">A few more</span></label>
+          <label class="choice"><input type="radio" name="e2" value="enough">      <span class="dot"></span><span class="ct">Enough already</span></label>
+          <label class="choice"><input type="radio" name="e2" value="didnt-think"> <span class="dot"></span><span class="ct">Didn't notice</span></label>
         </div>
       </div>
       <div class="q-block">
-        <div class="q-label">Will it hold up?</div>
+        <div class="q-label">Will it last?</div>
         <div class="scale-wrap">
           <div class="scale-row" id="e3-sc">
             <button class="sb" onclick="pickScale('e3',1,'e3-sc')">1</button>
@@ -1053,7 +1053,7 @@
   <div class="slide" id="slide-q6" data-sec="3">
     <div class="slide-body">
       <div class="slide-tag">Section 3 &middot; What Matters</div>
-      <h2 class="slide-headline">What matters when you pick something to rent?</h2>
+      <h2 class="slide-headline">What's important to you?</h2>
 
       <!-- Mobile: card list -->
       <div class="fgrid-cards" id="fgrid-cards"></div>
@@ -1069,12 +1069,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr data-f="price">    <td>Monthly price</td>           <td><div class="gr" onclick="pickGrid('price','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','high',this)"></div></td></tr>
-          <tr data-f="look">     <td>How it looks in my home</td> <td><div class="gr" onclick="pickGrid('look','low',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','mid',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','high',this)"></div></td></tr>
-          <tr data-f="condition"><td>Condition on arrival</td>     <td><div class="gr" onclick="pickGrid('condition','low',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','mid',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','high',this)"></div></td></tr>
-          <tr data-f="brand">    <td>Brand name / reputation</td> <td><div class="gr" onclick="pickGrid('brand','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','high',this)"></div></td></tr>
-          <tr data-f="delivery"> <td>Delivery speed</td>          <td><div class="gr" onclick="pickGrid('delivery','low',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','mid',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','high',this)"></div></td></tr>
-          <tr data-f="custom">   <td>Colour / size options</td>   <td><div class="gr" onclick="pickGrid('custom','low',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','mid',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','high',this)"></div></td></tr>
+          <tr data-f="price">    <td>Price</td>           <td><div class="gr" onclick="pickGrid('price','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','high',this)"></div></td></tr>
+          <tr data-f="look">     <td>How it looks</td> <td><div class="gr" onclick="pickGrid('look','low',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','mid',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','high',this)"></div></td></tr>
+          <tr data-f="condition"><td>Condition on delivery</td>     <td><div class="gr" onclick="pickGrid('condition','low',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','mid',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','high',this)"></div></td></tr>
+          <tr data-f="brand">    <td>Brand name</td> <td><div class="gr" onclick="pickGrid('brand','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','high',this)"></div></td></tr>
+          <tr data-f="delivery"> <td>Quick delivery</td>          <td><div class="gr" onclick="pickGrid('delivery','low',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','mid',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','high',this)"></div></td></tr>
+          <tr data-f="custom">   <td>Colour &amp; size options</td>   <td><div class="gr" onclick="pickGrid('custom','low',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','mid',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','high',this)"></div></td></tr>
         </tbody>
       </table>
     </div>
@@ -1088,11 +1088,11 @@
   <div class="slide" id="slide-q7" data-sec="4">
     <div class="slide-body">
       <div class="slide-tag">Section 4 &middot; What's Next</div>
-      <h2 class="slide-headline">Has something ever slipped through the cracks?</h2>
-      <p class="slide-sub">Something you wanted but we didn't have.</p>
+      <h2 class="slide-headline">Did we ever miss something?</h2>
+      <p class="slide-sub">Something you wanted but couldn't find.</p>
       <div class="choices" id="q7-ch">
-        <label class="choice"><input type="radio" name="q7" value="yes"><span class="dot"></span><span class="ct">Yes &mdash; something I really wanted but couldn't find</span></label>
-        <label class="choice"><input type="radio" name="q7" value="no"> <span class="dot"></span><span class="ct">Not really, I've found what I needed</span></label>
+        <label class="choice"><input type="radio" name="q7" value="yes"><span class="dot"></span><span class="ct">Yes</span></label>
+        <label class="choice"><input type="radio" name="q7" value="no"> <span class="dot"></span><span class="ct">No</span></label>
       </div>
     </div>
     <div class="slide-actions">
@@ -1105,19 +1105,19 @@
   <div class="slide" id="slide-q7ab" data-sec="4">
     <div class="slide-body">
       <div class="slide-tag">Section 4 &middot; What's Next</div>
-      <h2 class="slide-headline">Tell us more &mdash; what was it?</h2>
+      <h2 class="slide-headline">Tell us more</h2>
       <div class="q-block">
-        <div class="q-label">What were you looking for?</div>
+        <div class="q-label">What were you after?</div>
         <textarea class="cf-input" id="q7a-in" rows="2" placeholder="e.g. 'A recliner sofa', 'A chest freezer', 'Kids bunk bed'" style="margin-bottom:0;"></textarea>
       </div>
       <div class="q-block">
-        <div class="q-label">What did you end up doing?</div>
+        <div class="q-label">What did you do?</div>
         <div class="choices" id="q7b-ch">
-          <label class="choice"><input type="radio" name="q7b" value="bought-new">   <span class="dot"></span><span class="ct">Just bought it new</span></label>
-          <label class="choice"><input type="radio" name="q7b" value="second-hand">  <span class="dot"></span><span class="ct">Found a pre-owned one</span></label>
-          <label class="choice"><input type="radio" name="q7b" value="made-do">      <span class="dot"></span><span class="ct">Made do without it</span></label>
-          <label class="choice"><input type="radio" name="q7b" value="other-rental"> <span class="dot"></span><span class="ct">Rented it from somewhere else</span></label>
-          <label class="choice"><input type="radio" name="q7b" value="borrowed">     <span class="dot"></span><span class="ct">Borrowed it from someone</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="bought-new">   <span class="dot"></span><span class="ct">Bought new</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="second-hand">  <span class="dot"></span><span class="ct">Bought used</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="made-do">      <span class="dot"></span><span class="ct">Did without</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="other-rental"> <span class="dot"></span><span class="ct">Rented elsewhere</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="borrowed">     <span class="dot"></span><span class="ct">Borrowed it</span></label>
         </div>
       </div>
     </div>
@@ -1131,18 +1131,18 @@
   <div class="slide" id="slide-q8" data-sec="4">
     <div class="slide-body">
       <div class="slide-tag">Section 4 &middot; What's Next</div>
-      <h2 class="slide-headline">Dream big &mdash; what would you love to rent someday?</h2>
+      <h2 class="slide-headline">What else should we rent?</h2>
       <div class="choices g2" id="q8-ch">
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="smart-home">   <span class="dot"></span><span class="ct">Smart home devices<span class="sub">Speakers, displays, doorbells</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="kids">         <span class="dot"></span><span class="ct">Baby &amp; kids furniture<span class="sub">Cribs, high chairs, study tables</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="home-gym">     <span class="dot"></span><span class="ct">Home gym equipment<span class="sub">Treadmill, weights, cycles</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="outdoor">      <span class="dot"></span><span class="ct">Outdoor &amp; balcony<span class="sub">Chairs, planters, daybeds</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="kitchen-more"> <span class="dot"></span><span class="ct">More kitchen appliances<span class="sub">Air fryer, dishwasher, etc.</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="decor">        <span class="dot"></span><span class="ct">Home d&#233;cor &amp; art<span class="sub">Rugs, lamps, wall art</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="gaming">       <span class="dot"></span><span class="ct">Gaming setup<span class="sub">Monitor, chair, accessories</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="instruments">  <span class="dot"></span><span class="ct">Musical instruments<span class="sub">Keyboard, guitar, etc.</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="photography">  <span class="dot"></span><span class="ct">Photography &amp; lighting<span class="sub">Ring light, tripod, backdrops</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="other" id="q8-other-cb" onchange="toggleQ8Other()"><span class="dot"></span><span class="ct">Something else &mdash; tell us</span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="smart-home">   <span class="dot"></span><span class="ct">Smart home<span class="sub">Speakers, doorbells</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="kids">         <span class="dot"></span><span class="ct">Baby &amp; kids<span class="sub">Cribs, high chairs</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="home-gym">     <span class="dot"></span><span class="ct">Home gym<span class="sub">Treadmill, weights</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="outdoor">      <span class="dot"></span><span class="ct">Outdoor<span class="sub">Chairs, planters</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="kitchen-more"> <span class="dot"></span><span class="ct">More kitchen<span class="sub">Air fryer, dishwasher</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="decor">        <span class="dot"></span><span class="ct">Decor<span class="sub">Rugs, lamps, art</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="gaming">       <span class="dot"></span><span class="ct">Gaming<span class="sub">Monitor, chair</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="instruments">  <span class="dot"></span><span class="ct">Music<span class="sub">Keyboard, guitar</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="photography">  <span class="dot"></span><span class="ct">Photography<span class="sub">Tripod, lights</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="other" id="q8-other-cb" onchange="toggleQ8Other()"><span class="dot"></span><span class="ct">Something else</span></label>
       </div>
       <input type="text" class="cf-input" id="q8-other-in" placeholder="What would you love to rent?" style="display:none; margin-top:6px;">
     </div>
@@ -1156,8 +1156,8 @@
   <div class="slide" id="slide-q9" data-sec="4">
     <div class="slide-body">
       <div class="slide-tag">Section 4 &middot; What's Next</div>
-      <h2 class="slide-headline">What's a fair monthly price?</h2>
-      <p class="slide-sub">Just your gut feeling &mdash; helps us launch at the right price.</p>
+      <h2 class="slide-headline">Fair monthly price?</h2>
+      <p class="slide-sub">Your gut feeling.</p>
       <div id="q9-content"></div>
     </div>
     <div class="slide-actions">
@@ -1169,18 +1169,18 @@
   <!-- IDENTITY -->
   <div class="slide" id="slide-identity" data-sec="4">
     <div class="slide-body">
-      <div class="slide-tag">One last thing</div>
-      <h2 class="slide-headline">So we know who to thank</h2>
-      <p class="slide-sub">We'll only use this to follow up if needed.</p>
+      <div class="slide-tag">Almost done</div>
+      <h2 class="slide-headline">Your details</h2>
+      <p class="slide-sub">We'll only call if needed.</p>
 
       <div class="q-block">
-        <div class="q-label">Your name</div>
+        <div class="q-label">Name</div>
         <input type="text" class="cf-input" id="cf-name" placeholder="e.g. Priya Sharma" autocomplete="name" style="margin-bottom:0;">
       </div>
 
       <div class="q-block">
-        <div class="q-label">Phone number (registered with Cityfurnish)</div>
-        <input type="tel" class="cf-input" id="cf-phone" placeholder="10-digit mobile number" inputmode="numeric" autocomplete="tel" maxlength="13" style="margin-bottom:0;">
+        <div class="q-label">Phone (registered with us)</div>
+        <input type="tel" class="cf-input" id="cf-phone" placeholder="10-digit number" inputmode="numeric" autocomplete="tel" maxlength="13" style="margin-bottom:0;">
       </div>
 
       <div class="q-block">
@@ -1198,13 +1198,13 @@
   <div class="slide" id="slide-done" data-sec="4">
     <div class="slide-body">
       <div class="done-icon">&#127881;</div>
-      <div class="slide-tag">You're done!</div>
-      <h2 class="slide-headline">Thank you. Genuinely.</h2>
-      <p class="slide-sub">Your answers shape what Cityfurnish builds next. We read every response from our legacy customers. Everyone.</p>
+      <div class="slide-tag">Done!</div>
+      <h2 class="slide-headline">Thanks!</h2>
+      <p class="slide-sub">Your answers help shape what we build next. We read every one.</p>
 
       <div class="contact-card">
-        <div class="contact-title">Facing any problems? Missed something?</div>
-        <div class="contact-sub">Give us a call or drop a WhatsApp message &mdash; we're here.</div>
+        <div class="contact-title">Need help?</div>
+        <div class="contact-sub">Call or message us anytime.</div>
 
         <div class="contact-num-row">
           <div class="contact-num">+91-80055-79990</div>
@@ -1236,7 +1236,7 @@
       </div>
 
       <div style="margin-top:22px; text-align:center;">
-        <button class="btn-outline" onclick="restartSurvey()" style="width:auto;">&#10227; Take the survey again</button>
+        <button class="btn-outline" onclick="restartSurvey()" style="width:auto;">&#10227; Start again</button>
       </div>
 
       <p class="done-footer">Or email <a href="mailto:hello@cityfurnish.com" style="color:var(--cf-purple)">hello@cityfurnish.com</a></p>
