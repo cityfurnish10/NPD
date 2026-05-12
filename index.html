@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#6C5CE7">
-  <title>Cityfurnish ¬∑ Legacy Customer Survey</title>
+  <title>Cityfurnish &middot; Legacy Customer Survey</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
-       MOBILE-FIRST: base styles target ~360‚Äì414px phones.
+    /* =======================================================
+       MOBILE-FIRST: base styles target ~360-414px phones.
        Tablet (>=640) and Desktop (>=1024) layer on top.
-       ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+       ======================================================= */
     :root {
       --cf-purple:      #6C5CE7;
       --cf-purple-h:    #5A4BD6;
@@ -33,7 +33,7 @@
 
       --ease:           cubic-bezier(0.4, 0, 0.2, 1);
 
-      /* Safe area insets ‚Äî iPhone notches, Android gesture bars */
+      /* Safe area insets &mdash; iPhone notches, Android gesture bars */
       --safe-top:    env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
 
@@ -60,7 +60,7 @@
       overflow: hidden;
     }
 
-    /* ‚îÄ‚îÄ NAV (mobile: compact) ‚îÄ‚îÄ */
+    /* -- NAV (mobile: compact) -- */
     .cf-nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: calc(var(--nav-h) + var(--safe-top));
@@ -148,7 +148,7 @@
       white-space: nowrap;
     }
 
-    /* ‚îÄ‚îÄ PROGRESS ‚îÄ‚îÄ */
+    /* -- PROGRESS -- */
     .prog-outer {
       position: fixed; left: 0; right: 0;
       top: calc(var(--nav-h) + var(--safe-top));
@@ -156,7 +156,7 @@
     }
     .prog-inner { height: 100%; background: var(--cf-purple); transition: width 400ms ease; width: 0%; }
 
-    /* ‚îÄ‚îÄ SHELL ‚îÄ‚îÄ */
+    /* -- SHELL -- */
     .shell {
       position: fixed; left: 0; right: 0;
       top: calc(var(--nav-h) + var(--safe-top) + 3px);
@@ -167,7 +167,7 @@
       position: relative; width: 100%; max-width: 640px; height: 100%; overflow: hidden;
     }
 
-    /* ‚îÄ‚îÄ SLIDE STRUCTURE ‚Äî flex column with sticky actions ‚îÄ‚îÄ */
+    /* -- SLIDE STRUCTURE &mdash; flex column with sticky actions -- */
     .slide {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
@@ -181,8 +181,10 @@
     .slide.exit-down { opacity: 0; transform: translateY(28px); }
 
     .slide-body {
-      flex: 1;
+      flex: 1 1 0;
+      min-height: 0;          /* essential &mdash; lets flex item shrink below content height for overflow:auto to work */
       overflow-y: auto;
+      overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       padding: 24px 20px 16px;
       display: flex; flex-direction: column; align-items: center;
@@ -190,7 +192,7 @@
     }
     .slide-body > * { width: 100%; }
 
-    /* Sticky action bar ‚Äî always visible at bottom on mobile */
+    /* Sticky action bar &mdash; always visible at bottom on mobile */
     .slide-actions {
       flex-shrink: 0;
       padding: 12px 20px calc(14px + var(--safe-bottom));
@@ -202,7 +204,7 @@
       box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
     }
 
-    /* ‚îÄ‚îÄ TYPOGRAPHY (mobile base) ‚îÄ‚îÄ */
+    /* -- TYPOGRAPHY (mobile base) -- */
     .slide-tag {
       font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600;
       letter-spacing: 1.6px; text-transform: uppercase; color: var(--cf-purple);
@@ -228,7 +230,7 @@
     }
     .q-divider { height: 1px; background: var(--cf-grey-200); margin: 14px 0; }
 
-    /* ‚îÄ‚îÄ Q-BLOCK ‚Äî contrasting card per question with purple accent bar ‚îÄ‚îÄ */
+    /* -- Q-BLOCK &mdash; contrasting card per question with purple accent bar -- */
     .q-block {
       position: relative;
       background: var(--cf-white);
@@ -253,7 +255,7 @@
     .q-block .slider-wrap { margin-bottom: 0; }
     .q-block .slider-val { text-align: left; font-size: 16px; }
 
-    /* ‚îÄ‚îÄ CHOICES (mobile: single column, bigger touch) ‚îÄ‚îÄ */
+    /* -- CHOICES (mobile: single column, bigger touch) -- */
     .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; text-align: left; }
     .choices.g2 { display: flex; flex-direction: column; gap: 8px; }   /* always 1-col on mobile */
     .choice {
@@ -291,7 +293,7 @@
     }
     .ct .sub { display: block; font-size: 12px; font-weight: 400; color: var(--cf-grey-600); margin-top: 2px; }
 
-    /* ‚îÄ‚îÄ SCALE ‚îÄ‚îÄ */
+    /* -- SCALE -- */
     .scale-wrap { margin-bottom: 14px; }
     .scale-row  { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
     .sb {
@@ -310,7 +312,7 @@
     }
     .scale-ends { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); }
 
-    /* ‚îÄ‚îÄ STARS ‚îÄ‚îÄ */
+    /* -- STARS -- */
     .star-wrap { margin-bottom: 14px; }
     .star-row  { display: flex; gap: 10px; justify-content: center; margin-bottom: 6px; }
     .star {
@@ -325,7 +327,7 @@
     .star:active { transform: scale(1.2); }
     .star-ends  { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); max-width: 220px; margin: 0 auto; }
 
-    /* ‚îÄ‚îÄ SLIDER ‚îÄ‚îÄ */
+    /* -- SLIDER -- */
     .slider-wrap { margin-bottom: 14px; }
     .slider-val  {
       font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700;
@@ -354,7 +356,7 @@
     }
     .slider-ends { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); }
 
-    /* ‚îÄ‚îÄ PRICE BLOCKS ‚îÄ‚îÄ */
+    /* -- PRICE BLOCKS -- */
     .price-block {
       margin-bottom: 14px; padding: 18px 18px 16px;
       background: rgba(255,255,255,0.88); border: 1.5px solid var(--cf-grey-200);
@@ -365,7 +367,7 @@
       color: var(--cf-charcoal); margin-bottom: 12px; text-align: center;
     }
 
-    /* ‚îÄ‚îÄ Q6 FACTOR LIST (mobile: card stack, NOT table) ‚îÄ‚îÄ */
+    /* -- Q6 FACTOR LIST (mobile: card stack, NOT table) -- */
     .fgrid-table { display: none; }
     .fgrid-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
     .fcard {
@@ -399,7 +401,7 @@
       box-shadow: 0 3px 10px rgba(108,92,231,0.30);
     }
 
-    /* ‚îÄ‚îÄ TEXT INPUT (16px to prevent iOS zoom) ‚îÄ‚îÄ */
+    /* -- TEXT INPUT (16px to prevent iOS zoom) -- */
     .cf-input {
       width: 100%; padding: 14px 16px; border: 1.5px solid var(--cf-grey-200);
       border-radius: 12px; font-family: 'Montserrat', sans-serif; font-size: 16px;
@@ -414,7 +416,7 @@
     .cf-input:focus { border-color: var(--cf-purple); box-shadow: 0 0 0 3px rgba(108,92,231,0.10); }
     .cf-input::placeholder { color: var(--cf-grey-300); }
 
-    /* ‚îÄ‚îÄ BUTTONS (Gold = action only) ‚îÄ‚îÄ */
+    /* -- BUTTONS (Gold = action only) -- */
     .btn-next {
       flex: 1; max-width: 320px;
       display: inline-flex; align-items: center; justify-content: center; gap: 7px;
@@ -455,7 +457,7 @@
     }
     .btn-outline:active { background: var(--cf-purple-wash); }
 
-    /* ‚îÄ‚îÄ INTERSTITIAL ‚îÄ‚îÄ */
+    /* -- INTERSTITIAL -- */
     .int-card {
       background: rgba(240,234,255,0.78); border-radius: 18px; padding: 26px 22px;
       border: 1px solid rgba(108,92,231,0.16); margin-top: 20px;
@@ -466,7 +468,7 @@
     .int-card h2    { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 19px; color: var(--cf-charcoal); margin-bottom: 8px; line-height: 1.3; }
     .int-card p     { font-family: 'Montserrat', sans-serif; font-size: 14px; color: var(--cf-grey-600); line-height: 1.55; margin-bottom: 0; }
 
-    /* ‚îÄ‚îÄ DONE ‚îÄ‚îÄ */
+    /* -- DONE -- */
     .done-icon { font-size: 56px; margin-bottom: 12px; margin-top: 16px; }
     .done-actions {
       display: flex; flex-direction: column; gap: 10px;
@@ -476,7 +478,7 @@
     .done-actions .btn-outline { max-width: none; width: 100%; }
     .done-footer { margin-top: 14px; font-size: 13px; color: var(--cf-grey-600); }
 
-    /* ‚îÄ‚îÄ CONTACT CARD ‚îÄ‚îÄ */
+    /* -- CONTACT CARD -- */
     .contact-card {
       margin-top: 22px;
       padding: 20px 18px 18px;
@@ -537,7 +539,7 @@
       .contact-btn.wa:hover   { background: #1FB855;            transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,211,102,0.36); }
     }
 
-    /* ‚îÄ‚îÄ TOAST ‚îÄ‚îÄ */
+    /* -- TOAST -- */
     .cf-toast {
       position: fixed;
       bottom: calc(var(--actions-h) + var(--safe-bottom) + 16px);
@@ -554,12 +556,12 @@
     }
     .cf-toast.show { opacity: 1; transform: translateY(0); }
 
-    /* ‚îÄ‚îÄ CONFETTI ‚îÄ‚îÄ */
+    /* -- CONFETTI -- */
     #conf { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
-    /* ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
-       TABLET ‚Äî 640px and up
-       ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+    /* =======================================================
+       TABLET &mdash; 640px and up
+       ======================================================= */
     @media (min-width: 640px) {
       :root { --nav-h: 60px; }
 
@@ -576,7 +578,7 @@
 
       .choices.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-      /* Q6 ‚Äî switch back to table on tablet */
+      /* Q6 &mdash; switch back to table on tablet */
       .fgrid-cards { display: none; }
       .fgrid-table { display: table; width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 14px; }
       .fgrid-table th {
@@ -598,9 +600,9 @@
       .gr.selected::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 6px; height: 6px; background: #fff; border-radius: 50%; }
     }
 
-    /* ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
-       DESKTOP ‚Äî 1024px and up (richer hover states)
-       ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+    /* =======================================================
+       DESKTOP &mdash; 1024px and up (richer hover states)
+       ======================================================= */
     @media (min-width: 1024px) {
       .slide-headline { font-size: 26px; }
       .slide-headline.hero { font-size: 38px; }
@@ -664,7 +666,7 @@
     <div class="step-pill" data-sec="4">What's Next</div>
   </div>
   <div class="nav-right">
-    <button id="musicBtn" class="cf-music-btn muted" onclick="toggleMusic()" aria-label="Toggle ambient music" title="Ambient music">
+    <button id="musicBtn" class="cf-music-btn" onclick="toggleMusic()" aria-label="Toggle ambient music" title="Ambient music">
       <svg class="icon-on"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
       <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
     </button>
@@ -694,7 +696,7 @@
   <!-- Q1 -->
   <div class="slide" id="slide-q1" data-sec="1">
     <div class="slide-body">
-      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <div class="slide-tag">Section 1 &middot; Your Setup</div>
       <h2 class="slide-headline">What's Cityfurnish doing in your home right now?</h2>
       <div class="choices g2" id="q1-ch">
         <label class="choice is-cb"><input type="checkbox" name="q1" value="bedroom">           <span class="dot"></span><span class="ct">Bedroom furniture<span class="sub">Beds, wardrobes, side tables</span></span></label>
@@ -718,7 +720,7 @@
   <!-- Q2 + Q4 -->
   <div class="slide" id="slide-q2q4" data-sec="1">
     <div class="slide-body">
-      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <div class="slide-tag">Section 1 &middot; Your Setup</div>
       <h2 class="slide-headline">A couple of quick things about you</h2>
       <div class="q-block">
         <div class="q-label">How long have you been with us?</div>
@@ -748,7 +750,7 @@
   <!-- Q3 -->
   <div class="slide" id="slide-q3" data-sec="1">
     <div class="slide-body">
-      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <div class="slide-tag">Section 1 &middot; Your Setup</div>
       <h2 class="slide-headline">If you could fix one thing about our products, what would it be?</h2>
       <p class="slide-sub">Pick as many as feel true.</p>
       <div class="choices" id="q3-ch">
@@ -770,14 +772,14 @@
   <!-- Q5 -->
   <div class="slide" id="slide-q5" data-sec="1">
     <div class="slide-body">
-      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <div class="slide-tag">Section 1 &middot; Your Setup</div>
       <h2 class="slide-headline">What made you choose renting over buying?</h2>
       <div class="choices" id="q5-ch">
         <label class="choice"><input type="radio" name="q5" value="upfront-cost">    <span class="dot"></span><span class="ct">Didn't want to spend a big lump sum</span></label>
         <label class="choice"><input type="radio" name="q5" value="flexibility">     <span class="dot"></span><span class="ct">I like the flexibility to return or upgrade</span></label>
-        <label class="choice"><input type="radio" name="q5" value="mobile-life">     <span class="dot"></span><span class="ct">I move around ‚Äî ownership doesn't make sense</span></label>
+        <label class="choice"><input type="radio" name="q5" value="mobile-life">     <span class="dot"></span><span class="ct">I move around &mdash; ownership doesn't make sense</span></label>
         <label class="choice"><input type="radio" name="q5" value="better-products"> <span class="dot"></span><span class="ct">Access to nicer things than I could afford to buy</span></label>
-        <label class="choice"><input type="radio" name="q5" value="no-maintenance">  <span class="dot"></span><span class="ct">No stress about repairs ‚Äî that's your department</span></label>
+        <label class="choice"><input type="radio" name="q5" value="no-maintenance">  <span class="dot"></span><span class="ct">No stress about repairs &mdash; that's your department</span></label>
         <label class="choice"><input type="radio" name="q5" value="simpler">         <span class="dot"></span><span class="ct">Just simpler than buying and dealing with delivery</span></label>
         <label class="choice"><input type="radio" name="q5" value="environment">     <span class="dot"></span><span class="ct">Better for the environment</span></label>
         <label class="choice"><input type="radio" name="q5" value="other" onchange="toggleQ5Other()"><span class="dot"></span><span class="ct">Something else</span></label>
@@ -796,7 +798,7 @@
       <div class="int-card">
         <div class="i-tag">Coming up</div>
         <h2>Now let's talk about the actual stuff at your place.</h2>
-        <p>We'll only ask about categories you actually have ‚Äî keep it real.</p>
+        <p>We'll only ask about categories you actually have &mdash; keep it real.</p>
       </div>
     </div>
     <div class="slide-actions">
@@ -808,7 +810,7 @@
   <!-- STORAGE -->
   <div class="slide" id="slide-a" data-sec="2" data-cat="storage">
     <div class="slide-body">
-      <div class="slide-tag">Section 2 ¬∑ Storage</div>
+      <div class="slide-tag">Section 2 &middot; Storage</div>
       <h2 class="slide-headline">Is your storage doing the job?</h2>
       <div class="q-block">
         <div class="q-label">Enough room?</div>
@@ -816,7 +818,7 @@
           <label class="choice"><input type="radio" name="a1" value="way-more">   <span class="dot"></span><span class="ct">Way more than I need</span></label>
           <label class="choice"><input type="radio" name="a1" value="about-right"><span class="dot"></span><span class="ct">About right</span></label>
           <label class="choice"><input type="radio" name="a1" value="bit-tight">  <span class="dot"></span><span class="ct">A bit tight, but managing</span></label>
-          <label class="choice"><input type="radio" name="a1" value="not-enough"> <span class="dot"></span><span class="ct">Not enough ‚Äî constantly running out</span></label>
+          <label class="choice"><input type="radio" name="a1" value="not-enough"> <span class="dot"></span><span class="ct">Not enough &mdash; constantly running out</span></label>
         </div>
       </div>
       <div class="q-block">
@@ -849,12 +851,12 @@
   <!-- APPLIANCES -->
   <div class="slide" id="slide-b" data-sec="2" data-cat="appliances">
     <div class="slide-body">
-      <div class="slide-tag">Section 2 ¬∑ Appliances</div>
+      <div class="slide-tag">Section 2 &middot; Appliances</div>
       <h2 class="slide-headline">How are the appliances holding up?</h2>
       <div class="q-block">
         <div class="q-label">Did we have what you needed?</div>
         <div class="choices" id="b1-ch">
-          <label class="choice"><input type="radio" name="b1" value="found-all">  <span class="dot"></span><span class="ct">Found everything ‚Äî no gaps</span></label>
+          <label class="choice"><input type="radio" name="b1" value="found-all">  <span class="dot"></span><span class="ct">Found everything &mdash; no gaps</span></label>
           <label class="choice"><input type="radio" name="b1" value="found-most"> <span class="dot"></span><span class="ct">Found most things, a couple were missing</span></label>
           <label class="choice"><input type="radio" name="b1" value="big-gaps">   <span class="dot"></span><span class="ct">Some pretty big gaps</span></label>
           <label class="choice"><input type="radio" name="b1" value="limited">    <span class="dot"></span><span class="ct">Selection felt quite limited</span></label>
@@ -883,12 +885,12 @@
   <!-- DINING -->
   <div class="slide" id="slide-c" data-sec="2" data-cat="dining">
     <div class="slide-body">
-      <div class="slide-tag">Section 2 ¬∑ Tables &amp; Chairs</div>
-      <h2 class="slide-headline">Tables and chairs ‚Äî how are they really?</h2>
+      <div class="slide-tag">Section 2 &middot; Tables &amp; Chairs</div>
+      <h2 class="slide-headline">Tables and chairs &mdash; how are they really?</h2>
       <div class="q-block">
         <div class="q-label">Any quality issues?</div>
         <div class="choices" id="c1-ch">
-          <label class="choice"><input type="radio" name="c1" value="no-issues">     <span class="dot"></span><span class="ct">No issues ‚Äî solid and well-made</span></label>
+          <label class="choice"><input type="radio" name="c1" value="no-issues">     <span class="dot"></span><span class="ct">No issues &mdash; solid and well-made</span></label>
           <label class="choice"><input type="radio" name="c1" value="minor">         <span class="dot"></span><span class="ct">Minor things, nothing major</span></label>
           <label class="choice"><input type="radio" name="c1" value="noticeable">    <span class="dot"></span><span class="ct">Noticeable issues I've gotten used to</span></label>
           <label class="choice"><input type="radio" name="c1" value="clear-problems"><span class="dot"></span><span class="ct">Clear problems I'd love fixed</span></label>
@@ -917,12 +919,12 @@
   <!-- SOFAS & BEDS -->
   <div class="slide" id="slide-d" data-sec="2" data-cat="living">
     <div class="slide-body">
-      <div class="slide-tag">Section 2 ¬∑ Sofas &amp; Beds</div>
+      <div class="slide-tag">Section 2 &middot; Sofas &amp; Beds</div>
       <h2 class="slide-headline">The big ones. Tell us the truth.</h2>
       <div class="q-block">
         <div class="q-label">Did it fit the way you pictured?</div>
         <div class="choices" id="d1-ch">
-          <label class="choice"><input type="radio" name="d1" value="perfect">    <span class="dot"></span><span class="ct">Perfectly ‚Äî exactly as expected</span></label>
+          <label class="choice"><input type="radio" name="d1" value="perfect">    <span class="dot"></span><span class="ct">Perfectly &mdash; exactly as expected</span></label>
           <label class="choice"><input type="radio" name="d1" value="mostly-fine"><span class="dot"></span><span class="ct">Mostly fine, slightly off</span></label>
           <label class="choice"><input type="radio" name="d1" value="rearranged"> <span class="dot"></span><span class="ct">Had to rearrange quite a bit</span></label>
           <label class="choice"><input type="radio" name="d1" value="didnt-fit">  <span class="dot"></span><span class="ct">Didn't really fit the way I'd hoped</span></label>
@@ -951,7 +953,7 @@
   <!-- MATTRESS -->
   <div class="slide" id="slide-e" data-sec="2" data-cat="mattress">
     <div class="slide-body">
-      <div class="slide-tag">Section 2 ¬∑ Mattress</div>
+      <div class="slide-tag">Section 2 &middot; Mattress</div>
       <h2 class="slide-headline">Sleep is everything. Be honest.</h2>
       <div class="q-block">
         <div class="q-label">Does it actually feel right?</div>
@@ -959,13 +961,13 @@
           <label class="choice"><input type="radio" name="e1" value="great">           <span class="dot"></span><span class="ct">Genuinely good sleep every night</span></label>
           <label class="choice"><input type="radio" name="e1" value="comfortable">     <span class="dot"></span><span class="ct">Comfortable enough, I don't think about it</span></label>
           <label class="choice"><input type="radio" name="e1" value="limited-options"> <span class="dot"></span><span class="ct">Okay, but not what I'd choose</span></label>
-          <label class="choice"><input type="radio" name="e1" value="not-comfortable"> <span class="dot"></span><span class="ct">Not that comfortable ‚Äî I've had to adapt</span></label>
+          <label class="choice"><input type="radio" name="e1" value="not-comfortable"> <span class="dot"></span><span class="ct">Not that comfortable &mdash; I've had to adapt</span></label>
         </div>
       </div>
       <div class="q-block">
         <div class="q-label">More variety would help?</div>
         <div class="choices" id="e2-ch">
-          <label class="choice"><input type="radio" name="e2" value="yes">         <span class="dot"></span><span class="ct">Yes ‚Äî more variety would've helped</span></label>
+          <label class="choice"><input type="radio" name="e2" value="yes">         <span class="dot"></span><span class="ct">Yes &mdash; more variety would've helped</span></label>
           <label class="choice"><input type="radio" name="e2" value="maybe">       <span class="dot"></span><span class="ct">A few more options would be nice</span></label>
           <label class="choice"><input type="radio" name="e2" value="enough">      <span class="dot"></span><span class="ct">What was available was enough</span></label>
           <label class="choice"><input type="radio" name="e2" value="didnt-think"> <span class="dot"></span><span class="ct">Didn't think about it at the time</span></label>
@@ -1009,7 +1011,7 @@
   <!-- Q6 -->
   <div class="slide" id="slide-q6" data-sec="3">
     <div class="slide-body">
-      <div class="slide-tag">Section 3 ¬∑ What Matters</div>
+      <div class="slide-tag">Section 3 &middot; What Matters</div>
       <h2 class="slide-headline">What matters when you pick something to rent?</h2>
 
       <!-- Mobile: card list -->
@@ -1044,11 +1046,11 @@
   <!-- Q7 -->
   <div class="slide" id="slide-q7" data-sec="4">
     <div class="slide-body">
-      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
+      <div class="slide-tag">Section 4 &middot; What's Next</div>
       <h2 class="slide-headline">Has something ever slipped through the cracks?</h2>
       <p class="slide-sub">Something you wanted but we didn't have.</p>
       <div class="choices" id="q7-ch">
-        <label class="choice"><input type="radio" name="q7" value="yes"><span class="dot"></span><span class="ct">Yes ‚Äî something I really wanted but couldn't find</span></label>
+        <label class="choice"><input type="radio" name="q7" value="yes"><span class="dot"></span><span class="ct">Yes &mdash; something I really wanted but couldn't find</span></label>
         <label class="choice"><input type="radio" name="q7" value="no"> <span class="dot"></span><span class="ct">Not really, I've found what I needed</span></label>
       </div>
     </div>
@@ -1061,8 +1063,8 @@
   <!-- Q7ab -->
   <div class="slide" id="slide-q7ab" data-sec="4">
     <div class="slide-body">
-      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
-      <h2 class="slide-headline">Tell us more ‚Äî what was it?</h2>
+      <div class="slide-tag">Section 4 &middot; What's Next</div>
+      <h2 class="slide-headline">Tell us more &mdash; what was it?</h2>
       <div class="q-block">
         <div class="q-label">What were you looking for?</div>
         <textarea class="cf-input" id="q7a-in" rows="2" placeholder="e.g. 'A recliner sofa', 'A chest freezer', 'Kids bunk bed'" style="margin-bottom:0;"></textarea>
@@ -1087,8 +1089,8 @@
   <!-- Q8 -->
   <div class="slide" id="slide-q8" data-sec="4">
     <div class="slide-body">
-      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
-      <h2 class="slide-headline">Dream big ‚Äî what would you love to rent someday?</h2>
+      <div class="slide-tag">Section 4 &middot; What's Next</div>
+      <h2 class="slide-headline">Dream big &mdash; what would you love to rent someday?</h2>
       <div class="choices g2" id="q8-ch">
         <label class="choice is-cb"><input type="checkbox" name="q8" value="smart-home">   <span class="dot"></span><span class="ct">Smart home devices<span class="sub">Speakers, displays, doorbells</span></span></label>
         <label class="choice is-cb"><input type="checkbox" name="q8" value="kids">         <span class="dot"></span><span class="ct">Baby &amp; kids furniture<span class="sub">Cribs, high chairs, study tables</span></span></label>
@@ -1099,7 +1101,7 @@
         <label class="choice is-cb"><input type="checkbox" name="q8" value="gaming">       <span class="dot"></span><span class="ct">Gaming setup<span class="sub">Monitor, chair, accessories</span></span></label>
         <label class="choice is-cb"><input type="checkbox" name="q8" value="instruments">  <span class="dot"></span><span class="ct">Musical instruments<span class="sub">Keyboard, guitar, etc.</span></span></label>
         <label class="choice is-cb"><input type="checkbox" name="q8" value="photography">  <span class="dot"></span><span class="ct">Photography &amp; lighting<span class="sub">Ring light, tripod, backdrops</span></span></label>
-        <label class="choice is-cb"><input type="checkbox" name="q8" value="other" id="q8-other-cb" onchange="toggleQ8Other()"><span class="dot"></span><span class="ct">Something else ‚Äî tell us</span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="other" id="q8-other-cb" onchange="toggleQ8Other()"><span class="dot"></span><span class="ct">Something else &mdash; tell us</span></label>
       </div>
       <input type="text" class="cf-input" id="q8-other-in" placeholder="What would you love to rent?" style="display:none; margin-top:6px;">
     </div>
@@ -1112,14 +1114,42 @@
   <!-- Q9 -->
   <div class="slide" id="slide-q9" data-sec="4">
     <div class="slide-body">
-      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
+      <div class="slide-tag">Section 4 &middot; What's Next</div>
       <h2 class="slide-headline">What's a fair monthly price?</h2>
-      <p class="slide-sub">Just your gut feeling ‚Äî helps us launch at the right price.</p>
+      <p class="slide-sub">Just your gut feeling &mdash; helps us launch at the right price.</p>
       <div id="q9-content"></div>
     </div>
     <div class="slide-actions">
       <button class="btn-back" onclick="prev()">&#8592;</button>
-      <button class="btn-next" onclick="finishSurvey()">Submit &#8594;</button>
+      <button class="btn-next" onclick="next()">Next &#8594;</button>
+    </div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="slide" id="slide-identity" data-sec="4">
+    <div class="slide-body">
+      <div class="slide-tag">One last thing</div>
+      <h2 class="slide-headline">So we know who to thank</h2>
+      <p class="slide-sub">We'll only use this to follow up if needed.</p>
+
+      <div class="q-block">
+        <div class="q-label">Your name</div>
+        <input type="text" class="cf-input" id="cf-name" placeholder="e.g. Priya Sharma" autocomplete="name" style="margin-bottom:0;">
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">Phone number (registered with Cityfurnish)</div>
+        <input type="tel" class="cf-input" id="cf-phone" placeholder="10-digit mobile number" inputmode="numeric" autocomplete="tel" maxlength="13" style="margin-bottom:0;">
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">Email <span style="font-weight:400;color:var(--cf-grey-600);font-size:12px;">(optional)</span></div>
+        <input type="email" class="cf-input" id="cf-email" placeholder="you@example.com" autocomplete="email" style="margin-bottom:0;">
+      </div>
+    </div>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" id="submitBtn" onclick="submitSurvey()">Submit &#10003;</button>
     </div>
   </div>
 
@@ -1130,15 +1160,10 @@
       <div class="slide-tag">You're done!</div>
       <h2 class="slide-headline">Thank you. Genuinely.</h2>
       <p class="slide-sub">Your answers shape what Cityfurnish builds next. We read every response from our legacy customers. Every one.</p>
-      <div class="done-actions">
-        <button class="btn-next" id="copyBtn" onclick="copyAll()">Copy my answers</button>
-        <button class="btn-outline" onclick="dlCSV()">Download CSV</button>
-        <button class="btn-outline" onclick="emailR()">Send via email</button>
-      </div>
 
       <div class="contact-card">
         <div class="contact-title">Facing any problems? Missed something?</div>
-        <div class="contact-sub">Give us a call or drop a WhatsApp message ‚Äî we're here.</div>
+        <div class="contact-sub">Give us a call or drop a WhatsApp message &mdash; we're here.</div>
 
         <div class="contact-num-row">
           <div class="contact-num">+91 80055 79990</div>
@@ -1177,7 +1202,7 @@
 </div><!-- /shell -->
 
 <script>
-/* ‚ïê‚ïê‚ïê STATE ‚ïê‚ïê‚ïê */
+/* === STATE === */
 const A = {};
 let seq = [], idx = 0;
 
@@ -1186,7 +1211,7 @@ const catSlides = { storage:['slide-a'],appliances:['slide-b'],dining:['slide-c'
 
 const CAT_LABELS = {
   'smart-home':'Smart home devices','kids':'Baby & kids furniture','home-gym':'Home gym equipment',
-  'outdoor':'Outdoor & balcony furniture','kitchen-more':'More kitchen appliances','decor':'Home d√©cor & art',
+  'outdoor':'Outdoor & balcony furniture','kitchen-more':'More kitchen appliances','decor':'Home d\u00E9cor & art',
   'gaming':'Gaming setup','instruments':'Musical instruments','photography':'Photography & lighting','other':'Something else',
 };
 
@@ -1206,14 +1231,14 @@ const Q6_LEVELS = [
 
 const PRICE_VALS    = ['under500','500-1000','1000-2000','2000-3500','3500+'];
 const PRICE_DISPLAY = [
-  'Under ‚Çπ500 per month feels right',
-  '‚Çπ500‚Äì‚Çπ1,000 per month feels right',
-  '‚Çπ1,000‚Äì‚Çπ2,000 per month feels right',
-  '‚Çπ2,000‚Äì‚Çπ3,500 per month feels right',
-  '‚Çπ3,500+ per month feels right',
+  'Under \u20B9500 per month feels right',
+  '\u20B9500\u2013\u20B91,000 per month feels right',
+  '\u20B91,000\u2013\u20B92,000 per month feels right',
+  '\u20B92,000\u2013\u20B93,500 per month feels right',
+  '\u20B93,500+ per month feels right',
 ];
 
-/* ‚ïê‚ïê‚ïê SEQUENCE ‚ïê‚ïê‚ïê */
+/* === SEQUENCE === */
 function initSeq() { seq = ['slide-hero','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1']; }
 function buildSeq() {
   const base = ['slide-hero','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1'];
@@ -1223,7 +1248,7 @@ function buildSeq() {
   seq = [...base, ...blocks, 'slide-int2','slide-q6','slide-q7'];
 }
 
-/* ‚ïê‚ïê‚ïê NAVIGATION ‚ïê‚ïê‚ïê */
+/* === NAVIGATION === */
 function showSlide(newIdx, dir='fwd') {
   const curEl = document.getElementById(seq[idx]);
   const nxtEl = document.getElementById(seq[newIdx]);
@@ -1286,7 +1311,7 @@ function restoreSlideState(id) {
   }
 }
 
-/* ‚ïê‚ïê‚ïê NAV ‚ïê‚ïê‚ïê */
+/* === NAV === */
 function updateNav(id) {
   const sec = parseInt(document.getElementById(id)?.dataset.sec||0);
   document.querySelectorAll('.step-pill').forEach(p=>{
@@ -1299,7 +1324,7 @@ function updateNav(id) {
   document.getElementById('prog').style.width = `${((idx+1)/seq.length)*100}%`;
 }
 
-/* ‚ïê‚ïê‚ïê CHOICE INTERACTIONS ‚ïê‚ïê‚ïê */
+/* === CHOICE INTERACTIONS === */
 document.addEventListener('change', e=>{
   const inp = e.target;
   if(inp.type==='radio'){
@@ -1309,7 +1334,7 @@ document.addEventListener('change', e=>{
   if(inp.type==='checkbox') inp.closest('.choice')?.classList.toggle('selected',inp.checked);
 });
 
-/* ‚ïê‚ïê‚ïê INPUT HELPERS ‚ïê‚ïê‚ïê */
+/* === INPUT HELPERS === */
 function saveRadio(key, wid) {
   const s = document.querySelector(`#${wid} input[type="radio"]:checked`);
   if(!s){ shake('Pick one to continue.'); return; } A[key]=s.value; next();
@@ -1321,7 +1346,7 @@ function pickScale(key,val,rowId) {
 function initStars(cid,key) {
   const c=document.getElementById(cid); if(!c) return; c.innerHTML='';
   for(let i=1;i<=5;i++){
-    const s=document.createElement('span'); s.className='star'; s.textContent='‚òÖ';
+    const s=document.createElement('span'); s.className='star'; s.textContent='\u2605';
     // touch / click
     const set = ()=>{ A[key]=i; litStars(cid,i); };
     s.addEventListener('click', set);
@@ -1380,10 +1405,10 @@ function buildQ6Cards() {
   });
 }
 
-/* ‚ïê‚ïê‚ïê SAVE FUNCTIONS ‚ïê‚ïê‚ïê */
+/* === SAVE FUNCTIONS === */
 function saveQ1() {
   const sel = [...document.querySelectorAll('input[name="q1"]:checked')].map(el=>el.value);
-  if(sel.length===0){ shake('Pick at least one ‚Äî even "Something else" works.'); return; }
+  if(sel.length===0){ shake('Pick at least one \u2014 even "Something else" works.'); return; }
   A.q1 = sel;
   buildSeq(); updateNav(seq[idx]); next();
 }
@@ -1470,12 +1495,12 @@ function toggleQ8Other() {
 }
 function saveQ8() {
   const sel = [...document.querySelectorAll('input[name="q8"]:checked')].map(el=>el.value);
-  if (sel.length === 0) { shake('Pick at least one ‚Äî or none if nothing fits.'); return; }
+  if (sel.length === 0) { shake('Pick at least one \u2014 or none if nothing fits.'); return; }
   A.q8 = sel;
   const oi = document.getElementById('q8-other-in'); if(oi?.value.trim()) A.q8_other=oi.value.trim();
   const base = seq.slice(0,seq.indexOf('slide-q8')+1);
-  if(A.q8.length>0){ buildPriceSlide(); seq=[...base,'slide-q9','slide-done']; }
-  else             { seq=[...base,'slide-done']; }
+  if(A.q8.length>0){ buildPriceSlide(); seq=[...base,'slide-q9','slide-identity','slide-done']; }
+  else             { seq=[...base,'slide-identity','slide-done']; }
   next();
 }
 function buildPriceSlide() {
@@ -1488,15 +1513,67 @@ function buildPriceSlide() {
       <div class="price-cat-label">${label}</div>
       <div class="slider-val" id="prv-${cat}">${PRICE_DISPLAY[dv]}</div>
       <input type="range" class="cf-slider" min="0" max="4" value="${dv}" oninput="updatePriceSlider('${cat}',this.value)">
-      <div class="slider-ends"><span>Under ‚Çπ500</span><span>‚Çπ3,500+</span></div>`;
+      <div class="slider-ends"><span>Under \u20B9500</span><span>\u20B93,500+</span></div>`;
     wrap.appendChild(block);
     if(!A.priceRanges) A.priceRanges={};
     A.priceRanges[cat]=PRICE_VALS[dv];
   });
 }
-function finishSurvey() {
-  if(!seq.includes('slide-done')) seq.push('slide-done');
-  next(); launchConfetti();
+/* === SUBMIT ===
+   PASTE your Google Apps Script Web App URL between the quotes below.
+   Setup steps are in the README / chat. If left as 'PASTE_ENDPOINT_HERE',
+   the form will still complete locally (useful for testing) but answers
+   will NOT be saved anywhere. */
+const ENDPOINT = 'PASTE_ENDPOINT_HERE';
+
+async function submitSurvey() {
+  const nameEl  = document.getElementById('cf-name');
+  const phoneEl = document.getElementById('cf-phone');
+  const emailEl = document.getElementById('cf-email');
+
+  const name  = nameEl.value.trim();
+  const phone = phoneEl.value.replace(/\D/g,'');
+  const email = emailEl.value.trim();
+
+  if (!name)              { shake('Please add your name.'); nameEl.focus(); return; }
+  if (phone.length !== 10){ shake('Please add a valid 10-digit mobile number.'); phoneEl.focus(); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { shake('That email doesn't look right.'); emailEl.focus(); return; }
+
+  A.name  = name;
+  A.phone = phone;
+  if (email) A.email = email;
+  A.submitted_at = new Date().toISOString();
+  A.user_agent   = navigator.userAgent;
+
+  // Capture URL params (e.g. ?cust=12345&src=email)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    params.forEach((v,k)=>{ A['url_'+k] = v; });
+  } catch(e) {}
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  const original = btn.innerHTML;
+  btn.innerHTML = 'Sending...';
+
+  try {
+    if (ENDPOINT && ENDPOINT.startsWith('http')) {
+      // URLSearchParams body is a "simple request" - no CORS preflight needed,
+      // so Apps Script accepts it without extra config.
+      await fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new URLSearchParams({ data: JSON.stringify(A) })
+      });
+    }
+    if(!seq.includes('slide-done')) seq.push('slide-done');
+    next();
+    launchConfetti();
+  } catch(e) {
+    btn.disabled = false;
+    btn.innerHTML = original;
+    shake('Network hiccup. Try again?');
+  }
 }
 function shake(msg) {
   const el=document.getElementById(seq[idx]);
@@ -1516,7 +1593,7 @@ function showToast(msg) {
   toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
 }
 
-/* ‚ïê‚ïê‚ïê EXPORT ‚ïê‚ïê‚ïê */
+/* === EXPORT === */
 const LBL={q1:'Products rented',q2:'Tenure',q3:'Improvement areas',q4:'Home % Cityfurnish',q5:'Why rent',q5_other:'Why rent (other)',a1:'Storage space',a2:'Storage cramming',a3:'Storage rating',b1:'Appliance availability',b2:'Appliance performance',c1:'Tables quality',c2:'Tables satisfaction',d1:'Sofas/beds fit',d2:'Sofas/beds comfort',e1:'Mattress comfort',e2:'Mattress variety',e3:'Mattress durability',q6:'Rental decision factors',q7:'Unmet product need',q7a:'What they looked for',q7b:'How they resolved it',q8:'Dream categories',q8_other:'Other category',priceRanges:'Price ranges'};
 function fmt(){
   const lines=['=== Cityfurnish Legacy Customer Survey ===',''];
@@ -1538,7 +1615,7 @@ function dlCSV(){
 }
 function emailR(){ window.location.href=`mailto:cityfurnish10@gmail.com?subject=Legacy%20Survey%20Response&body=${encodeURIComponent(fmt())}`; }
 
-/* ‚ïê‚ïê‚ïê CONFETTI ‚ïê‚ïê‚ïê */
+/* === CONFETTI === */
 function launchConfetti(){
   const cv=document.getElementById('conf'); const ctx=cv.getContext('2d');
   cv.width=window.innerWidth; cv.height=window.innerHeight;
@@ -1549,7 +1626,7 @@ function launchConfetti(){
   draw();
 }
 
-/* ‚ïê‚ïê‚ïê AMBIENT MUSIC ‚Äî Web Audio synth pad ‚ïê‚ïê‚ïê
+/* === AMBIENT MUSIC \u2014 Web Audio synth pad ===
    Browsers block audio until user interacts, so the AudioContext is
    built on the first click/touch and faded in. The pad is a 5-voice
    Cm9 chord (C3, Eb3, G3, Bb3, D4) with slight detune + slow LFOs
@@ -1577,7 +1654,7 @@ function initAmbient() {
   masterGain.connect(filter);
   filter.connect(audioCtx.destination);
 
-  // Cm9: C3, Eb3, G3, Bb3, D4 ‚Äî warm, contemplative
+  // Cm9: C3, Eb3, G3, Bb3, D4 \u2014 warm, contemplative
   const freqs = [130.81, 155.56, 196.00, 233.08, 293.66];
   freqs.forEach((freq, i) => {
     const osc = audioCtx.createOscillator();
@@ -1638,7 +1715,7 @@ function firstInteractionHandler() {
   document.removeEventListener('keydown', firstInteractionHandler);
 }
 
-/* ‚ïê‚ïê‚ïê INIT ‚ïê‚ïê‚ïê */
+/* === INIT === */
 document.addEventListener('DOMContentLoaded',()=>{
   initSeq();
   updateNav('slide-hero');
