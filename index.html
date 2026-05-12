@@ -2,55 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cityfurnish · Legacy Customer Survey</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#6C5CE7">
+  <title>Cityfurnish ¬∑ Legacy Customer Survey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+       MOBILE-FIRST: base styles target ~360‚Äì414px phones.
+       Tablet (>=640) and Desktop (>=1024) layer on top.
+       ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
     :root {
       --cf-purple:      #6C5CE7;
       --cf-purple-h:    #5A4BD6;
+      --cf-purple-d:    #4834C5;
       --cf-purple-wash: #F0EAFF;
+
       --cf-gold:        #F5C518;
       --cf-gold-h:      #E6B800;
+      --cf-gold-d:      #D4A80E;
+
       --cf-charcoal:    #222222;
+      --cf-charcoal-l:  #333333;
       --cf-grey-800:    #302F30;
       --cf-grey-600:    #71717A;
-      --cf-grey-300:    #DDDDDF;
-      --cf-grey-200:    #EDEDEE;
+      --cf-grey-300:    #C9C9D1;
+      --cf-grey-200:    #E4E4F0;
       --cf-grey-100:    #F7F7F8;
       --cf-white:       #FFFFFF;
-      --ease:           cubic-bezier(0.4,0,0.2,1);
+      --cf-error:       #DC3545;
+
+      --ease:           cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Safe area insets ‚Äî iPhone notches, Android gesture bars */
+      --safe-top:    env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+      /* Layout */
+      --nav-h:       56px;
+      --actions-h:   76px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html, body { height: 100%; height: 100dvh; overscroll-behavior: none; }
+
     body {
       font-family: 'Montserrat', sans-serif;
       color: var(--cf-charcoal);
-      height: 100vh;
-      overflow: hidden;
       background-color: #f8f7ff;
       background-image:
         radial-gradient(circle, rgba(108,92,231,0.09) 1.5px, transparent 1.5px),
         radial-gradient(circle, rgba(108,92,231,0.04) 1px, transparent 1px);
-      background-size: 40px 40px, 20px 20px;
-      background-position: 0 0, 10px 10px;
+      background-size: 32px 32px, 16px 16px;
+      background-position: 0 0, 8px 8px;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
     }
 
-    /* ── NAV ── */
+    /* ‚îÄ‚îÄ NAV (mobile: compact) ‚îÄ‚îÄ */
     .cf-nav {
-      position: fixed; top: 0; left: 0; right: 0; height: 58px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
+      position: fixed; top: 0; left: 0; right: 0;
+      height: calc(var(--nav-h) + var(--safe-top));
+      padding-top: var(--safe-top);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--cf-grey-200);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 28px; z-index: 200; gap: 20px;
+      padding-left: 16px; padding-right: 16px; gap: 12px;
+      z-index: 200;
     }
-    .cf-logo-svg {
-      height: 26px; width: auto; flex-shrink: 0;
+    .nav-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex-shrink: 1; }
+    .cf-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 21px;
       color: var(--cf-purple);
+      letter-spacing: -0.7px;
+      line-height: 1;
+      text-transform: lowercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      user-select: none;
     }
-    .step-bar { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: center; }
+    .cf-tagline {
+      display: none;
+      font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 500;
+      color: var(--cf-grey-600); letter-spacing: 0.4px;
+      border-left: 1px solid var(--cf-grey-200); padding-left: 12px;
+    }
+    .step-bar { display: none; align-items: center; gap: 6px; flex: 1; justify-content: center; }
     .step-pill {
       padding: 4px 14px; border-radius: 20px;
       font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 500;
@@ -59,280 +100,546 @@
     }
     .step-pill.active { background: var(--cf-purple); color: #fff; }
     .step-pill.done   { background: var(--cf-purple-wash); color: var(--cf-purple); }
-    .step-div { width: 18px; height: 1px; background: var(--cf-grey-300); flex-shrink: 0; }
-    .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .slide-counter { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500; color: var(--cf-grey-600); }
+    .step-div { width: 18px; height: 1px; background: var(--cf-grey-200); flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .cf-music-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--cf-grey-200);
+      background: rgba(255,255,255,0.85);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cf-purple);
+      transition: all 200ms ease;
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .cf-music-btn:active { transform: scale(0.92); }
+    .cf-music-btn svg { width: 16px; height: 16px; }
+    .cf-music-btn .icon-on  { display: block; }
+    .cf-music-btn .icon-off { display: none; }
+    .cf-music-btn.muted { color: var(--cf-grey-300); border-color: var(--cf-grey-200); }
+    .cf-music-btn.muted .icon-on  { display: none; }
+    .cf-music-btn.muted .icon-off { display: block; }
+    /* Soft pulse when playing */
+    .cf-music-btn:not(.muted)::before {
+      content: ''; position: absolute; inset: -2px;
+      border-radius: 50%;
+      border: 1.5px solid var(--cf-purple);
+      opacity: 0;
+      animation: musicPulse 2.4s ease-out infinite;
+    }
+    @keyframes musicPulse {
+      0%   { transform: scale(0.95); opacity: 0.5; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+    @media (hover: hover) {
+      .cf-music-btn:hover { border-color: var(--cf-purple); background: var(--cf-purple-wash); }
+    }
+    .slide-counter {
+      font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+      color: var(--cf-grey-600);
+    }
     .legacy-badge {
       background: var(--cf-gold); color: var(--cf-charcoal);
-      font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 700;
-      padding: 3px 11px; border-radius: 20px;
+      font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+      white-space: nowrap;
     }
 
-    /* ── PROGRESS ── */
-    .prog-outer { position: fixed; top: 58px; left: 0; right: 0; height: 3px; background: var(--cf-grey-200); z-index: 199; }
+    /* ‚îÄ‚îÄ PROGRESS ‚îÄ‚îÄ */
+    .prog-outer {
+      position: fixed; left: 0; right: 0;
+      top: calc(var(--nav-h) + var(--safe-top));
+      height: 3px; background: var(--cf-grey-200); z-index: 199;
+    }
     .prog-inner { height: 100%; background: var(--cf-purple); transition: width 400ms ease; width: 0%; }
 
-    /* ── SHELL ── */
-    .shell { display: flex; justify-content: center; height: 100vh; padding-top: 61px; }
+    /* ‚îÄ‚îÄ SHELL ‚îÄ‚îÄ */
+    .shell {
+      position: fixed; left: 0; right: 0;
+      top: calc(var(--nav-h) + var(--safe-top) + 3px);
+      bottom: 0;
+      display: flex; justify-content: center;
+    }
+    .slide-wrap {
+      position: relative; width: 100%; max-width: 640px; height: 100%; overflow: hidden;
+    }
 
-    /* ── SLIDE CONTAINER ── */
-    .slide-wrap { position: relative; width: 100%; max-width: 620px; height: 100%; overflow: hidden; }
-
-    /* ── SLIDES — vertical scroll transitions ── */
+    /* ‚îÄ‚îÄ SLIDE STRUCTURE ‚Äî flex column with sticky actions ‚îÄ‚îÄ */
     .slide {
       position: absolute; inset: 0;
-      padding: 40px 40px 32px;
       display: flex; flex-direction: column;
-      align-items: center;           /* horizontal centering of content blocks */
-      text-align: center;            /* text centered */
       opacity: 0;
-      transform: translateY(32px);   /* default: enters from below */
-      transition: opacity 480ms var(--ease), transform 480ms var(--ease);
+      transform: translateY(28px);
+      transition: opacity 420ms var(--ease), transform 420ms var(--ease);
       pointer-events: none;
-      overflow-y: auto; scrollbar-width: thin;
     }
     .slide.active    { opacity: 1; transform: translateY(0); pointer-events: all; }
-    .slide.exit-up   { opacity: 0; transform: translateY(-32px); }   /* exits upward */
-    .slide.exit-down { opacity: 0; transform: translateY(32px); }    /* exits downward */
+    .slide.exit-up   { opacity: 0; transform: translateY(-28px); }
+    .slide.exit-down { opacity: 0; transform: translateY(28px); }
 
-    /* Full-width children */
-    .slide > * { width: 100%; }
+    .slide-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 24px 20px 16px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+    }
+    .slide-body > * { width: 100%; }
 
-    /* ── TYPOGRAPHY ── */
+    /* Sticky action bar ‚Äî always visible at bottom on mobile */
+    .slide-actions {
+      flex-shrink: 0;
+      padding: 12px 20px calc(14px + var(--safe-bottom));
+      background: rgba(248,247,255,0.96);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid var(--cf-grey-200);
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
+    }
+
+    /* ‚îÄ‚îÄ TYPOGRAPHY (mobile base) ‚îÄ‚îÄ */
     .slide-tag {
       font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600;
-      letter-spacing: 1.8px; text-transform: uppercase; color: var(--cf-purple);
+      letter-spacing: 1.6px; text-transform: uppercase; color: var(--cf-purple);
       margin-bottom: 8px;
     }
     .slide-headline {
       font-family: 'Poppins', sans-serif; font-weight: 700;
-      font-size: 24px; line-height: 1.28; color: var(--cf-charcoal);
-      margin-bottom: 22px; letter-spacing: -0.3px;
+      font-size: 22px; line-height: 1.25; color: var(--cf-charcoal);
+      margin-bottom: 18px; letter-spacing: -0.3px;
     }
-    .slide-headline.hero { font-size: 36px; line-height: 1.15; margin-bottom: 12px; }
+    .slide-headline.hero {
+      font-size: 30px; font-weight: 800; line-height: 1.12; margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
     .slide-sub {
-      font-family: 'Montserrat', sans-serif; font-size: 13px;
-      color: var(--cf-grey-600); line-height: 1.6; margin-bottom: 20px; margin-top: -14px;
+      font-family: 'Montserrat', sans-serif; font-size: 14px;
+      color: var(--cf-grey-600); line-height: 1.55; margin-bottom: 20px; margin-top: -8px;
     }
     .q-label {
-      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 600;
-      color: var(--cf-grey-600); margin-bottom: 7px; margin-top: 4px;
-      text-transform: uppercase; letter-spacing: 0.6px; text-align: center;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      color: var(--cf-charcoal); margin-bottom: 12px; margin-top: 0;
+      letter-spacing: 0.1px; text-align: left; line-height: 1.35;
     }
     .q-divider { height: 1px; background: var(--cf-grey-200); margin: 14px 0; }
 
-    /* ── CHOICES — left-aligned text inside, but container is full-width ── */
-    .choices { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; text-align: left; }
-    .choices.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    /* ‚îÄ‚îÄ Q-BLOCK ‚Äî contrasting card per question with purple accent bar ‚îÄ‚îÄ */
+    .q-block {
+      position: relative;
+      background: var(--cf-white);
+      border: 1.5px solid var(--cf-grey-200);
+      border-radius: 14px;
+      padding: 16px 16px 14px 18px;
+      margin-bottom: 14px;
+      text-align: left;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      overflow: hidden;
+    }
+    .q-block::before {
+      content: ''; position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 4px;
+      background: var(--cf-purple);
+    }
+    .q-block .q-label { text-align: left; }
+    .q-block .choices,
+    .q-block .scale-wrap,
+    .q-block .star-wrap,
+    .q-block .slider-wrap { margin-bottom: 0; }
+    .q-block .slider-val { text-align: left; font-size: 16px; }
+
+    /* ‚îÄ‚îÄ CHOICES (mobile: single column, bigger touch) ‚îÄ‚îÄ */
+    .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; text-align: left; }
+    .choices.g2 { display: flex; flex-direction: column; gap: 8px; }   /* always 1-col on mobile */
     .choice {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 10px 13px;
-      border: 1.5px solid var(--cf-grey-200); border-radius: 10px;
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      border: 1.5px solid var(--cf-grey-200); border-radius: 12px;
       cursor: pointer;
-      background: rgba(255,255,255,0.82);
-      text-align: left; width: 100%; user-select: none;
-      transition: border-color 200ms ease, background 200ms ease,
-                  transform 200ms ease, box-shadow 200ms ease;
+      background: rgba(255,255,255,0.88);
+      width: 100%; user-select: none;
+      transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease;
+      min-height: 52px;
     }
-    /* ── CHOICE HOVER HIGHLIGHT ── */
-    .choice:hover {
-      border-color: var(--cf-purple);
-      background: var(--cf-purple-wash);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(108,92,231,0.14);
-    }
+    .choice:active { background: var(--cf-purple-wash); border-color: var(--cf-purple); }
     .choice.selected {
       border-color: var(--cf-purple);
       background: var(--cf-purple-wash);
-      box-shadow: 0 2px 10px rgba(108,92,231,0.1);
+      box-shadow: 0 2px 10px rgba(108,92,231,0.10);
     }
     .choice input { display: none; }
     .dot {
-      width: 16px; height: 16px; border: 2px solid var(--cf-grey-300);
+      width: 18px; height: 18px; border: 2px solid var(--cf-grey-300);
       border-radius: 50%; flex-shrink: 0; margin-top: 2px;
       transition: border-color 200ms, background 200ms; position: relative;
     }
-    .is-cb .dot { border-radius: 4px; }
+    .is-cb .dot { border-radius: 5px; }
     .choice.selected .dot { border-color: var(--cf-purple); background: var(--cf-purple); }
     .choice.selected .dot::after {
-      content: ''; position: absolute; top: 2px; left: 4px;
-      width: 4px; height: 7px; border: 2px solid #fff;
+      content: ''; position: absolute; top: 3px; left: 5px;
+      width: 4px; height: 8px; border: 2px solid #fff;
       border-top: none; border-left: none; transform: rotate(45deg);
     }
-    .ct { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 500; color: var(--cf-grey-800); line-height: 1.35; }
-    .ct .sub { display: block; font-size: 11px; font-weight: 400; color: var(--cf-grey-600); margin-top: 1px; }
+    .ct {
+      font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 500;
+      color: var(--cf-grey-800); line-height: 1.35;
+    }
+    .ct .sub { display: block; font-size: 12px; font-weight: 400; color: var(--cf-grey-600); margin-top: 2px; }
 
-    /* ── SCALE ── */
-    .scale-wrap { margin-bottom: 14px; text-align: center; }
-    .scale-row  { display: flex; gap: 7px; justify-content: center; margin-bottom: 5px; }
+    /* ‚îÄ‚îÄ SCALE ‚îÄ‚îÄ */
+    .scale-wrap { margin-bottom: 14px; }
+    .scale-row  { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
     .sb {
-      width: 42px; height: 42px; border: 1.5px solid var(--cf-grey-200); border-radius: 9px;
-      background: rgba(255,255,255,0.85); font-family: 'Poppins', sans-serif; font-size: 14px;
+      flex: 1; max-width: 56px; min-width: 0;
+      height: 52px; border: 1.5px solid var(--cf-grey-200); border-radius: 11px;
+      background: rgba(255,255,255,0.88); font-family: 'Poppins', sans-serif; font-size: 15px;
       font-weight: 600; color: var(--cf-grey-600); cursor: pointer;
       transition: all 180ms ease;
       display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent;
     }
-    /* ── SCALE BUTTON HOVER HIGHLIGHT ── */
-    .sb:hover {
-      border-color: var(--cf-purple); color: var(--cf-purple);
-      background: var(--cf-purple-wash);
-      transform: translateY(-2px) scale(1.08);
-      box-shadow: 0 4px 14px rgba(108,92,231,0.18);
-    }
+    .sb:active { transform: scale(0.95); }
     .sb.selected {
       background: var(--cf-purple); border-color: var(--cf-purple); color: #fff;
-      box-shadow: 0 4px 14px rgba(108,92,231,0.3);
+      box-shadow: 0 4px 14px rgba(108,92,231,0.30);
     }
     .scale-ends { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); }
 
-    /* ── STARS ── */
-    .star-wrap { margin-bottom: 14px; text-align: center; }
-    .star-row  { display: flex; gap: 6px; justify-content: center; margin-bottom: 4px; }
+    /* ‚îÄ‚îÄ STARS ‚îÄ‚îÄ */
+    .star-wrap { margin-bottom: 14px; }
+    .star-row  { display: flex; gap: 10px; justify-content: center; margin-bottom: 6px; }
     .star {
-      font-size: 30px; cursor: pointer; color: var(--cf-grey-200);
+      font-size: 36px; cursor: pointer; color: var(--cf-grey-200);
       transition: color 150ms, transform 180ms ease;
       line-height: 1; display: inline-block;
+      padding: 4px;
+      min-width: 44px; min-height: 44px;
+      display: flex; align-items: center; justify-content: center;
     }
     .star.lit   { color: var(--cf-gold); }
-    /* ── STAR HOVER HIGHLIGHT ── */
-    .star:hover { transform: scale(1.28) rotate(-5deg); }
-    .star-ends  { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); max-width: 168px; margin: 0 auto; }
+    .star:active { transform: scale(1.2); }
+    .star-ends  { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); max-width: 220px; margin: 0 auto; }
 
-    /* ── SLIDER ── */
-    .slider-wrap { margin-bottom: 14px; text-align: center; }
+    /* ‚îÄ‚îÄ SLIDER ‚îÄ‚îÄ */
+    .slider-wrap { margin-bottom: 14px; }
     .slider-val  {
-      font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
-      color: var(--cf-purple); margin-bottom: 12px; line-height: 1.3;
+      font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700;
+      color: var(--cf-purple); margin-bottom: 14px; line-height: 1.3;
+      text-align: center;
     }
     .cf-slider {
-      -webkit-appearance: none; width: 100%; height: 5px; border-radius: 4px;
-      background: var(--cf-grey-200); outline: none; margin-bottom: 6px; cursor: pointer;
-      transition: background 200ms;
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 8px; border-radius: 4px;
+      background: var(--cf-grey-200); outline: none; cursor: pointer;
+      margin-bottom: 8px;
+      touch-action: manipulation;
     }
-    .cf-slider:hover { background: var(--cf-grey-300); }
     .cf-slider::-webkit-slider-thumb {
-      -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+      -webkit-appearance: none; appearance: none;
+      width: 28px; height: 28px; border-radius: 50%;
       background: var(--cf-purple); cursor: pointer;
-      box-shadow: 0 2px 8px rgba(108,92,231,0.4);
-      transition: transform 150ms ease, box-shadow 150ms ease;
+      box-shadow: 0 2px 10px rgba(108,92,231,0.4);
+      border: 2px solid #fff;
     }
-    .cf-slider:active::-webkit-slider-thumb {
-      transform: scale(1.2);
-      box-shadow: 0 4px 16px rgba(108,92,231,0.5);
+    .cf-slider::-moz-range-thumb {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--cf-purple); cursor: pointer;
+      box-shadow: 0 2px 10px rgba(108,92,231,0.4);
+      border: 2px solid #fff;
     }
     .slider-ends { display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--cf-grey-600); }
 
-    /* ── PRICE BLOCKS — hover highlight ── */
+    /* ‚îÄ‚îÄ PRICE BLOCKS ‚îÄ‚îÄ */
     .price-block {
-      margin-bottom: 16px; padding: 18px 20px;
-      background: rgba(255,255,255,0.85); border: 1.5px solid var(--cf-grey-200);
-      border-radius: 12px; text-align: center;
-      transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
-    }
-    .price-block:hover {
-      border-color: var(--cf-purple);
-      box-shadow: 0 6px 20px rgba(108,92,231,0.1);
-      transform: translateY(-1px);
+      margin-bottom: 14px; padding: 18px 18px 16px;
+      background: rgba(255,255,255,0.88); border: 1.5px solid var(--cf-grey-200);
+      border-radius: 14px;
     }
     .price-cat-label {
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      color: var(--cf-charcoal); margin-bottom: 12px;
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
+      color: var(--cf-charcoal); margin-bottom: 12px; text-align: center;
     }
 
-    /* ── FACTOR GRID ── */
-    .fgrid { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 14px; text-align: left; }
-    .fgrid th {
-      font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600;
-      color: var(--cf-purple); text-align: center; padding: 8px 5px;
-      background: var(--cf-purple-wash); border-bottom: 1px solid var(--cf-grey-200);
+    /* ‚îÄ‚îÄ Q6 FACTOR LIST (mobile: card stack, NOT table) ‚îÄ‚îÄ */
+    .fgrid-table { display: none; }
+    .fgrid-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .fcard {
+      background: rgba(255,255,255,0.88);
+      border: 1.5px solid var(--cf-grey-200);
+      border-radius: 12px;
+      padding: 14px 14px 12px;
     }
-    .fgrid th:first-child { text-align: left; padding-left: 10px; border-radius: 7px 0 0 0; }
-    .fgrid th:last-child  { border-radius: 0 7px 0 0; }
-    .fgrid td { font-size: 12px; color: var(--cf-grey-800); padding: 9px 5px; border-bottom: 1px solid var(--cf-grey-200); text-align: center; vertical-align: middle; }
-    .fgrid td:first-child { text-align: left; font-weight: 500; padding-left: 10px; }
-    .fgrid tr:last-child td { border-bottom: none; }
-    .fgrid tr { transition: background 150ms ease; }
-    .fgrid tr:hover td { background: var(--cf-purple-wash); }
-    .gr {
-      width: 18px; height: 18px; border: 2px solid var(--cf-grey-300); border-radius: 50%;
-      cursor: pointer; display: inline-block; position: relative;
-      transition: all 150ms ease; vertical-align: middle;
+    .fcard-label {
+      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600;
+      color: var(--cf-charcoal); margin-bottom: 10px; text-align: left;
     }
-    .gr:hover    { border-color: var(--cf-purple); background: rgba(108,92,231,0.08); transform: scale(1.15); }
-    .gr.selected { border-color: var(--cf-purple); background: var(--cf-purple); }
-    .gr.selected::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 5px; height: 5px; background: #fff; border-radius: 50%; }
+    .fcard-options { display: flex; gap: 6px; }
+    .fopt {
+      flex: 1;
+      min-height: 44px;
+      padding: 8px 6px;
+      border: 1.5px solid var(--cf-grey-200);
+      border-radius: 9px;
+      background: rgba(255,255,255,0.6);
+      font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600;
+      color: var(--cf-grey-600); cursor: pointer;
+      transition: all 180ms ease;
+      line-height: 1.2;
+      -webkit-tap-highlight-color: transparent;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+    }
+    .fopt:active { transform: scale(0.97); }
+    .fopt.selected {
+      background: var(--cf-purple); border-color: var(--cf-purple); color: #fff;
+      box-shadow: 0 3px 10px rgba(108,92,231,0.30);
+    }
 
-    /* ── TEXT INPUT ── */
+    /* ‚îÄ‚îÄ TEXT INPUT (16px to prevent iOS zoom) ‚îÄ‚îÄ */
     .cf-input {
-      width: 100%; padding: 11px 14px; border: 1.5px solid var(--cf-grey-200);
-      border-radius: 9px; font-family: 'Montserrat', sans-serif; font-size: 13px;
+      width: 100%; padding: 14px 16px; border: 1.5px solid var(--cf-grey-200);
+      border-radius: 12px; font-family: 'Montserrat', sans-serif; font-size: 16px;
       color: var(--cf-charcoal); outline: none;
       transition: border-color 200ms, box-shadow 200ms;
-      margin-bottom: 14px; resize: none; background: rgba(255,255,255,0.85);
+      margin-bottom: 14px; resize: none;
+      background: rgba(255,255,255,0.88);
       text-align: left;
+      min-height: 52px;
+      -webkit-appearance: none;
     }
-    .cf-input:focus { border-color: var(--cf-purple); box-shadow: 0 0 0 3px rgba(108,92,231,0.1); }
+    .cf-input:focus { border-color: var(--cf-purple); box-shadow: 0 0 0 3px rgba(108,92,231,0.10); }
     .cf-input::placeholder { color: var(--cf-grey-300); }
 
-    /* ── BUTTONS ── */
-    .btn-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    /* ‚îÄ‚îÄ BUTTONS (Gold = action only) ‚îÄ‚îÄ */
     .btn-next {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 12px 26px; background: var(--cf-gold); color: var(--cf-charcoal);
-      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
-      border: none; border-radius: 8px; cursor: pointer;
-      transition: background 150ms, transform 180ms ease, box-shadow 180ms ease;
-      box-shadow: 0 2px 8px rgba(245,197,24,0.2);
+      flex: 1; max-width: 320px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      min-height: 52px; padding: 14px 24px;
+      background: var(--cf-gold); color: var(--cf-charcoal);
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+      border: none; border-radius: 14px; cursor: pointer;
+      transition: background 150ms, transform 120ms ease;
+      box-shadow: 0 4px 12px rgba(245,197,24,0.28);
+      -webkit-tap-highlight-color: transparent;
     }
-    .btn-next:hover  { background: var(--cf-gold-h); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(245,197,24,0.35); }
-    .btn-next:active { transform: scale(0.97); }
+    .btn-next:active { background: var(--cf-gold-h); transform: scale(0.97); }
     .btn-back {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 11px 16px; background: rgba(255,255,255,0.8);
-      border: 1.5px solid var(--cf-grey-200); border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      min-height: 52px; padding: 12px 16px;
+      background: rgba(255,255,255,0.85);
+      border: 1.5px solid var(--cf-grey-200); border-radius: 12px;
       color: var(--cf-grey-600); font-family: 'Poppins', sans-serif;
-      font-size: 13px; font-weight: 500; cursor: pointer;
-      transition: all 180ms ease;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+      transition: all 150ms ease;
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
     }
-    .btn-back:hover { border-color: var(--cf-purple); color: var(--cf-purple); background: var(--cf-purple-wash); transform: translateY(-1px); }
-    .btn-ghost { background: none; border: none; color: var(--cf-grey-600); font-family: 'Montserrat', sans-serif; font-size: 12px; cursor: pointer; padding: 6px 2px; transition: color 150ms; }
-    .btn-ghost:hover { color: var(--cf-charcoal); }
+    .btn-back:active { background: var(--cf-purple-wash); color: var(--cf-purple); border-color: var(--cf-purple); }
+    .btn-ghost {
+      background: none; border: none; color: var(--cf-grey-600);
+      font-family: 'Montserrat', sans-serif; font-size: 13px; cursor: pointer;
+      padding: 12px 6px;
+      min-height: 44px;
+    }
     .btn-outline {
-      padding: 11px 18px; border: 1.5px solid var(--cf-purple); border-radius: 8px;
+      min-height: 48px;
+      padding: 12px 20px; border: 1.5px solid var(--cf-purple); border-radius: 12px;
       background: none; color: var(--cf-purple); font-family: 'Poppins', sans-serif;
-      font-size: 13px; font-weight: 600; cursor: pointer;
+      font-size: 14px; font-weight: 600; cursor: pointer;
       transition: all 180ms ease;
+      -webkit-tap-highlight-color: transparent;
     }
-    .btn-outline:hover { background: var(--cf-purple-wash); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(108,92,231,0.14); }
+    .btn-outline:active { background: var(--cf-purple-wash); }
 
-    /* ── INTERSTITIAL ── */
+    /* ‚îÄ‚îÄ INTERSTITIAL ‚îÄ‚îÄ */
     .int-card {
-      background: rgba(240,234,255,0.75); border-radius: 18px; padding: 30px;
-      border: 1px solid rgba(108,92,231,0.15); margin-top: 28px;
-      backdrop-filter: blur(8px); text-align: center;
+      background: rgba(240,234,255,0.78); border-radius: 18px; padding: 26px 22px;
+      border: 1px solid rgba(108,92,231,0.16); margin-top: 20px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      text-align: center;
     }
-    .int-card .i-tag { font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase; color: var(--cf-purple); margin-bottom: 8px; }
-    .int-card h2    { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 20px; color: var(--cf-charcoal); margin-bottom: 8px; line-height: 1.3; }
-    .int-card p     { font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--cf-grey-600); line-height: 1.6; margin-bottom: 18px; }
+    .int-card .i-tag { font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--cf-purple); margin-bottom: 10px; }
+    .int-card h2    { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 19px; color: var(--cf-charcoal); margin-bottom: 8px; line-height: 1.3; }
+    .int-card p     { font-family: 'Montserrat', sans-serif; font-size: 14px; color: var(--cf-grey-600); line-height: 1.55; margin-bottom: 0; }
 
-    /* ── DONE ── */
-    .done-icon { font-size: 52px; margin-bottom: 12px; margin-top: 24px; }
-    .done-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
-    .done-footer { margin-top: 14px; font-size: 12px; color: var(--cf-grey-600); }
+    /* ‚îÄ‚îÄ DONE ‚îÄ‚îÄ */
+    .done-icon { font-size: 56px; margin-bottom: 12px; margin-top: 16px; }
+    .done-actions {
+      display: flex; flex-direction: column; gap: 10px;
+      margin-top: 18px; align-items: stretch;
+    }
+    .done-actions .btn-next,
+    .done-actions .btn-outline { max-width: none; width: 100%; }
+    .done-footer { margin-top: 14px; font-size: 13px; color: var(--cf-grey-600); }
 
-    /* ── CONFETTI ── */
+    /* ‚îÄ‚îÄ CONTACT CARD ‚îÄ‚îÄ */
+    .contact-card {
+      margin-top: 22px;
+      padding: 20px 18px 18px;
+      background: var(--cf-white);
+      border: 1.5px solid var(--cf-grey-200);
+      border-top: 4px solid var(--cf-purple);
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(108,92,231,0.08);
+    }
+    .contact-title {
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--cf-charcoal); margin-bottom: 4px;
+    }
+    .contact-sub {
+      font-family: 'Montserrat', sans-serif; font-size: 13px;
+      color: var(--cf-grey-600); margin-bottom: 16px; line-height: 1.5;
+    }
+    .contact-num-row {
+      padding: 12px 0;
+      border-top: 1px solid var(--cf-grey-200);
+    }
+    .contact-num-row:first-of-type { border-top: none; padding-top: 0; }
+    .contact-num-row:last-of-type { padding-bottom: 0; }
+    .contact-num {
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
+      color: var(--cf-charcoal); margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+    .contact-actions {
+      display: flex; gap: 8px; justify-content: center;
+    }
+    .contact-btn {
+      flex: 1; max-width: 160px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      min-height: 44px; padding: 10px 14px;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+      text-decoration: none;
+      transition: transform 150ms ease, box-shadow 180ms ease, background 150ms;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .contact-btn:active { transform: scale(0.97); }
+    .contact-btn.call {
+      background: var(--cf-purple); color: #fff;
+      box-shadow: 0 2px 8px rgba(108,92,231,0.28);
+    }
+    .contact-btn.call:active { background: var(--cf-purple-h); }
+    .contact-btn.wa {
+      background: #25D366; color: #fff;
+      box-shadow: 0 2px 8px rgba(37,211,102,0.28);
+    }
+    .contact-btn.wa:active { background: #1FB855; }
+    .contact-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    @media (hover: hover) {
+      .contact-btn.call:hover { background: var(--cf-purple-h); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(108,92,231,0.36); }
+      .contact-btn.wa:hover   { background: #1FB855;            transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,211,102,0.36); }
+    }
+
+    /* ‚îÄ‚îÄ TOAST ‚îÄ‚îÄ */
+    .cf-toast {
+      position: fixed;
+      bottom: calc(var(--actions-h) + var(--safe-bottom) + 16px);
+      left: 16px; right: 16px;
+      background: var(--cf-charcoal); color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 12px 18px; border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 240ms ease, transform 320ms var(--ease);
+      z-index: 1000; pointer-events: none;
+      text-align: center;
+      max-width: 480px; margin: 0 auto;
+    }
+    .cf-toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ‚îÄ‚îÄ CONFETTI ‚îÄ‚îÄ */
     #conf { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
 
-    /* ── MOBILE ── */
-    @media (max-width: 680px) {
-      .slide         { padding: 24px 18px 22px; }
-      .slide-headline{ font-size: 21px; }
-      .slide-headline.hero { font-size: 27px; }
-      .step-bar      { display: none; }
-      .choices.g2    { grid-template-columns: 1fr; }
+    /* ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+       TABLET ‚Äî 640px and up
+       ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+    @media (min-width: 640px) {
+      :root { --nav-h: 60px; }
+
+      .cf-nav { padding-left: 24px; padding-right: 24px; }
+      .cf-logo { font-size: 23px; }
+      .cf-tagline { display: inline; }
+      .step-bar { display: flex; }
+
+      .slide-body { padding: 32px 32px 16px; }
+      .slide-actions { padding: 14px 32px calc(16px + var(--safe-bottom)); }
+
+      .slide-headline { font-size: 24px; }
+      .slide-headline.hero { font-size: 34px; }
+
+      .choices.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+      /* Q6 ‚Äî switch back to table on tablet */
+      .fgrid-cards { display: none; }
+      .fgrid-table { display: table; width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 14px; }
+      .fgrid-table th {
+        font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600;
+        color: var(--cf-purple); text-align: center; padding: 10px 6px;
+        background: var(--cf-purple-wash); border-bottom: 1px solid var(--cf-grey-200);
+      }
+      .fgrid-table th:first-child { text-align: left; padding-left: 14px; border-radius: 8px 0 0 0; }
+      .fgrid-table th:last-child  { border-radius: 0 8px 0 0; }
+      .fgrid-table td { font-size: 13px; color: var(--cf-grey-800); padding: 12px 6px; border-bottom: 1px solid var(--cf-grey-200); text-align: center; vertical-align: middle; }
+      .fgrid-table td:first-child { text-align: left; font-weight: 500; padding-left: 14px; }
+      .fgrid-table tr:last-child td { border-bottom: none; }
+      .gr {
+        width: 22px; height: 22px; border: 2px solid var(--cf-grey-300); border-radius: 50%;
+        cursor: pointer; display: inline-block; position: relative;
+        transition: all 150ms ease; vertical-align: middle;
+      }
+      .gr.selected { border-color: var(--cf-purple); background: var(--cf-purple); }
+      .gr.selected::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 6px; height: 6px; background: #fff; border-radius: 50%; }
     }
+
+    /* ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê
+       DESKTOP ‚Äî 1024px and up (richer hover states)
+       ‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê‚ïê */
+    @media (min-width: 1024px) {
+      .slide-headline { font-size: 26px; }
+      .slide-headline.hero { font-size: 38px; }
+
+      .slide-body { padding: 40px 40px 20px; }
+
+      .choice { min-height: 48px; padding: 12px 14px; }
+      .ct { font-size: 14px; }
+      .ct .sub { font-size: 11px; }
+    }
+
+    /* Hover states only on devices that support real hover */
+    @media (hover: hover) {
+      .choice:hover {
+        border-color: var(--cf-purple);
+        background: var(--cf-purple-wash);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(108,92,231,0.14);
+      }
+      .sb:hover {
+        border-color: var(--cf-purple); color: var(--cf-purple);
+        background: var(--cf-purple-wash);
+        transform: translateY(-2px) scale(1.05);
+      }
+      .star:hover { transform: scale(1.2); }
+      .btn-next:hover  { background: var(--cf-gold-h); transform: translateY(-2px); box-shadow: 0 8px 22px rgba(245,197,24,0.36); }
+      .btn-back:hover  { border-color: var(--cf-purple); color: var(--cf-purple); background: var(--cf-purple-wash); }
+      .btn-outline:hover { background: var(--cf-purple-wash); transform: translateY(-1px); }
+      .gr:hover { border-color: var(--cf-purple); background: rgba(108,92,231,0.08); transform: scale(1.15); }
+      .fopt:hover { border-color: var(--cf-purple); color: var(--cf-purple); background: var(--cf-purple-wash); }
+      .fgrid-table tr:hover td { background: var(--cf-purple-wash); }
+    }
+
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      .slide, .choice, .sb, .star { transition: opacity 120ms; }
+      .slide, .choice, .sb, .star, .btn-next, .btn-back, .btn-outline, .cf-toast, .fopt {
+        transition: opacity 120ms !important;
+        animation: none !important;
+      }
     }
 
     @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 60%{transform:translateX(8px)} }
@@ -342,24 +649,10 @@
 
 <!-- NAV -->
 <nav class="cf-nav">
-  <!-- Cityfurnish SVG logo -->
-  <svg class="cf-logo-svg" viewBox="0 0 596 128" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(0,128) scale(0.1,-0.1)" fill="currentColor" stroke="none">
-      <path d="M2355 1205 c-5 -2 -27 -6 -48 -10 -39 -6 -107 -59 -129 -99 -7 -12 -14 -52 -17 -91 l-6 -70 -57 -3 -58 -3 0 -54 0 -55 60 0 60 0 0 -240 0 -240 60 0 60 0 0 240 0 240 90 0 90 0 0 55 0 55 -91 0 -92 0 5 51 c3 28 14 62 25 77 18 24 27 27 74 26 30 0 63 -4 74 -8 17 -6 24 0 43 39 l22 46 -42 18 c-44 19 -105 32 -123 26z"/>
-      <path d="M735 1192 c-55 -11 -76 -91 -35 -132 62 -62 162 21 120 100 -11 21 -56 38 -85 32z"/>
-      <path d="M4520 1187 c-51 -26 -61 -93 -18 -129 48 -41 128 -2 128 62 0 28 -29 70 -49 70 -5 0 -15 2 -23 5 -7 3 -24 -1 -38 -8z"/>
-      <path d="M5330 765 l0 -425 64 0 65 0 3 193 3 194 29 37 c49 65 136 85 206 48 63 -33 70 -62 70 -279 l0 -193 66 0 65 0 -3 213 c-3 210 -3 212 -32 270 -21 44 -40 66 -73 87 -89 57 -221 49 -294 -18 l-39 -34 0 166 0 166 -65 0 -65 0 0 -425z"/>
-      <path d="M1048 1103 c-28 -4 -28 -5 -28 -84 l0 -79 -55 0 -55 0 0 -55 0 -55 55 0 55 0 0 -150 c0 -189 11 -243 59 -292 57 -56 155 -73 243 -39 l27 10 -16 49 -16 49 -62 -5 c-58 -4 -63 -3 -83 23 -21 26 -22 39 -22 191 l0 164 91 0 90 0 -3 53 -3 52 -87 3 -88 3 0 84 0 85 -37 -1 c-21 -1 -50 -4 -65 -6z"/>
-      <path d="M4900 946 c-114 -24 -170 -81 -170 -171 0 -102 68 -155 231 -181 112 -18 144 -36 144 -84 0 -53 -39 -75 -128 -74 -78 1 -126 17 -175 59 l-30 25 -31 -42 c-17 -23 -31 -45 -31 -49 0 -12 68 -59 118 -82 70 -32 228 -32 294 1 110 54 147 171 84 265 -27 40 -103 71 -210 86 -96 14 -128 28 -140 64 -9 24 -6 31 17 55 25 25 34 27 105 27 64 0 84 -4 120 -25 l43 -24 34 39 c18 22 31 43 28 48 -10 17 -103 56 -158 66 -69 13 -74 13 -145 -3z"/>
-      <path d="M253 933 c-61 -21 -136 -92 -163 -155 -34 -78 -33 -203 2 -278 52 -114 149 -174 283 -174 85 0 129 14 198 61 l38 26 -42 43 -42 43 -42 -25 c-31 -18 -56 -24 -98 -24 -69 0 -103 12 -145 53 -91 88 -56 272 61 316 52 20 140 14 180 -13 l35 -24 42 43 42 43 -44 29 c-23 17 -58 35 -77 41 -47 16 -177 14 -228 -5z"/>
-      <path d="M3475 934 c-16 -8 -42 -27 -57 -42 l-28 -26 0 37 0 37 -60 0 -60 0 0 -300 0 -300 65 0 65 0 0 193 c0 175 2 195 20 225 38 61 133 88 207 57 19 -8 37 -15 39 -15 4 0 54 97 54 105 0 3 -19 15 -42 25 -54 24 -160 27 -203 4z"/>
-      <path d="M4030 941 c-41 -13 -84 -37 -104 -60 -23 -25 -36 -13 -36 32 0 26 -1 27 -60 27 l-60 0 0 -300 0 -300 65 0 65 0 0 178 c0 164 2 181 23 222 31 63 76 90 147 90 67 0 113 -26 141 -80 17 -30 19 -59 19 -222 l0 -188 66 0 66 0 -4 208 c-3 193 -5 210 -26 254 -55 112 -188 173 -302 139z"/>
-      <path d="M690 640 l0 -300 65 0 65 0 0 300 0 300 -65 0 -65 0 0 -300z"/>
-      <path d="M1370 933 c0 -4 52 -137 116 -296 l117 -288 -48 -112 c-26 -61 -54 -127 -62 -145 l-14 -33 71 3 71 3 53 125 c30 69 113 262 185 429 72 168 131 308 131 313 0 4 -29 8 -66 8 l-65 0 -26 -57 c-14 -32 -56 -133 -93 -226 l-67 -167 -16 42 c-8 24 -44 124 -80 223 l-65 180 -71 3 c-39 2 -71 -1 -71 -5z"/>
-      <path d="M2550 747 c0 -141 4 -207 15 -243 51 -170 263 -229 407 -114 l37 30 3 -38 3 -37 58 -3 57 -3 0 301 0 300 -59 0 -59 0 -4 -182 c-4 -204 -9 -220 -74 -278 -35 -31 -40 -32 -105 -28 -55 3 -73 8 -94 28 -55 51 -59 70 -63 273 l-4 187 -59 0 -59 0 0 -193z"/>
-      <path d="M4490 640 l0 -300 60 0 60 0 0 300 0 300 -60 0 -60 0 0 -300z"/>
-    </g>
-  </svg>
+  <div class="nav-left">
+    <span class="cf-logo" aria-label="cityfurnish">cityfurnish</span>
+    <span class="cf-tagline">commitment-free furniture rental</span>
+  </div>
 
   <div class="step-bar">
     <div class="step-pill active" data-sec="1">Your Setup</div>
@@ -371,417 +664,520 @@
     <div class="step-pill" data-sec="4">What's Next</div>
   </div>
   <div class="nav-right">
-    <span class="slide-counter" id="counter">1 of —</span>
+    <button id="musicBtn" class="cf-music-btn muted" onclick="toggleMusic()" aria-label="Toggle ambient music" title="Ambient music">
+      <svg class="icon-on"  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+    </button>
+    <span class="slide-counter" id="counter">1 / 6</span>
     <span class="legacy-badge">&#128081; Legacy</span>
   </div>
 </nav>
 <div class="prog-outer"><div class="prog-inner" id="prog"></div></div>
 <canvas id="conf"></canvas>
+<div class="cf-toast" id="toast">Something went sideways. Try again?</div>
 
 <div class="shell">
 <div class="slide-wrap">
 
   <!-- HERO -->
   <div class="slide active" id="slide-hero" data-sec="0">
-    <div class="slide-tag">A note from Cityfurnish</div>
-    <h1 class="slide-headline hero">You've been with us for a while. Let's actually listen.</h1>
-    <p class="slide-sub">Five minutes. Your words shape what we build next.</p>
-    <div class="btn-row">
+    <div class="slide-body">
+      <div class="slide-tag">A note from Cityfurnish</div>
+      <h1 class="slide-headline hero">You've been with us for a while. Let's actually listen.</h1>
+      <p class="slide-sub">Five minutes. Your words shape what we build next.</p>
+    </div>
+    <div class="slide-actions">
       <button class="btn-next" onclick="next()">Let's do this &#8594;</button>
     </div>
   </div>
 
   <!-- Q1 -->
   <div class="slide" id="slide-q1" data-sec="1">
-    <div class="slide-tag">Section 1 · Your Setup</div>
-    <h2 class="slide-headline">What's Cityfurnish doing in your home right now?</h2>
-    <div class="choices g2" id="q1-ch">
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="bedroom">           <span class="dot"></span><span class="ct">Bedroom furniture<span class="sub">Beds, wardrobes, side tables</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="living-room">       <span class="dot"></span><span class="ct">Living room<span class="sub">Sofas, TV units, coffee tables</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="dining">            <span class="dot"></span><span class="ct">Dining furniture<span class="sub">Tables &amp; chairs</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="study">             <span class="dot"></span><span class="ct">Study / home office<span class="sub">Desks, chairs, bookshelves</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="storage">           <span class="dot"></span><span class="ct">Storage<span class="sub">Chests, shelving, organisers</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="kitchen-appliances"><span class="dot"></span><span class="ct">Kitchen appliances<span class="sub">Microwave, refrigerator, etc.</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="laundry">           <span class="dot"></span><span class="ct">Laundry appliance<span class="sub">Washing machine</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="entertainment">     <span class="dot"></span><span class="ct">Entertainment<span class="sub">TV, speakers</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="mattress">          <span class="dot"></span><span class="ct">Mattress</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q1" value="other">             <span class="dot"></span><span class="ct">Something else</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <h2 class="slide-headline">What's Cityfurnish doing in your home right now?</h2>
+      <div class="choices g2" id="q1-ch">
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="bedroom">           <span class="dot"></span><span class="ct">Bedroom furniture<span class="sub">Beds, wardrobes, side tables</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="living-room">       <span class="dot"></span><span class="ct">Living room<span class="sub">Sofas, TV units, coffee tables</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="dining">            <span class="dot"></span><span class="ct">Dining furniture<span class="sub">Tables &amp; chairs</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="study">             <span class="dot"></span><span class="ct">Study / home office<span class="sub">Desks, chairs, bookshelves</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="storage">           <span class="dot"></span><span class="ct">Storage<span class="sub">Chests, shelving, organisers</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="kitchen-appliances"><span class="dot"></span><span class="ct">Kitchen appliances<span class="sub">Microwave, refrigerator, etc.</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="laundry">           <span class="dot"></span><span class="ct">Laundry appliance<span class="sub">Washing machine</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="entertainment">     <span class="dot"></span><span class="ct">Entertainment<span class="sub">TV, speakers</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="mattress">          <span class="dot"></span><span class="ct">Mattress</span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q1" value="other">             <span class="dot"></span><span class="ct">Something else</span></label>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
       <button class="btn-next" onclick="saveQ1()">That's my list &#8594;</button>
     </div>
   </div>
 
   <!-- Q2 + Q4 -->
   <div class="slide" id="slide-q2q4" data-sec="1">
-    <div class="slide-tag">Section 1 · Your Setup</div>
-    <h2 class="slide-headline">A couple of quick things about you</h2>
-    <div class="q-label">How long have you been with us?</div>
-    <div class="choices" id="q2-ch">
-      <label class="choice"><input type="radio" name="q2" value="under-6m"><span class="dot"></span><span class="ct">Under 6 months</span></label>
-      <label class="choice"><input type="radio" name="q2" value="6-12m">   <span class="dot"></span><span class="ct">6 months to a year</span></label>
-      <label class="choice"><input type="radio" name="q2" value="1-2y">    <span class="dot"></span><span class="ct">1 to 2 years</span></label>
-      <label class="choice"><input type="radio" name="q2" value="2-3y">    <span class="dot"></span><span class="ct">2 to 3 years</span></label>
-      <label class="choice"><input type="radio" name="q2" value="3-4y">    <span class="dot"></span><span class="ct">3 to 4 years</span></label>
-      <label class="choice"><input type="radio" name="q2" value="4y+">     <span class="dot"></span><span class="ct">More than 4 years &#128081;</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <h2 class="slide-headline">A couple of quick things about you</h2>
+      <div class="q-block">
+        <div class="q-label">How long have you been with us?</div>
+        <div class="choices" id="q2-ch">
+          <label class="choice"><input type="radio" name="q2" value="18m-2y"><span class="dot"></span><span class="ct">18 months to 2 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="2-3y">  <span class="dot"></span><span class="ct">2 to 3 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="3-4y">  <span class="dot"></span><span class="ct">3 to 4 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="4-5y">  <span class="dot"></span><span class="ct">4 to 5 years</span></label>
+          <label class="choice"><input type="radio" name="q2" value="5y+">   <span class="dot"></span><span class="ct">More than 5 years &#128081;</span></label>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">How much of your home is ours?</div>
+        <div class="slider-wrap">
+          <div class="slider-val" id="sliderVal">About 50% of my home is Cityfurnish</div>
+          <input type="range" class="cf-slider" id="q4sl" min="0" max="100" value="50" oninput="updateSlider(this.value)">
+          <div class="slider-ends"><span>A couple of things</span><span>Almost everything</span></div>
+        </div>
+      </div>
     </div>
-    <div class="q-divider"></div>
-    <div class="q-label">How much of your home is ours?</div>
-    <div class="slider-wrap">
-      <div class="slider-val" id="sliderVal">About 50% of my home is Cityfurnish</div>
-      <input type="range" class="cf-slider" id="q4sl" min="0" max="100" value="50" oninput="updateSlider(this.value)">
-      <div class="slider-ends"><span>Just a couple of things</span><span>Almost everything</span></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
       <button class="btn-next" onclick="saveQ2Q4()">Got it &#8594;</button>
     </div>
   </div>
 
   <!-- Q3 -->
   <div class="slide" id="slide-q3" data-sec="1">
-    <div class="slide-tag">Section 1 · Your Setup</div>
-    <h2 class="slide-headline">If you could fix one thing, what would it be?</h2>
-    <div class="choices" id="q3-ch">
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="modern-designs">   <span class="dot"></span><span class="ct">More modern designs</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="premium">          <span class="dot"></span><span class="ct">More premium products</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="better-condition"><span class="dot"></span><span class="ct">Better product condition on arrival</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="faster-delivery"> <span class="dot"></span><span class="ct">Faster delivery and setup</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="customisation">   <span class="dot"></span><span class="ct">More personalisation options</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="more-variety">    <span class="dot"></span><span class="ct">More variety in categories I already use</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="new-categories">  <span class="dot"></span><span class="ct">New categories I can't find today</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="easier-swap">     <span class="dot"></span><span class="ct">Easier swaps and returns</span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q3" value="maintenance">     <span class="dot"></span><span class="ct">Better maintenance when something breaks</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <h2 class="slide-headline">If you could fix one thing about our products, what would it be?</h2>
+      <p class="slide-sub">Pick as many as feel true.</p>
+      <div class="choices" id="q3-ch">
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="modern-designs"> <span class="dot"></span><span class="ct">More modern designs<span class="sub">Trendier styles, fresher aesthetics</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="premium">        <span class="dot"></span><span class="ct">More premium products<span class="sub">Higher-end pieces, designer-grade brands</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="build-quality"> <span class="dot"></span><span class="ct">Better build quality<span class="sub">Sturdier construction that lasts longer</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="less-wear">     <span class="dot"></span><span class="ct">Less wear and tear<span class="sub">Items that look closer to brand new</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="customisation"> <span class="dot"></span><span class="ct">More personalisation<span class="sub">More colour, fabric, and size choices</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="more-variety">  <span class="dot"></span><span class="ct">More variety in your categories<span class="sub">Wider selection in what we already offer</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q3" value="new-categories"><span class="dot"></span><span class="ct">New product categories<span class="sub">Things we don't rent yet but you wish we did</span></span></label>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="next()">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveQ3()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- Q5 -->
   <div class="slide" id="slide-q5" data-sec="1">
-    <div class="slide-tag">Section 1 · Your Setup</div>
-    <h2 class="slide-headline">What made you choose renting over buying?</h2>
-    <div class="choices" id="q5-ch">
-      <label class="choice"><input type="radio" name="q5" value="upfront-cost">    <span class="dot"></span><span class="ct">Didn't want to spend a big lump sum</span></label>
-      <label class="choice"><input type="radio" name="q5" value="flexibility">     <span class="dot"></span><span class="ct">I like the flexibility to return or upgrade</span></label>
-      <label class="choice"><input type="radio" name="q5" value="mobile-life">     <span class="dot"></span><span class="ct">I move around — ownership doesn't make sense</span></label>
-      <label class="choice"><input type="radio" name="q5" value="better-products"> <span class="dot"></span><span class="ct">Access to nicer things than I could afford to buy</span></label>
-      <label class="choice"><input type="radio" name="q5" value="no-maintenance">  <span class="dot"></span><span class="ct">No stress about repairs — that's your department</span></label>
-      <label class="choice"><input type="radio" name="q5" value="simpler">         <span class="dot"></span><span class="ct">Just simpler than buying and dealing with delivery</span></label>
-      <label class="choice"><input type="radio" name="q5" value="environment">     <span class="dot"></span><span class="ct">Better for the environment</span></label>
-      <label class="choice"><input type="radio" name="q5" value="other">           <span class="dot"></span><span class="ct">Something else</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 1 ¬∑ Your Setup</div>
+      <h2 class="slide-headline">What made you choose renting over buying?</h2>
+      <div class="choices" id="q5-ch">
+        <label class="choice"><input type="radio" name="q5" value="upfront-cost">    <span class="dot"></span><span class="ct">Didn't want to spend a big lump sum</span></label>
+        <label class="choice"><input type="radio" name="q5" value="flexibility">     <span class="dot"></span><span class="ct">I like the flexibility to return or upgrade</span></label>
+        <label class="choice"><input type="radio" name="q5" value="mobile-life">     <span class="dot"></span><span class="ct">I move around ‚Äî ownership doesn't make sense</span></label>
+        <label class="choice"><input type="radio" name="q5" value="better-products"> <span class="dot"></span><span class="ct">Access to nicer things than I could afford to buy</span></label>
+        <label class="choice"><input type="radio" name="q5" value="no-maintenance">  <span class="dot"></span><span class="ct">No stress about repairs ‚Äî that's your department</span></label>
+        <label class="choice"><input type="radio" name="q5" value="simpler">         <span class="dot"></span><span class="ct">Just simpler than buying and dealing with delivery</span></label>
+        <label class="choice"><input type="radio" name="q5" value="environment">     <span class="dot"></span><span class="ct">Better for the environment</span></label>
+        <label class="choice"><input type="radio" name="q5" value="other" onchange="toggleQ5Other()"><span class="dot"></span><span class="ct">Something else</span></label>
+      </div>
+      <input type="text" class="cf-input" id="q5-other-in" placeholder="Tell us in your own words" style="display:none;">
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveRadio('q5','q5-ch')">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveQ5()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- INT 1 -->
   <div class="slide" id="slide-int1" data-sec="1">
-    <div class="int-card">
-      <div class="i-tag">Coming up</div>
-      <h2>Now let's talk about the actual stuff at your place.</h2>
-      <p>We'll only ask about categories you actually have — keep it real.</p>
-      <button class="btn-next" onclick="next()">Let's get into it &#8594;</button>
+    <div class="slide-body">
+      <div class="int-card">
+        <div class="i-tag">Coming up</div>
+        <h2>Now let's talk about the actual stuff at your place.</h2>
+        <p>We'll only ask about categories you actually have ‚Äî keep it real.</p>
+      </div>
     </div>
-    <div class="btn-row" style="margin-top:16px">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="next()">Let's get into it &#8594;</button>
     </div>
   </div>
 
   <!-- STORAGE -->
   <div class="slide" id="slide-a" data-sec="2" data-cat="storage">
-    <div class="slide-tag">Section 2 · Storage</div>
-    <h2 class="slide-headline">Is your storage actually doing the job?</h2>
-    <div class="q-label">Enough room?</div>
-    <div class="choices" id="a1-ch">
-      <label class="choice"><input type="radio" name="a1" value="way-more">   <span class="dot"></span><span class="ct">Way more than I need</span></label>
-      <label class="choice"><input type="radio" name="a1" value="about-right"><span class="dot"></span><span class="ct">About right</span></label>
-      <label class="choice"><input type="radio" name="a1" value="bit-tight">  <span class="dot"></span><span class="ct">A bit tight, but managing</span></label>
-      <label class="choice"><input type="radio" name="a1" value="not-enough"> <span class="dot"></span><span class="ct">Not enough — constantly running out</span></label>
-    </div>
-    <div class="q-divider"></div>
-    <div class="q-label">How often do you end up cramming things in?</div>
-    <div class="scale-wrap">
-      <div class="scale-row" id="a2-sc">
-        <button class="sb" onclick="pickScale('a2',1,'a2-sc')">1</button>
-        <button class="sb" onclick="pickScale('a2',2,'a2-sc')">2</button>
-        <button class="sb" onclick="pickScale('a2',3,'a2-sc')">3</button>
-        <button class="sb" onclick="pickScale('a2',4,'a2-sc')">4</button>
-        <button class="sb" onclick="pickScale('a2',5,'a2-sc')">5</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 2 ¬∑ Storage</div>
+      <h2 class="slide-headline">Is your storage doing the job?</h2>
+      <div class="q-block">
+        <div class="q-label">Enough room?</div>
+        <div class="choices" id="a1-ch">
+          <label class="choice"><input type="radio" name="a1" value="way-more">   <span class="dot"></span><span class="ct">Way more than I need</span></label>
+          <label class="choice"><input type="radio" name="a1" value="about-right"><span class="dot"></span><span class="ct">About right</span></label>
+          <label class="choice"><input type="radio" name="a1" value="bit-tight">  <span class="dot"></span><span class="ct">A bit tight, but managing</span></label>
+          <label class="choice"><input type="radio" name="a1" value="not-enough"> <span class="dot"></span><span class="ct">Not enough ‚Äî constantly running out</span></label>
+        </div>
       </div>
-      <div class="scale-ends"><span>Never</span><span>All the time</span></div>
+      <div class="q-block">
+        <div class="q-label">How often do you end up cramming things in?</div>
+        <div class="scale-wrap">
+          <div class="scale-row" id="a2-sc">
+            <button class="sb" onclick="pickScale('a2',1,'a2-sc')">1</button>
+            <button class="sb" onclick="pickScale('a2',2,'a2-sc')">2</button>
+            <button class="sb" onclick="pickScale('a2',3,'a2-sc')">3</button>
+            <button class="sb" onclick="pickScale('a2',4,'a2-sc')">4</button>
+            <button class="sb" onclick="pickScale('a2',5,'a2-sc')">5</button>
+          </div>
+          <div class="scale-ends"><span>Never</span><span>All the time</span></div>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Overall rating</div>
+        <div class="star-wrap">
+          <div class="star-row" id="a3-st"></div>
+          <div class="star-ends"><span>Not happy</span><span>Love them</span></div>
+        </div>
+      </div>
     </div>
-    <div class="q-divider"></div>
-    <div class="q-label">Overall rating</div>
-    <div class="star-wrap">
-      <div class="star-row" id="a3-st"></div>
-      <div class="star-ends"><span>Not happy</span><span>Love them</span></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveCatAndNext('a1','a1-ch')">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveStorage()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- APPLIANCES -->
   <div class="slide" id="slide-b" data-sec="2" data-cat="appliances">
-    <div class="slide-tag">Section 2 · Appliances</div>
-    <h2 class="slide-headline">How are the appliances holding up?</h2>
-    <div class="q-label">Did we have what you needed?</div>
-    <div class="choices" id="b1-ch">
-      <label class="choice"><input type="radio" name="b1" value="found-all">  <span class="dot"></span><span class="ct">Found everything — no gaps</span></label>
-      <label class="choice"><input type="radio" name="b1" value="found-most"> <span class="dot"></span><span class="ct">Found most things, a couple were missing</span></label>
-      <label class="choice"><input type="radio" name="b1" value="big-gaps">   <span class="dot"></span><span class="ct">Some pretty big gaps</span></label>
-      <label class="choice"><input type="radio" name="b1" value="limited">    <span class="dot"></span><span class="ct">Selection felt quite limited</span></label>
-    </div>
-    <div class="q-divider"></div>
-    <div class="q-label">Daily performance</div>
-    <div class="scale-wrap">
-      <div class="scale-row" id="b2-sc">
-        <button class="sb" onclick="pickScale('b2',1,'b2-sc')">1</button>
-        <button class="sb" onclick="pickScale('b2',2,'b2-sc')">2</button>
-        <button class="sb" onclick="pickScale('b2',3,'b2-sc')">3</button>
-        <button class="sb" onclick="pickScale('b2',4,'b2-sc')">4</button>
-        <button class="sb" onclick="pickScale('b2',5,'b2-sc')">5</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 2 ¬∑ Appliances</div>
+      <h2 class="slide-headline">How are the appliances holding up?</h2>
+      <div class="q-block">
+        <div class="q-label">Did we have what you needed?</div>
+        <div class="choices" id="b1-ch">
+          <label class="choice"><input type="radio" name="b1" value="found-all">  <span class="dot"></span><span class="ct">Found everything ‚Äî no gaps</span></label>
+          <label class="choice"><input type="radio" name="b1" value="found-most"> <span class="dot"></span><span class="ct">Found most things, a couple were missing</span></label>
+          <label class="choice"><input type="radio" name="b1" value="big-gaps">   <span class="dot"></span><span class="ct">Some pretty big gaps</span></label>
+          <label class="choice"><input type="radio" name="b1" value="limited">    <span class="dot"></span><span class="ct">Selection felt quite limited</span></label>
+        </div>
       </div>
-      <div class="scale-ends"><span>Quite disappointing</span><span>Works exactly as hoped</span></div>
+      <div class="q-block">
+        <div class="q-label">Daily performance</div>
+        <div class="scale-wrap">
+          <div class="scale-row" id="b2-sc">
+            <button class="sb" onclick="pickScale('b2',1,'b2-sc')">1</button>
+            <button class="sb" onclick="pickScale('b2',2,'b2-sc')">2</button>
+            <button class="sb" onclick="pickScale('b2',3,'b2-sc')">3</button>
+            <button class="sb" onclick="pickScale('b2',4,'b2-sc')">4</button>
+            <button class="sb" onclick="pickScale('b2',5,'b2-sc')">5</button>
+          </div>
+          <div class="scale-ends"><span>Disappointing</span><span>Works exactly as hoped</span></div>
+        </div>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveCatAndNext('b1','b1-ch')">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveCatAndNext('b1','b1-ch','b2')">Next &#8594;</button>
     </div>
   </div>
 
   <!-- DINING -->
   <div class="slide" id="slide-c" data-sec="2" data-cat="dining">
-    <div class="slide-tag">Section 2 · Tables &amp; Chairs</div>
-    <h2 class="slide-headline">Tables and chairs — how are they really?</h2>
-    <div class="q-label">Any quality issues?</div>
-    <div class="choices" id="c1-ch">
-      <label class="choice"><input type="radio" name="c1" value="no-issues">     <span class="dot"></span><span class="ct">No issues — solid and well-made</span></label>
-      <label class="choice"><input type="radio" name="c1" value="minor">         <span class="dot"></span><span class="ct">Minor things, nothing major</span></label>
-      <label class="choice"><input type="radio" name="c1" value="noticeable">    <span class="dot"></span><span class="ct">Noticeable issues I've gotten used to</span></label>
-      <label class="choice"><input type="radio" name="c1" value="clear-problems"><span class="dot"></span><span class="ct">Clear problems I'd love fixed</span></label>
-    </div>
-    <div class="q-divider"></div>
-    <div class="q-label">Happy with look and feel?</div>
-    <div class="scale-wrap">
-      <div class="scale-row" id="c2-sc">
-        <button class="sb" onclick="pickScale('c2',1,'c2-sc')">1</button>
-        <button class="sb" onclick="pickScale('c2',2,'c2-sc')">2</button>
-        <button class="sb" onclick="pickScale('c2',3,'c2-sc')">3</button>
-        <button class="sb" onclick="pickScale('c2',4,'c2-sc')">4</button>
-        <button class="sb" onclick="pickScale('c2',5,'c2-sc')">5</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 2 ¬∑ Tables &amp; Chairs</div>
+      <h2 class="slide-headline">Tables and chairs ‚Äî how are they really?</h2>
+      <div class="q-block">
+        <div class="q-label">Any quality issues?</div>
+        <div class="choices" id="c1-ch">
+          <label class="choice"><input type="radio" name="c1" value="no-issues">     <span class="dot"></span><span class="ct">No issues ‚Äî solid and well-made</span></label>
+          <label class="choice"><input type="radio" name="c1" value="minor">         <span class="dot"></span><span class="ct">Minor things, nothing major</span></label>
+          <label class="choice"><input type="radio" name="c1" value="noticeable">    <span class="dot"></span><span class="ct">Noticeable issues I've gotten used to</span></label>
+          <label class="choice"><input type="radio" name="c1" value="clear-problems"><span class="dot"></span><span class="ct">Clear problems I'd love fixed</span></label>
+        </div>
       </div>
-      <div class="scale-ends"><span>Not happy</span><span>Love how they look</span></div>
+      <div class="q-block">
+        <div class="q-label">Happy with look and feel?</div>
+        <div class="scale-wrap">
+          <div class="scale-row" id="c2-sc">
+            <button class="sb" onclick="pickScale('c2',1,'c2-sc')">1</button>
+            <button class="sb" onclick="pickScale('c2',2,'c2-sc')">2</button>
+            <button class="sb" onclick="pickScale('c2',3,'c2-sc')">3</button>
+            <button class="sb" onclick="pickScale('c2',4,'c2-sc')">4</button>
+            <button class="sb" onclick="pickScale('c2',5,'c2-sc')">5</button>
+          </div>
+          <div class="scale-ends"><span>Not happy</span><span>Love how they look</span></div>
+        </div>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveCatAndNext('c1','c1-ch')">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveCatAndNext('c1','c1-ch','c2')">Next &#8594;</button>
     </div>
   </div>
 
   <!-- SOFAS & BEDS -->
   <div class="slide" id="slide-d" data-sec="2" data-cat="living">
-    <div class="slide-tag">Section 2 · Sofas &amp; Beds</div>
-    <h2 class="slide-headline">The big ones. Tell us the truth.</h2>
-    <div class="q-label">Did it fit your room the way you pictured?</div>
-    <div class="choices" id="d1-ch">
-      <label class="choice"><input type="radio" name="d1" value="perfect">    <span class="dot"></span><span class="ct">Perfectly — exactly as expected</span></label>
-      <label class="choice"><input type="radio" name="d1" value="mostly-fine"><span class="dot"></span><span class="ct">Mostly fine, slightly off</span></label>
-      <label class="choice"><input type="radio" name="d1" value="rearranged"> <span class="dot"></span><span class="ct">Had to rearrange quite a bit</span></label>
-      <label class="choice"><input type="radio" name="d1" value="didnt-fit">  <span class="dot"></span><span class="ct">Didn't really fit the way I'd hoped</span></label>
-    </div>
-    <div class="q-divider"></div>
-    <div class="q-label">Comfort and build quality</div>
-    <div class="scale-wrap">
-      <div class="scale-row" id="d2-sc">
-        <button class="sb" onclick="pickScale('d2',1,'d2-sc')">1</button>
-        <button class="sb" onclick="pickScale('d2',2,'d2-sc')">2</button>
-        <button class="sb" onclick="pickScale('d2',3,'d2-sc')">3</button>
-        <button class="sb" onclick="pickScale('d2',4,'d2-sc')">4</button>
-        <button class="sb" onclick="pickScale('d2',5,'d2-sc')">5</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 2 ¬∑ Sofas &amp; Beds</div>
+      <h2 class="slide-headline">The big ones. Tell us the truth.</h2>
+      <div class="q-block">
+        <div class="q-label">Did it fit the way you pictured?</div>
+        <div class="choices" id="d1-ch">
+          <label class="choice"><input type="radio" name="d1" value="perfect">    <span class="dot"></span><span class="ct">Perfectly ‚Äî exactly as expected</span></label>
+          <label class="choice"><input type="radio" name="d1" value="mostly-fine"><span class="dot"></span><span class="ct">Mostly fine, slightly off</span></label>
+          <label class="choice"><input type="radio" name="d1" value="rearranged"> <span class="dot"></span><span class="ct">Had to rearrange quite a bit</span></label>
+          <label class="choice"><input type="radio" name="d1" value="didnt-fit">  <span class="dot"></span><span class="ct">Didn't really fit the way I'd hoped</span></label>
+        </div>
       </div>
-      <div class="scale-ends"><span>Not happy at all</span><span>No complaints</span></div>
+      <div class="q-block">
+        <div class="q-label">Comfort and build quality</div>
+        <div class="scale-wrap">
+          <div class="scale-row" id="d2-sc">
+            <button class="sb" onclick="pickScale('d2',1,'d2-sc')">1</button>
+            <button class="sb" onclick="pickScale('d2',2,'d2-sc')">2</button>
+            <button class="sb" onclick="pickScale('d2',3,'d2-sc')">3</button>
+            <button class="sb" onclick="pickScale('d2',4,'d2-sc')">4</button>
+            <button class="sb" onclick="pickScale('d2',5,'d2-sc')">5</button>
+          </div>
+          <div class="scale-ends"><span>Not happy</span><span>No complaints</span></div>
+        </div>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveCatAndNext('d1','d1-ch')">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveCatAndNext('d1','d1-ch','d2')">Next &#8594;</button>
     </div>
   </div>
 
   <!-- MATTRESS -->
   <div class="slide" id="slide-e" data-sec="2" data-cat="mattress">
-    <div class="slide-tag">Section 2 · Mattress</div>
-    <h2 class="slide-headline">Sleep is everything. Be honest.</h2>
-    <div class="q-label">Does it actually feel right?</div>
-    <div class="choices" id="e1-ch">
-      <label class="choice"><input type="radio" name="e1" value="great">           <span class="dot"></span><span class="ct">Genuinely good sleep every night</span></label>
-      <label class="choice"><input type="radio" name="e1" value="comfortable">     <span class="dot"></span><span class="ct">Comfortable enough, I don't think about it</span></label>
-      <label class="choice"><input type="radio" name="e1" value="limited-options"> <span class="dot"></span><span class="ct">Okay, but not what I'd choose with more options</span></label>
-      <label class="choice"><input type="radio" name="e1" value="not-comfortable"> <span class="dot"></span><span class="ct">Not that comfortable — I've had to adapt</span></label>
-    </div>
-    <div class="q-divider"></div>
-    <div class="q-label">More variety would help?</div>
-    <div class="choices" id="e2-ch">
-      <label class="choice"><input type="radio" name="e2" value="yes">         <span class="dot"></span><span class="ct">Yes — more variety would've helped</span></label>
-      <label class="choice"><input type="radio" name="e2" value="maybe">       <span class="dot"></span><span class="ct">A few more options would be nice</span></label>
-      <label class="choice"><input type="radio" name="e2" value="enough">      <span class="dot"></span><span class="ct">What was available was enough</span></label>
-      <label class="choice"><input type="radio" name="e2" value="didnt-think"> <span class="dot"></span><span class="ct">Didn't think about it at the time</span></label>
-    </div>
-    <div class="q-divider"></div>
-    <div class="q-label">Will it hold up?</div>
-    <div class="scale-wrap">
-      <div class="scale-row" id="e3-sc">
-        <button class="sb" onclick="pickScale('e3',1,'e3-sc')">1</button>
-        <button class="sb" onclick="pickScale('e3',2,'e3-sc')">2</button>
-        <button class="sb" onclick="pickScale('e3',3,'e3-sc')">3</button>
-        <button class="sb" onclick="pickScale('e3',4,'e3-sc')">4</button>
-        <button class="sb" onclick="pickScale('e3',5,'e3-sc')">5</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 2 ¬∑ Mattress</div>
+      <h2 class="slide-headline">Sleep is everything. Be honest.</h2>
+      <div class="q-block">
+        <div class="q-label">Does it actually feel right?</div>
+        <div class="choices" id="e1-ch">
+          <label class="choice"><input type="radio" name="e1" value="great">           <span class="dot"></span><span class="ct">Genuinely good sleep every night</span></label>
+          <label class="choice"><input type="radio" name="e1" value="comfortable">     <span class="dot"></span><span class="ct">Comfortable enough, I don't think about it</span></label>
+          <label class="choice"><input type="radio" name="e1" value="limited-options"> <span class="dot"></span><span class="ct">Okay, but not what I'd choose</span></label>
+          <label class="choice"><input type="radio" name="e1" value="not-comfortable"> <span class="dot"></span><span class="ct">Not that comfortable ‚Äî I've had to adapt</span></label>
+        </div>
       </div>
-      <div class="scale-ends"><span>Already showing wear</span><span>Totally confident</span></div>
+      <div class="q-block">
+        <div class="q-label">More variety would help?</div>
+        <div class="choices" id="e2-ch">
+          <label class="choice"><input type="radio" name="e2" value="yes">         <span class="dot"></span><span class="ct">Yes ‚Äî more variety would've helped</span></label>
+          <label class="choice"><input type="radio" name="e2" value="maybe">       <span class="dot"></span><span class="ct">A few more options would be nice</span></label>
+          <label class="choice"><input type="radio" name="e2" value="enough">      <span class="dot"></span><span class="ct">What was available was enough</span></label>
+          <label class="choice"><input type="radio" name="e2" value="didnt-think"> <span class="dot"></span><span class="ct">Didn't think about it at the time</span></label>
+        </div>
+      </div>
+      <div class="q-block">
+        <div class="q-label">Will it hold up?</div>
+        <div class="scale-wrap">
+          <div class="scale-row" id="e3-sc">
+            <button class="sb" onclick="pickScale('e3',1,'e3-sc')">1</button>
+            <button class="sb" onclick="pickScale('e3',2,'e3-sc')">2</button>
+            <button class="sb" onclick="pickScale('e3',3,'e3-sc')">3</button>
+            <button class="sb" onclick="pickScale('e3',4,'e3-sc')">4</button>
+            <button class="sb" onclick="pickScale('e3',5,'e3-sc')">5</button>
+          </div>
+          <div class="scale-ends"><span>Showing wear</span><span>Totally confident</span></div>
+        </div>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveCatAndNext('e1','e1-ch')">Next &#8594;</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveMattress()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- INT 2 -->
   <div class="slide" id="slide-int2" data-sec="2">
-    <div class="int-card">
-      <div class="i-tag">Almost there</div>
-      <h2>Two quick sections to go.</h2>
-      <p>What drives your rental decisions, and what you wish we actually stocked.</p>
-      <button class="btn-next" onclick="next()">Keep going &#8594;</button>
+    <div class="slide-body">
+      <div class="int-card">
+        <div class="i-tag">Almost there</div>
+        <h2>Two quick sections to go.</h2>
+        <p>What drives your rental decisions, and what you wish we actually stocked.</p>
+      </div>
     </div>
-    <div class="btn-row" style="margin-top:16px">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="next()">Keep going &#8594;</button>
     </div>
   </div>
 
-  <!-- Q6: FACTOR GRID -->
+  <!-- Q6 -->
   <div class="slide" id="slide-q6" data-sec="3">
-    <div class="slide-tag">Section 3 · What Matters</div>
-    <h2 class="slide-headline">What actually matters when you pick something to rent?</h2>
-    <table class="fgrid">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Doesn't matter</th>
-          <th>Matters somewhat</th>
-          <th>Matters a lot</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr data-f="price">    <td>Monthly price</td>           <td><div class="gr" onclick="pickGrid('price','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','high',this)"></div></td></tr>
-        <tr data-f="look">     <td>How it looks in my home</td> <td><div class="gr" onclick="pickGrid('look','low',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','mid',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','high',this)"></div></td></tr>
-        <tr data-f="condition"><td>Condition on arrival</td>     <td><div class="gr" onclick="pickGrid('condition','low',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','mid',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','high',this)"></div></td></tr>
-        <tr data-f="brand">    <td>Brand name / reputation</td> <td><div class="gr" onclick="pickGrid('brand','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','high',this)"></div></td></tr>
-        <tr data-f="delivery"> <td>Delivery speed</td>          <td><div class="gr" onclick="pickGrid('delivery','low',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','mid',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','high',this)"></div></td></tr>
-        <tr data-f="custom">   <td>Colour / size options</td>   <td><div class="gr" onclick="pickGrid('custom','low',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','mid',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','high',this)"></div></td></tr>
-      </tbody>
-    </table>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="next()">Next &#8594;</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 3 ¬∑ What Matters</div>
+      <h2 class="slide-headline">What matters when you pick something to rent?</h2>
+
+      <!-- Mobile: card list -->
+      <div class="fgrid-cards" id="fgrid-cards"></div>
+
+      <!-- Tablet+: table -->
+      <table class="fgrid-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Doesn't matter</th>
+            <th>Somewhat</th>
+            <th>Matters a lot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-f="price">    <td>Monthly price</td>           <td><div class="gr" onclick="pickGrid('price','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('price','high',this)"></div></td></tr>
+          <tr data-f="look">     <td>How it looks in my home</td> <td><div class="gr" onclick="pickGrid('look','low',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','mid',this)"></div></td>     <td><div class="gr" onclick="pickGrid('look','high',this)"></div></td></tr>
+          <tr data-f="condition"><td>Condition on arrival</td>     <td><div class="gr" onclick="pickGrid('condition','low',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','mid',this)"></div></td><td><div class="gr" onclick="pickGrid('condition','high',this)"></div></td></tr>
+          <tr data-f="brand">    <td>Brand name / reputation</td> <td><div class="gr" onclick="pickGrid('brand','low',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','mid',this)"></div></td>    <td><div class="gr" onclick="pickGrid('brand','high',this)"></div></td></tr>
+          <tr data-f="delivery"> <td>Delivery speed</td>          <td><div class="gr" onclick="pickGrid('delivery','low',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','mid',this)"></div></td> <td><div class="gr" onclick="pickGrid('delivery','high',this)"></div></td></tr>
+          <tr data-f="custom">   <td>Colour / size options</td>   <td><div class="gr" onclick="pickGrid('custom','low',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','mid',this)"></div></td>   <td><div class="gr" onclick="pickGrid('custom','high',this)"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveQ6()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- Q7 -->
   <div class="slide" id="slide-q7" data-sec="4">
-    <div class="slide-tag">Section 4 · What's Next</div>
-    <h2 class="slide-headline">Has something ever slipped through the cracks — something you wanted but we didn't have?</h2>
-    <div class="choices" id="q7-ch">
-      <label class="choice"><input type="radio" name="q7" value="yes"><span class="dot"></span><span class="ct">Yes — something I really wanted but couldn't find</span></label>
-      <label class="choice"><input type="radio" name="q7" value="no"> <span class="dot"></span><span class="ct">Not really, I've found what I needed</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
+      <h2 class="slide-headline">Has something ever slipped through the cracks?</h2>
+      <p class="slide-sub">Something you wanted but we didn't have.</p>
+      <div class="choices" id="q7-ch">
+        <label class="choice"><input type="radio" name="q7" value="yes"><span class="dot"></span><span class="ct">Yes ‚Äî something I really wanted but couldn't find</span></label>
+        <label class="choice"><input type="radio" name="q7" value="no"> <span class="dot"></span><span class="ct">Not really, I've found what I needed</span></label>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
       <button class="btn-next" onclick="handleQ7()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- Q7ab -->
   <div class="slide" id="slide-q7ab" data-sec="4">
-    <div class="slide-tag">Section 4 · What's Next</div>
-    <h2 class="slide-headline">Tell us more — what was it, and what did you do?</h2>
-    <div class="q-label">What were you looking for?</div>
-    <textarea class="cf-input" id="q7a-in" rows="2" placeholder="e.g. 'A recliner sofa', 'A chest freezer', 'Kids bunk bed'"></textarea>
-    <div class="q-label">What did you end up doing?</div>
-    <div class="choices" id="q7b-ch">
-      <label class="choice"><input type="radio" name="q7b" value="bought-new">   <span class="dot"></span><span class="ct">Just bought it new</span></label>
-      <label class="choice"><input type="radio" name="q7b" value="second-hand">  <span class="dot"></span><span class="ct">Found a second-hand one</span></label>
-      <label class="choice"><input type="radio" name="q7b" value="made-do">      <span class="dot"></span><span class="ct">Made do without it</span></label>
-      <label class="choice"><input type="radio" name="q7b" value="other-rental"> <span class="dot"></span><span class="ct">Rented it from somewhere else</span></label>
-      <label class="choice"><input type="radio" name="q7b" value="borrowed">     <span class="dot"></span><span class="ct">Borrowed it from someone</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
+      <h2 class="slide-headline">Tell us more ‚Äî what was it?</h2>
+      <div class="q-block">
+        <div class="q-label">What were you looking for?</div>
+        <textarea class="cf-input" id="q7a-in" rows="2" placeholder="e.g. 'A recliner sofa', 'A chest freezer', 'Kids bunk bed'" style="margin-bottom:0;"></textarea>
+      </div>
+      <div class="q-block">
+        <div class="q-label">What did you end up doing?</div>
+        <div class="choices" id="q7b-ch">
+          <label class="choice"><input type="radio" name="q7b" value="bought-new">   <span class="dot"></span><span class="ct">Just bought it new</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="second-hand">  <span class="dot"></span><span class="ct">Found a pre-owned one</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="made-do">      <span class="dot"></span><span class="ct">Made do without it</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="other-rental"> <span class="dot"></span><span class="ct">Rented it from somewhere else</span></label>
+          <label class="choice"><input type="radio" name="q7b" value="borrowed">     <span class="dot"></span><span class="ct">Borrowed it from someone</span></label>
+        </div>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
-      <button class="btn-next" onclick="saveRadio('q7b','q7b-ch')">Next &#8594;</button>
-      <button class="btn-ghost" onclick="next()">Skip</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
+      <button class="btn-next" onclick="saveQ7ab()">Next &#8594;</button>
     </div>
   </div>
 
   <!-- Q8 -->
   <div class="slide" id="slide-q8" data-sec="4">
-    <div class="slide-tag">Section 4 · What's Next</div>
-    <h2 class="slide-headline">Dream big — what would you love to rent from us someday?</h2>
-    <div class="choices g2" id="q8-ch">
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="smart-home">   <span class="dot"></span><span class="ct">Smart home devices<span class="sub">Speakers, displays, doorbells</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="kids">         <span class="dot"></span><span class="ct">Baby &amp; kids furniture<span class="sub">Cribs, high chairs, study tables</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="home-gym">     <span class="dot"></span><span class="ct">Home gym equipment<span class="sub">Treadmill, weights, cycles</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="outdoor">      <span class="dot"></span><span class="ct">Outdoor &amp; balcony<span class="sub">Chairs, planters, daybeds</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="kitchen-more"> <span class="dot"></span><span class="ct">More kitchen appliances<span class="sub">Air fryer, dishwasher, etc.</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="decor">        <span class="dot"></span><span class="ct">Home d&#233;cor &amp; art<span class="sub">Rugs, lamps, wall art</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="gaming">       <span class="dot"></span><span class="ct">Gaming setup<span class="sub">Monitor, chair, accessories</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="instruments">  <span class="dot"></span><span class="ct">Musical instruments<span class="sub">Keyboard, guitar, etc.</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="photography">  <span class="dot"></span><span class="ct">Photography &amp; lighting<span class="sub">Ring light, tripod, backdrops</span></span></label>
-      <label class="choice is-cb"><input type="checkbox" name="q8" value="other" id="q8-other-cb" onchange="toggleQ8Other()"><span class="dot"></span><span class="ct">Something else — tell us</span></label>
+    <div class="slide-body">
+      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
+      <h2 class="slide-headline">Dream big ‚Äî what would you love to rent someday?</h2>
+      <div class="choices g2" id="q8-ch">
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="smart-home">   <span class="dot"></span><span class="ct">Smart home devices<span class="sub">Speakers, displays, doorbells</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="kids">         <span class="dot"></span><span class="ct">Baby &amp; kids furniture<span class="sub">Cribs, high chairs, study tables</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="home-gym">     <span class="dot"></span><span class="ct">Home gym equipment<span class="sub">Treadmill, weights, cycles</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="outdoor">      <span class="dot"></span><span class="ct">Outdoor &amp; balcony<span class="sub">Chairs, planters, daybeds</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="kitchen-more"> <span class="dot"></span><span class="ct">More kitchen appliances<span class="sub">Air fryer, dishwasher, etc.</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="decor">        <span class="dot"></span><span class="ct">Home d&#233;cor &amp; art<span class="sub">Rugs, lamps, wall art</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="gaming">       <span class="dot"></span><span class="ct">Gaming setup<span class="sub">Monitor, chair, accessories</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="instruments">  <span class="dot"></span><span class="ct">Musical instruments<span class="sub">Keyboard, guitar, etc.</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="photography">  <span class="dot"></span><span class="ct">Photography &amp; lighting<span class="sub">Ring light, tripod, backdrops</span></span></label>
+        <label class="choice is-cb"><input type="checkbox" name="q8" value="other" id="q8-other-cb" onchange="toggleQ8Other()"><span class="dot"></span><span class="ct">Something else ‚Äî tell us</span></label>
+      </div>
+      <input type="text" class="cf-input" id="q8-other-in" placeholder="What would you love to rent?" style="display:none; margin-top:6px;">
     </div>
-    <input type="text" class="cf-input" id="q8-other-in" placeholder="What would you love to rent?" style="display:none; margin-top:6px;">
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
       <button class="btn-next" onclick="saveQ8()">Next &#8594;</button>
     </div>
   </div>
 
-  <!-- Q9: PRICE SLIDERS -->
+  <!-- Q9 -->
   <div class="slide" id="slide-q9" data-sec="4">
-    <div class="slide-tag">Section 4 · What's Next</div>
-    <h2 class="slide-headline">What's a fair monthly price for each of these?</h2>
-    <p class="slide-sub">Just your gut feeling — helps us launch at the right price.</p>
-    <div id="q9-content"></div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="prev()">&#8592; Back</button>
+    <div class="slide-body">
+      <div class="slide-tag">Section 4 ¬∑ What's Next</div>
+      <h2 class="slide-headline">What's a fair monthly price?</h2>
+      <p class="slide-sub">Just your gut feeling ‚Äî helps us launch at the right price.</p>
+      <div id="q9-content"></div>
+    </div>
+    <div class="slide-actions">
+      <button class="btn-back" onclick="prev()">&#8592;</button>
       <button class="btn-next" onclick="finishSurvey()">Submit &#8594;</button>
     </div>
   </div>
 
   <!-- DONE -->
   <div class="slide" id="slide-done" data-sec="4">
-    <div class="done-icon">&#127881;</div>
-    <div class="slide-tag">You're done!</div>
-    <h2 class="slide-headline">Thank you. Genuinely.</h2>
-    <p class="slide-sub">Your answers shape what Cityfurnish builds next. We read every response from our legacy customers. Every one.</p>
-    <div class="done-actions">
-      <button class="btn-next" id="copyBtn" onclick="copyAll()">Copy my answers</button>
-      <button class="btn-outline" onclick="dlCSV()">Download CSV</button>
-      <button class="btn-outline" onclick="emailR()">Send via email</button>
+    <div class="slide-body">
+      <div class="done-icon">&#127881;</div>
+      <div class="slide-tag">You're done!</div>
+      <h2 class="slide-headline">Thank you. Genuinely.</h2>
+      <p class="slide-sub">Your answers shape what Cityfurnish builds next. We read every response from our legacy customers. Every one.</p>
+      <div class="done-actions">
+        <button class="btn-next" id="copyBtn" onclick="copyAll()">Copy my answers</button>
+        <button class="btn-outline" onclick="dlCSV()">Download CSV</button>
+        <button class="btn-outline" onclick="emailR()">Send via email</button>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-title">Facing any problems? Missed something?</div>
+        <div class="contact-sub">Give us a call or drop a WhatsApp message ‚Äî we're here.</div>
+
+        <div class="contact-num-row">
+          <div class="contact-num">+91 80055 79990</div>
+          <div class="contact-actions">
+            <a href="tel:+918005579990" class="contact-btn call" aria-label="Call +91 80055 79990">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Call
+            </a>
+            <a href="https://wa.me/918005579990?text=Hi%20Cityfurnish%2C%20I%20just%20completed%20the%20legacy%20survey%20and%20wanted%20to%20share%20more." target="_blank" rel="noopener" class="contact-btn wa" aria-label="WhatsApp +91 80055 79990">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-num-row">
+          <div class="contact-num">+91 97737 55829</div>
+          <div class="contact-actions">
+            <a href="tel:+919773755829" class="contact-btn call" aria-label="Call +91 97737 55829">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              Call
+            </a>
+            <a href="https://wa.me/919773755829?text=Hi%20Cityfurnish%2C%20I%20just%20completed%20the%20legacy%20survey%20and%20wanted%20to%20share%20more." target="_blank" rel="noopener" class="contact-btn wa" aria-label="WhatsApp +91 97737 55829">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
+              WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <p class="done-footer">Or email <a href="mailto:hello@cityfurnish.com" style="color:var(--cf-purple)">hello@cityfurnish.com</a></p>
     </div>
-    <p class="done-footer">Questions? <a href="mailto:hello@cityfurnish.com" style="color:var(--cf-purple)">hello@cityfurnish.com</a></p>
   </div>
 
 </div><!-- /slide-wrap -->
 </div><!-- /shell -->
 
 <script>
-/* ═══ STATE ═══ */
+/* ‚ïê‚ïê‚ïê STATE ‚ïê‚ïê‚ïê */
 const A = {};
 let seq = [], idx = 0;
 
@@ -790,20 +1186,34 @@ const catSlides = { storage:['slide-a'],appliances:['slide-b'],dining:['slide-c'
 
 const CAT_LABELS = {
   'smart-home':'Smart home devices','kids':'Baby & kids furniture','home-gym':'Home gym equipment',
-  'outdoor':'Outdoor & balcony furniture','kitchen-more':'More kitchen appliances','decor':'Home décor & art',
+  'outdoor':'Outdoor & balcony furniture','kitchen-more':'More kitchen appliances','decor':'Home d√©cor & art',
   'gaming':'Gaming setup','instruments':'Musical instruments','photography':'Photography & lighting','other':'Something else',
 };
 
-const PRICE_VALS    = ['under500','500-1000','1000-2000','2000-3500','3500+'];
-const PRICE_DISPLAY = [
-  'Under ₹500 per month feels right',
-  '₹500–₹1,000 per month feels right',
-  '₹1,000–₹2,000 per month feels right',
-  '₹2,000–₹3,500 per month feels right',
-  '₹3,500+ per month feels right',
+const Q6_FACTORS = [
+  ['price','Monthly price'],
+  ['look','How it looks in my home'],
+  ['condition','Condition on arrival'],
+  ['brand','Brand name / reputation'],
+  ['delivery','Delivery speed'],
+  ['custom','Colour / size options'],
+];
+const Q6_LEVELS = [
+  ['low',"Doesn't matter"],
+  ['mid','Somewhat'],
+  ['high','Matters a lot'],
 ];
 
-/* ═══ SEQUENCE ═══ */
+const PRICE_VALS    = ['under500','500-1000','1000-2000','2000-3500','3500+'];
+const PRICE_DISPLAY = [
+  'Under ‚Çπ500 per month feels right',
+  '‚Çπ500‚Äì‚Çπ1,000 per month feels right',
+  '‚Çπ1,000‚Äì‚Çπ2,000 per month feels right',
+  '‚Çπ2,000‚Äì‚Çπ3,500 per month feels right',
+  '‚Çπ3,500+ per month feels right',
+];
+
+/* ‚ïê‚ïê‚ïê SEQUENCE ‚ïê‚ïê‚ïê */
 function initSeq() { seq = ['slide-hero','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1']; }
 function buildSeq() {
   const base = ['slide-hero','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1'];
@@ -813,43 +1223,70 @@ function buildSeq() {
   seq = [...base, ...blocks, 'slide-int2','slide-q6','slide-q7'];
 }
 
-/* ═══ NAVIGATION — vertical scroll ═══ */
+/* ‚ïê‚ïê‚ïê NAVIGATION ‚ïê‚ïê‚ïê */
 function showSlide(newIdx, dir='fwd') {
   const curEl = document.getElementById(seq[idx]);
   const nxtEl = document.getElementById(seq[newIdx]);
   if (!nxtEl) return;
 
-  // Outgoing: clears inline styles, exits up (fwd) or down (bck)
   curEl.removeAttribute('style');
   curEl.classList.remove('active');
   curEl.classList.add(dir === 'fwd' ? 'exit-up' : 'exit-down');
-  setTimeout(() => curEl.classList.remove('exit-up','exit-down'), 520);
+  setTimeout(() => curEl.classList.remove('exit-up','exit-down'), 460);
 
-  // Incoming: enters from below (fwd) or from above (bck)
   nxtEl.classList.remove('active','exit-up','exit-down');
   nxtEl.removeAttribute('style');
 
   if (dir === 'bck') {
-    // Start from above
-    nxtEl.style.cssText = 'transform:translateY(-32px);opacity:0;transition:none;';
+    nxtEl.style.cssText = 'transform:translateY(-28px);opacity:0;transition:none;';
     void nxtEl.offsetHeight;
-    nxtEl.style.cssText = 'transform:translateY(0);opacity:1;transition:opacity 480ms cubic-bezier(.4,0,.2,1),transform 480ms cubic-bezier(.4,0,.2,1);';
+    nxtEl.style.cssText = 'transform:translateY(0);opacity:1;transition:opacity 420ms cubic-bezier(.4,0,.2,1),transform 420ms cubic-bezier(.4,0,.2,1);';
     nxtEl.classList.add('active');
   } else {
-    // Start from below (CSS base state: translateY(32px))
     void nxtEl.offsetHeight;
     nxtEl.classList.add('active');
   }
 
   idx = newIdx;
   updateNav(seq[newIdx]);
-  nxtEl.scrollTop = 0;
+  restoreSlideState(seq[newIdx]);
+  const body = nxtEl.querySelector('.slide-body');
+  if (body) body.scrollTop = 0;
 }
 
 function next() { if (idx < seq.length-1) showSlide(idx+1,'fwd'); }
 function prev() { if (idx > 0)            showSlide(idx-1,'bck'); }
 
-/* ═══ NAV ═══ */
+function restoreSlideState(id) {
+  const scaleMap = { 'slide-a':['a2-sc','a2'], 'slide-b':['b2-sc','b2'], 'slide-c':['c2-sc','c2'], 'slide-d':['d2-sc','d2'], 'slide-e':['e3-sc','e3'] };
+  if (scaleMap[id]) {
+    const [rowId, key] = scaleMap[id];
+    const val = A[key];
+    if (val) document.querySelectorAll(`#${rowId} .sb`).forEach((b,i)=>b.classList.toggle('selected',i+1<=val));
+  }
+  if (id === 'slide-a' && A.a3) litStars('a3-st', A.a3);
+  if (id === 'slide-q6' && A.q6) {
+    Object.entries(A.q6).forEach(([f,lvl])=>{
+      const lvlIdx = {'low':0,'mid':1,'high':2}[lvl];
+      // table cells
+      const row = document.querySelector(`tr[data-f="${f}"]`);
+      if (row) {
+        const cells = row.querySelectorAll('.gr');
+        cells.forEach(c=>c.classList.remove('selected'));
+        if (cells[lvlIdx]) cells[lvlIdx].classList.add('selected');
+      }
+      // mobile card buttons
+      const card = document.querySelector(`.fcard[data-f="${f}"]`);
+      if (card) {
+        const opts = card.querySelectorAll('.fopt');
+        opts.forEach(o=>o.classList.remove('selected'));
+        if (opts[lvlIdx]) opts[lvlIdx].classList.add('selected');
+      }
+    });
+  }
+}
+
+/* ‚ïê‚ïê‚ïê NAV ‚ïê‚ïê‚ïê */
 function updateNav(id) {
   const sec = parseInt(document.getElementById(id)?.dataset.sec||0);
   document.querySelectorAll('.step-pill').forEach(p=>{
@@ -858,11 +1295,11 @@ function updateNav(id) {
     if(ps < sec) p.classList.add('done');
     else if(ps === sec) p.classList.add('active');
   });
-  document.getElementById('counter').textContent = `${idx+1} of ${seq.length}`;
+  document.getElementById('counter').textContent = `${idx+1} / ${seq.length}`;
   document.getElementById('prog').style.width = `${((idx+1)/seq.length)*100}%`;
 }
 
-/* ═══ CHOICE INTERACTIONS ═══ */
+/* ‚ïê‚ïê‚ïê CHOICE INTERACTIONS ‚ïê‚ïê‚ïê */
 document.addEventListener('change', e=>{
   const inp = e.target;
   if(inp.type==='radio'){
@@ -872,10 +1309,10 @@ document.addEventListener('change', e=>{
   if(inp.type==='checkbox') inp.closest('.choice')?.classList.toggle('selected',inp.checked);
 });
 
-/* ═══ INPUT HELPERS ═══ */
+/* ‚ïê‚ïê‚ïê INPUT HELPERS ‚ïê‚ïê‚ïê */
 function saveRadio(key, wid) {
   const s = document.querySelector(`#${wid} input[type="radio"]:checked`);
-  if(!s){ shake(); return; } A[key]=s.value; next();
+  if(!s){ shake('Pick one to continue.'); return; } A[key]=s.value; next();
 }
 function pickScale(key,val,rowId) {
   A[key]=val;
@@ -884,10 +1321,10 @@ function pickScale(key,val,rowId) {
 function initStars(cid,key) {
   const c=document.getElementById(cid); if(!c) return; c.innerHTML='';
   for(let i=1;i<=5;i++){
-    const s=document.createElement('span'); s.className='star'; s.textContent='★';
-    s.addEventListener('mouseover',()=>litStars(cid,i));
-    s.addEventListener('mouseout', ()=>litStars(cid,A[key]||0));
-    s.addEventListener('click',    ()=>{ A[key]=i; litStars(cid,i); });
+    const s=document.createElement('span'); s.className='star'; s.textContent='‚òÖ';
+    // touch / click
+    const set = ()=>{ A[key]=i; litStars(cid,i); };
+    s.addEventListener('click', set);
     c.appendChild(s);
   }
 }
@@ -910,38 +1347,132 @@ function updatePriceSlider(cat, val) {
 function pickGrid(factor,level,el) {
   if(!A.q6) A.q6={};
   A.q6[factor]=level;
-  el.closest('tr').querySelectorAll('.gr').forEach(r=>r.classList.remove('selected'));
-  el.classList.add('selected');
+  // update table row
+  const row = document.querySelector(`tr[data-f="${factor}"]`);
+  if (row) {
+    row.querySelectorAll('.gr').forEach(r=>r.classList.remove('selected'));
+    const lvlIdx = {'low':0,'mid':1,'high':2}[level];
+    const cells = row.querySelectorAll('.gr');
+    if (cells[lvlIdx]) cells[lvlIdx].classList.add('selected');
+  }
+  // update card on mobile
+  const card = document.querySelector(`.fcard[data-f="${factor}"]`);
+  if (card) {
+    const opts = card.querySelectorAll('.fopt');
+    opts.forEach(o=>o.classList.remove('selected'));
+    const lvlIdx = {'low':0,'mid':1,'high':2}[level];
+    if (opts[lvlIdx]) opts[lvlIdx].classList.add('selected');
+  }
 }
 
-/* ═══ SAVE FUNCTIONS ═══ */
+/* Build Q6 mobile cards */
+function buildQ6Cards() {
+  const wrap = document.getElementById('fgrid-cards');
+  wrap.innerHTML = '';
+  Q6_FACTORS.forEach(([key,label])=>{
+    const card = document.createElement('div');
+    card.className = 'fcard'; card.dataset.f = key;
+    const optsHTML = Q6_LEVELS.map(([lvl,text])=>
+      `<button class="fopt" type="button" onclick="pickGrid('${key}','${lvl}',this)">${text}</button>`
+    ).join('');
+    card.innerHTML = `<div class="fcard-label">${label}</div><div class="fcard-options">${optsHTML}</div>`;
+    wrap.appendChild(card);
+  });
+}
+
+/* ‚ïê‚ïê‚ïê SAVE FUNCTIONS ‚ïê‚ïê‚ïê */
 function saveQ1() {
-  A.q1 = [...document.querySelectorAll('input[name="q1"]:checked')].map(el=>el.value);
+  const sel = [...document.querySelectorAll('input[name="q1"]:checked')].map(el=>el.value);
+  if(sel.length===0){ shake('Pick at least one ‚Äî even "Something else" works.'); return; }
+  A.q1 = sel;
   buildSeq(); updateNav(seq[idx]); next();
 }
 function saveQ2Q4() {
   const s = document.querySelector('#q2-ch input[type="radio"]:checked');
-  if(!s){ shake(); return; }
+  if(!s){ shake('Pick a tenure to continue.'); return; }
   A.q2=s.value; A.q4=document.getElementById('q4sl').value; next();
 }
-function saveCatAndNext(key,wid) {
-  const s = document.querySelector(`#${wid} input[type="radio"]:checked`);
-  if(!s){ shake(); return; } A[key]=s.value; next();
+function saveQ3() {
+  const sel = [...document.querySelectorAll('input[name="q3"]:checked')].map(el=>el.value);
+  if(sel.length===0){ shake('Pick at least one thing to fix.'); return; }
+  A.q3 = sel;
+  next();
 }
+function toggleQ5Other() {
+  const cb = document.querySelector('#q5-ch input[value="other"]');
+  document.getElementById('q5-other-in').style.display = cb?.checked ? 'block' : 'none';
+}
+function saveQ5() {
+  const s = document.querySelector('#q5-ch input[type="radio"]:checked');
+  if(!s){ shake('Pick one reason.'); return; }
+  A.q5 = s.value;
+  if (s.value === 'other') {
+    const v = document.getElementById('q5-other-in').value.trim();
+    if (v) A.q5_other = v;
+  }
+  next();
+}
+
+function saveCatAndNext(rkey, wid, sKey) {
+  const s = document.querySelector(`#${wid} input[type="radio"]:checked`);
+  if(!s){ shake('Pick one to continue.'); return; }
+  A[rkey]=s.value;
+  if (sKey && !A[sKey]) { shake('Tap a number on the scale.'); return; }
+  next();
+}
+
+function saveStorage() {
+  const s = document.querySelector('#a1-ch input[type="radio"]:checked');
+  if(!s){ shake('Tell us about the space first.'); return; }
+  A.a1 = s.value;
+  if (!A.a2) { shake('Tap a number for cramming frequency.'); return; }
+  if (!A.a3) { shake('Give us a star rating to continue.'); return; }
+  next();
+}
+
+function saveMattress() {
+  const s1 = document.querySelector('#e1-ch input[type="radio"]:checked');
+  if(!s1){ shake('Pick a comfort answer first.'); return; }
+  A.e1 = s1.value;
+  const s2 = document.querySelector('#e2-ch input[type="radio"]:checked');
+  if(!s2){ shake('Pick a variety answer too.'); return; }
+  A.e2 = s2.value;
+  if (!A.e3) { shake('Tap a number on the durability scale.'); return; }
+  next();
+}
+
+function saveQ6() {
+  const required = ['price','look','condition','brand','delivery','custom'];
+  const missing = required.filter(f => !A.q6 || !A.q6[f]);
+  if (missing.length){ shake('Mark every row to continue.'); return; }
+  next();
+}
+
 function handleQ7() {
   const s = document.querySelector('#q7-ch input[type="radio"]:checked');
-  if(!s){ shake(); return; }
+  if(!s){ shake('Pick yes or no.'); return; }
   A.q7=s.value;
   const base = seq.slice(0,seq.indexOf('slide-q7')+1);
   seq=[...base,...(s.value==='yes'?['slide-q7ab','slide-q8']:['slide-q8'])];
+  next();
+}
+function saveQ7ab() {
+  const text = document.getElementById('q7a-in').value.trim();
+  if (!text) { shake('Tell us what you were looking for.'); return; }
+  const s = document.querySelector('#q7b-ch input[type="radio"]:checked');
+  if (!s) { shake('Pick what you ended up doing.'); return; }
+  A.q7a = text;
+  A.q7b = s.value;
   next();
 }
 function toggleQ8Other() {
   document.getElementById('q8-other-in').style.display = document.getElementById('q8-other-cb').checked?'block':'none';
 }
 function saveQ8() {
-  A.q8 = [...document.querySelectorAll('input[name="q8"]:checked')].map(el=>el.value);
-  const oi = document.getElementById('q8-other-in'); if(oi?.value) A.q8_other=oi.value;
+  const sel = [...document.querySelectorAll('input[name="q8"]:checked')].map(el=>el.value);
+  if (sel.length === 0) { shake('Pick at least one ‚Äî or none if nothing fits.'); return; }
+  A.q8 = sel;
+  const oi = document.getElementById('q8-other-in'); if(oi?.value.trim()) A.q8_other=oi.value.trim();
   const base = seq.slice(0,seq.indexOf('slide-q8')+1);
   if(A.q8.length>0){ buildPriceSlide(); seq=[...base,'slide-q9','slide-done']; }
   else             { seq=[...base,'slide-done']; }
@@ -957,32 +1488,48 @@ function buildPriceSlide() {
       <div class="price-cat-label">${label}</div>
       <div class="slider-val" id="prv-${cat}">${PRICE_DISPLAY[dv]}</div>
       <input type="range" class="cf-slider" min="0" max="4" value="${dv}" oninput="updatePriceSlider('${cat}',this.value)">
-      <div class="slider-ends"><span>Under ₹500</span><span>₹3,500+</span></div>`;
+      <div class="slider-ends"><span>Under ‚Çπ500</span><span>‚Çπ3,500+</span></div>`;
     wrap.appendChild(block);
     if(!A.priceRanges) A.priceRanges={};
     A.priceRanges[cat]=PRICE_VALS[dv];
   });
 }
 function finishSurvey() {
-  const q7a=document.getElementById('q7a-in'); if(q7a?.value) A.q7a=q7a.value;
   if(!seq.includes('slide-done')) seq.push('slide-done');
   next(); launchConfetti();
 }
-function shake() {
+function shake(msg) {
   const el=document.getElementById(seq[idx]);
   el.style.animation='none'; el.offsetHeight;
   el.style.animation='shake .4s ease';
   setTimeout(()=>el.style.animation='',450);
+  showToast(msg || 'Something went sideways. Try again?');
 }
 
-/* ═══ EXPORT ═══ */
-const LBL={q1:'Products rented',q2:'Tenure',q3:'Improvement areas',q4:'Home % Cityfurnish',q5:'Why rent',a1:'Storage space',a2:'Storage cramming',a3:'Storage rating',b1:'Appliance availability',b2:'Appliance performance',c1:'Tables quality',c2:'Tables satisfaction',d1:'Sofas/beds fit',d2:'Sofas/beds comfort',e1:'Mattress comfort',e2:'Mattress variety',e3:'Mattress durability',q6:'Rental decision factors',q7:'Unmet product need',q7a:'What they looked for',q7b:'How they resolved it',q8:'Dream categories',q8_other:'Other category',priceRanges:'Price ranges'};
+/* Toast */
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+/* ‚ïê‚ïê‚ïê EXPORT ‚ïê‚ïê‚ïê */
+const LBL={q1:'Products rented',q2:'Tenure',q3:'Improvement areas',q4:'Home % Cityfurnish',q5:'Why rent',q5_other:'Why rent (other)',a1:'Storage space',a2:'Storage cramming',a3:'Storage rating',b1:'Appliance availability',b2:'Appliance performance',c1:'Tables quality',c2:'Tables satisfaction',d1:'Sofas/beds fit',d2:'Sofas/beds comfort',e1:'Mattress comfort',e2:'Mattress variety',e3:'Mattress durability',q6:'Rental decision factors',q7:'Unmet product need',q7a:'What they looked for',q7b:'How they resolved it',q8:'Dream categories',q8_other:'Other category',priceRanges:'Price ranges'};
 function fmt(){
   const lines=['=== Cityfurnish Legacy Customer Survey ===',''];
   Object.entries(A).forEach(([k,v])=>{ const val=Array.isArray(v)?v.join(', '):(typeof v==='object'?JSON.stringify(v):v); lines.push(`${LBL[k]||k}: ${val}`); });
   return lines.join('\n');
 }
-function copyAll(){ navigator.clipboard.writeText(fmt()).then(()=>{ const b=document.getElementById('copyBtn'); b.textContent='Copied ✓'; setTimeout(()=>b.textContent='Copy my answers',2200); }); }
+function copyAll(){
+  navigator.clipboard.writeText(fmt()).then(()=>{
+    const b=document.getElementById('copyBtn');
+    b.textContent='Added! Great choice.';
+    setTimeout(()=>b.textContent='Copy my answers',2200);
+  });
+}
 function dlCSV(){
   const rows=[['Question','Answer']];
   Object.entries(A).forEach(([k,v])=>{ const val=Array.isArray(v)?v.join('; '):(typeof v==='object'?JSON.stringify(v):v); rows.push([LBL[k]||k,val]); });
@@ -991,21 +1538,117 @@ function dlCSV(){
 }
 function emailR(){ window.location.href=`mailto:cityfurnish10@gmail.com?subject=Legacy%20Survey%20Response&body=${encodeURIComponent(fmt())}`; }
 
-/* ═══ CONFETTI ═══ */
+/* ‚ïê‚ïê‚ïê CONFETTI ‚ïê‚ïê‚ïê */
 function launchConfetti(){
   const cv=document.getElementById('conf'); const ctx=cv.getContext('2d');
   cv.width=window.innerWidth; cv.height=window.innerHeight;
-  const C=['#6C5CE7','#F5C518','#4160A6','#2ECC71','#FF6B00','#fff'];
+  const C=['#6C5CE7','#F5C518','#4834C5','#F0EAFF','#FF6B00','#fff'];
   const P=Array.from({length:120},()=>({x:Math.random()*cv.width,y:-12,r:Math.random()*7+3,color:C[~~(Math.random()*C.length)],ta:0,tai:Math.random()*.07+.04,vy:Math.random()*2.5+1.8}));
   let f=0;
   function draw(){ ctx.clearRect(0,0,cv.width,cv.height); P.forEach(p=>{ p.ta+=p.tai;p.y+=p.vy;const t=Math.sin(p.ta)*13; ctx.beginPath();ctx.lineWidth=p.r;ctx.strokeStyle=p.color;ctx.moveTo(p.x+t+p.r/3,p.y);ctx.lineTo(p.x+t,p.y+t+p.r/3);ctx.stroke(); }); f++; if(f<160) requestAnimationFrame(draw); else ctx.clearRect(0,0,cv.width,cv.height); }
   draw();
 }
 
-/* ═══ INIT ═══ */
+/* ‚ïê‚ïê‚ïê AMBIENT MUSIC ‚Äî Web Audio synth pad ‚ïê‚ïê‚ïê
+   Browsers block audio until user interacts, so the AudioContext is
+   built on the first click/touch and faded in. The pad is a 5-voice
+   Cm9 chord (C3, Eb3, G3, Bb3, D4) with slight detune + slow LFOs
+   for movement, lowpass-filtered for warmth. Master gain stays low
+   (~0.04) so it sits under the conversation, never over it. */
+let audioCtx = null, masterGain = null, isMuted = false, audioStarted = false;
+const TARGET_VOL = 0.04;
+
+function initAmbient() {
+  if (audioCtx) return;
+  try {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    audioCtx = new Ctx();
+  } catch (e) { return; }
+
+  masterGain = audioCtx.createGain();
+  masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 900;
+  filter.Q.value = 0.6;
+
+  masterGain.connect(filter);
+  filter.connect(audioCtx.destination);
+
+  // Cm9: C3, Eb3, G3, Bb3, D4 ‚Äî warm, contemplative
+  const freqs = [130.81, 155.56, 196.00, 233.08, 293.66];
+  freqs.forEach((freq, i) => {
+    const osc = audioCtx.createOscillator();
+    const oscGain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    osc.detune.value = (i % 2 === 0 ? 1 : -1) * 4;
+    oscGain.gain.value = 0.18;
+    osc.connect(oscGain);
+    oscGain.connect(masterGain);
+    osc.start();
+
+    // Per-voice LFO for shimmer
+    const lfo = audioCtx.createOscillator();
+    const lfoGain = audioCtx.createGain();
+    lfo.frequency.value = 0.04 + i * 0.025;
+    lfoGain.gain.value = 0.07;
+    lfo.connect(lfoGain);
+    lfoGain.connect(oscGain.gain);
+    lfo.start();
+  });
+
+  // 3-second fade in
+  masterGain.gain.linearRampToValueAtTime(TARGET_VOL, audioCtx.currentTime + 3);
+}
+
+function setMuted(muted) {
+  isMuted = muted;
+  if (masterGain && audioCtx) {
+    masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(muted ? 0 : TARGET_VOL, audioCtx.currentTime + 0.6);
+  }
+  document.getElementById('musicBtn')?.classList.toggle('muted', muted);
+  try { sessionStorage.setItem('cf-muted', muted ? '1' : '0'); } catch (e) {}
+}
+
+function toggleMusic() {
+  if (!audioStarted) { startAmbient(); return; }
+  setMuted(!isMuted);
+}
+
+function startAmbient() {
+  if (audioStarted) return;
+  audioStarted = true;
+  initAmbient();
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  let saved = '0';
+  try { saved = sessionStorage.getItem('cf-muted') || '0'; } catch (e) {}
+  setMuted(saved === '1');
+}
+
+// Auto-start on first interaction (browser autoplay policies require this)
+function firstInteractionHandler() {
+  if (audioStarted) return;
+  startAmbient();
+  document.removeEventListener('click', firstInteractionHandler);
+  document.removeEventListener('touchstart', firstInteractionHandler);
+  document.removeEventListener('keydown', firstInteractionHandler);
+}
+
+/* ‚ïê‚ïê‚ïê INIT ‚ïê‚ïê‚ïê */
 document.addEventListener('DOMContentLoaded',()=>{
-  initSeq(); updateNav('slide-hero'); updateSlider(50);
+  initSeq();
+  updateNav('slide-hero');
+  updateSlider(50);
   initStars('a3-st','a3');
+  buildQ6Cards();
+
+  document.addEventListener('click',      firstInteractionHandler);
+  document.addEventListener('touchstart', firstInteractionHandler, {passive:true});
+  document.addEventListener('keydown',    firstInteractionHandler);
 });
 </script>
 </body>
