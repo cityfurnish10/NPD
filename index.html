@@ -1537,7 +1537,7 @@ async function submitSurvey() {
 
   if (!name)              { shake('Please add your name.'); nameEl.focus(); return; }
   if (phone.length !== 10){ shake('Please add a valid 10-digit mobile number.'); phoneEl.focus(); return; }
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { shake('That email doesn't look right.'); emailEl.focus(); return; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { shake("That email doesn't look right."); emailEl.focus(); return; }
 
   A.name  = name;
   A.phone = phone;
