@@ -44,7 +44,7 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html, body { height: 100%; height: 100dvh; overscroll-behavior: none; }
+    html, body { min-height: 100%; overscroll-behavior-y: none; }
 
     body {
       font-family: 'Montserrat', sans-serif;
@@ -57,8 +57,9 @@
       background-position: 0 0, 8px 8px;
       -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
-      overflow: hidden;
     }
+    /* Reserve top space for the fixed nav so content never sits under it */
+    body { padding-top: calc(var(--nav-h) + var(--safe-top) + 3px); }
 
     /* -- NAV (mobile: compact) -- */
     .cf-nav {
@@ -153,93 +154,55 @@
     }
     .prog-inner { height: 100%; background: var(--cf-purple); transition: width 400ms ease; width: 0%; }
 
-    /* -- SHELL -- */
+    /* -- SHELL -- natural page flow; the page scrolls when content is long -- */
     .shell {
-      position: fixed; left: 0; right: 0;
-      top: calc(var(--nav-h) + var(--safe-top) + 3px);
-      bottom: 0;
+      position: relative;
       display: flex; justify-content: center;
+      min-height: calc(100vh - var(--nav-h) - var(--safe-top) - 3px);
     }
     .slide-wrap {
-      position: relative; width: 100%; max-width: 640px; height: 100%; overflow: hidden;
+      position: relative;
+      width: 100%; max-width: 640px;
     }
 
-    /* -- SLIDE STRUCTURE &mdash; flex column with sticky actions -- */
+    /* -- SLIDE STRUCTURE: inactive slides hidden; active slide takes natural document flow.
+       This means each slide grows to fit its content - no internal scroll, no cropping. -- */
     .slide {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column;
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      min-height: calc(100vh - var(--nav-h) - var(--safe-top) - 3px);
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 420ms var(--ease), transform 420ms var(--ease);
-      pointer-events: none;
+      transform: translateY(20px);
+      transition: opacity 360ms var(--ease), transform 360ms var(--ease);
     }
-    .slide.active    { opacity: 1; transform: translateY(0); pointer-events: all; }
-    .slide.exit-up   { opacity: 0; transform: translateY(-28px); }
-    .slide.exit-down { opacity: 0; transform: translateY(28px); }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .slide.entering-back { transform: translateY(-20px); opacity: 0; }
 
     .slide-body {
-      flex: 1 1 0;
-      min-height: 0;          /* essential - lets flex item shrink below content height for overflow:auto to work */
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
+      flex: 1;
       padding: 24px 20px 24px;
       display: flex; flex-direction: column; align-items: center;
       text-align: center;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(108,92,231,0.4) transparent;
-      transition: mask-image 200ms ease, -webkit-mask-image 200ms ease;
     }
     .slide-body > * { width: 100%; }
-    .slide-body::-webkit-scrollbar { width: 5px; }
-    .slide-body::-webkit-scrollbar-track { background: transparent; }
-    .slide-body::-webkit-scrollbar-thumb {
-      background: rgba(108,92,231,0.4);
-      border-radius: 4px;
-    }
-    .slide-body::-webkit-scrollbar-thumb:hover { background: rgba(108,92,231,0.6); }
 
-    /* Bottom fade-mask when there's more content below - strong visual hint to scroll */
-    .slide.has-overflow:not(.scrolled-bottom) .slide-body {
-      -webkit-mask-image: linear-gradient(to bottom, black 0, black calc(100% - 28px), transparent 100%);
-              mask-image: linear-gradient(to bottom, black 0, black calc(100% - 28px), transparent 100%);
-    }
-
-    /* Pulsing scroll-down chip - bobs at the bottom of the slide whenever the body overflows */
-    .scroll-hint {
-      position: absolute;
-      left: 50%;
-      bottom: calc(var(--actions-h) + var(--safe-bottom) + 14px);
-      transform: translateX(-50%);
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--cf-purple);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(108,92,231,0.4);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 200ms ease;
-      z-index: 10;
-      animation: scrollBob 1.5s ease-in-out infinite;
-    }
-    .scroll-hint svg { width: 18px; height: 18px; }
-    .scroll-hint.visible { opacity: 1; }
-    @keyframes scrollBob {
-      0%, 100% { transform: translate(-50%, 0); }
-      50%      { transform: translate(-50%, 5px); }
-    }
-
-    /* Sticky action bar &mdash; always visible at bottom on mobile */
+    /* Sticky action bar - sticks to viewport bottom while the page scrolls behind it */
     .slide-actions {
-      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
+      z-index: 50;
       padding: 12px 20px calc(14px + var(--safe-bottom));
       background: rgba(248,247,255,0.96);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       border-top: 1px solid var(--cf-grey-200);
       display: flex; align-items: center; justify-content: center;
       gap: 10px;
-      box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.05);
     }
 
     /* -- TYPOGRAPHY (mobile base) -- */
@@ -511,10 +474,11 @@
       margin: 20px 0 18px;
     }
 
-    /* Hero slide - fill the vertical space with breathing room between the three elements */
+    /* Hero slide - centred vertically with breathing room between elements */
     #slide-hero .slide-body {
       justify-content: center;
-      gap: 28px;
+      gap: 26px;
+      min-height: calc(100vh - var(--nav-h) - var(--safe-top) - 3px - 80px);
     }
     #slide-hero .slide-tag      { margin-bottom: 0; }
     #slide-hero .slide-headline { margin-bottom: 0; }
@@ -1243,10 +1207,6 @@
     </div>
   </div>
 
-  <!-- Global scroll-hint chip - JS toggles via .visible class when the active slide overflows -->
-  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-  </div>
 
 </div><!-- /slide-wrap -->
 </div><!-- /shell -->
@@ -1304,68 +1264,32 @@ function showSlide(newIdx, dir='fwd') {
   const nxtEl = document.getElementById(seq[newIdx]);
   if (!nxtEl) return;
 
-  curEl.removeAttribute('style');
+  // Hide current
   curEl.classList.remove('active');
-  curEl.classList.add(dir === 'fwd' ? 'exit-up' : 'exit-down');
-  setTimeout(() => curEl.classList.remove('exit-up','exit-down'), 460);
 
-  nxtEl.classList.remove('active','exit-up','exit-down');
-  nxtEl.removeAttribute('style');
+  // Prep incoming slide for animation
+  if (dir === 'bck') nxtEl.classList.add('entering-back');
+  else               nxtEl.classList.remove('entering-back');
 
-  if (dir === 'bck') {
-    nxtEl.style.cssText = 'transform:translateY(-28px);opacity:0;transition:none;';
-    void nxtEl.offsetHeight;
-    nxtEl.style.cssText = 'transform:translateY(0);opacity:1;transition:opacity 420ms cubic-bezier(.4,0,.2,1),transform 420ms cubic-bezier(.4,0,.2,1);';
+  // Show next on next frame so the transition triggers
+  requestAnimationFrame(() => {
     nxtEl.classList.add('active');
-  } else {
-    void nxtEl.offsetHeight;
-    nxtEl.classList.add('active');
-  }
+    nxtEl.classList.remove('entering-back');
+  });
 
   idx = newIdx;
   updateNav(seq[newIdx]);
   restoreSlideState(seq[newIdx]);
-  const body = nxtEl.querySelector('.slide-body');
-  if (body) body.scrollTop = 0;
-  // Re-check overflow after the slide is rendered + transitioned in
-  requestAnimationFrame(() => requestAnimationFrame(updateOverflowAffordance));
-  setTimeout(updateOverflowAffordance, 520);   // catch async content (price sliders etc.)
+
+  // Always scroll the page to the very top when changing slides
+  window.scrollTo({ top: 0, behavior: 'auto' });
 }
 
 function next() { if (idx < seq.length-1) showSlide(idx+1,'fwd'); }
 function prev() { if (idx > 0)            showSlide(idx-1,'bck'); }
 
-/* === Overflow affordance ===
-   Detects when the active slide's body has more content than fits.
-   Toggles classes that drive:
-     1. Bottom fade-mask on .slide-body  (.slide.has-overflow:not(.scrolled-bottom))
-     2. Pulsing scroll-down chip          (#scrollHint.visible)
-   Runs on slide change, scroll, and resize. */
-function updateOverflowAffordance() {
-  const active = document.querySelector('.slide.active');
-  const hint = document.getElementById('scrollHint');
-  if (!active || !hint) return;
-  const body = active.querySelector('.slide-body');
-  if (!body) { active.classList.remove('has-overflow','scrolled-bottom'); hint.classList.remove('visible'); return; }
-
-  const overflows = body.scrollHeight > body.clientHeight + 4;
-  const atBottom  = body.scrollTop + body.clientHeight >= body.scrollHeight - 8;
-
-  active.classList.toggle('has-overflow', overflows);
-  active.classList.toggle('scrolled-bottom', atBottom);
-  hint.classList.toggle('visible', overflows && !atBottom);
-}
-
-function attachOverflowWatchers() {
-  document.querySelectorAll('.slide-body').forEach(b => {
-    b.addEventListener('scroll', () => {
-      // throttle via rAF
-      if (b._raf) return;
-      b._raf = requestAnimationFrame(() => { b._raf = null; updateOverflowAffordance(); });
-    }, { passive: true });
-  });
-  window.addEventListener('resize', () => requestAnimationFrame(updateOverflowAffordance));
-}
+/* Page-scroll model: no per-slide overflow detection needed.
+   The whole page scrolls naturally; sticky action bar stays visible at the bottom of the viewport. */
 
 function restoreSlideState(id) {
   const scaleMap = { 'slide-a':['a2-sc','a2'], 'slide-b':['b2-sc','b2'], 'slide-c':['c2-sc','c2'], 'slide-d':['d2-sc','d2'], 'slide-e':['e3-sc','e3'] };
@@ -1814,10 +1738,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateSlider(50);
   initStars('a3-st','a3');
   buildQ6Cards();
-
-  attachOverflowWatchers();
-  // Initial check for the hero (in case it overflows on very short screens)
-  requestAnimationFrame(updateOverflowAffordance);
 
   document.addEventListener('click',      firstInteractionHandler);
   document.addEventListener('touchstart', firstInteractionHandler, {passive:true});
