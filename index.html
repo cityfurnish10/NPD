@@ -1126,16 +1126,16 @@
     </div>
     <div class="slide-actions">
       <button class="btn-back" onclick="prev()">&#8592;</button>
-      <button class="btn-next" onclick="next()">Next &#8594;</button>
+      <button class="btn-next" id="submitBtn" onclick="submitSurvey()">Submit &#10003;</button>
     </div>
   </div>
 
-  <!-- IDENTITY -->
-  <div class="slide" id="slide-identity" data-sec="4">
+  <!-- IDENTITY (now slide #2, right after hero) -->
+  <div class="slide" id="slide-identity" data-sec="1">
     <div class="slide-body">
-      <div class="slide-tag">Almost done</div>
-      <h2 class="slide-headline">Your details</h2>
-      <p class="slide-sub">We'll only call if needed.</p>
+      <div class="slide-tag">First, the basics</div>
+      <h2 class="slide-headline">Tell us who you are</h2>
+      <p class="slide-sub">Quick contact details so we can match your answers to your account.</p>
 
       <div class="q-block">
         <div class="q-label">Name</div>
@@ -1154,7 +1154,7 @@
     </div>
     <div class="slide-actions">
       <button class="btn-back" onclick="prev()">&#8592;</button>
-      <button class="btn-next" id="submitBtn" onclick="submitSurvey()">Submit &#10003;</button>
+      <button class="btn-next" onclick="saveIdentity()">Next &#8594;</button>
     </div>
   </div>
 
@@ -1249,9 +1249,9 @@ const PRICE_DISPLAY = [
 ];
 
 /* === SEQUENCE === */
-function initSeq() { seq = ['slide-hero','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1']; }
+function initSeq() { seq = ['slide-hero','slide-identity','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1']; }
 function buildSeq() {
-  const base = ['slide-hero','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1'];
+  const base = ['slide-hero','slide-identity','slide-q1','slide-q2q4','slide-q3','slide-q5','slide-int1'];
   const cats = new Set((A.q1||[]).map(v=>q1Cat[v]).filter(Boolean));
   const blocks = [];
   ['storage','appliances','dining','living','mattress'].forEach(c=>{ if(cats.has(c)) blocks.push(...catSlides[c]); });
@@ -1283,6 +1283,9 @@ function showSlide(newIdx, dir='fwd') {
 
   // Always scroll the page to the very top when changing slides
   window.scrollTo({ top: 0, behavior: 'auto' });
+
+  // Persist position so a refresh restores the same slide
+  saveProgress();
 }
 
 function next() { if (idx < seq.length-1) showSlide(idx+1,'fwd'); }
@@ -1508,8 +1511,9 @@ function saveQ8() {
   A.q8 = sel;
   const oi = document.getElementById('q8-other-in'); if(oi?.value.trim()) A.q8_other=oi.value.trim();
   const base = seq.slice(0,seq.indexOf('slide-q8')+1);
-  if(A.q8.length>0){ buildPriceSlide(); seq=[...base,'slide-q9','slide-identity','slide-done']; }
-  else             { seq=[...base,'slide-identity','slide-done']; }
+  if(A.q8.length>0){ buildPriceSlide(); seq=[...base,'slide-q9','slide-done']; }
+  else             { seq=[...base,'slide-done']; }
+  saveProgress();
   next();
 }
 function buildPriceSlide() {
@@ -1531,8 +1535,91 @@ function buildPriceSlide() {
 /* === RESTART === resets state by reloading; sessionStorage clears the music-mute pref so it starts fresh too. */
 function restartSurvey() {
   try { sessionStorage.removeItem('cf-muted'); } catch(e) {}
+  try { localStorage.removeItem('cf-survey-progress'); } catch(e) {}
   window.scrollTo(0, 0);
   location.reload();
+}
+
+
+/* === PROGRESS PERSISTENCE ===
+   Saves A + idx + seq to localStorage on every nav and after each save* call.
+   On page load, restores state and jumps the user back to their saved slide.
+   Cleared after a successful submission, or via 'Start again'. */
+const STORAGE_KEY = 'cf-survey-progress';
+const PROGRESS_TTL = 7 * 24 * 60 * 60 * 1000;   // 7 days
+
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      A, idx, seq, savedAt: Date.now()
+    }));
+  } catch(e) {}
+}
+function clearProgress() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+}
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    if (!data || !data.A) return null;
+    if (Date.now() - (data.savedAt || 0) > PROGRESS_TTL) {
+      localStorage.removeItem(STORAGE_KEY);
+      return null;
+    }
+    return data;
+  } catch(e) { return null; }
+}
+function restoreFormFromState() {
+  // Checkboxes
+  [['q1','q1'],['q3','q3'],['q8','q8']].forEach(([key,name]) => {
+    if (Array.isArray(A[key])) A[key].forEach(v => {
+      const el = document.querySelector(`input[name="${name}"][value="${v}"]`);
+      if (el) { el.checked = true; el.closest('.choice')?.classList.add('selected'); }
+    });
+  });
+  // Radios
+  ['q2','q5','q7','q7b','a1','b1','c1','d1','e1','e2'].forEach(n => {
+    if (A[n]) {
+      const el = document.querySelector(`input[name="${n}"][value="${A[n]}"]`);
+      if (el) { el.checked = true; el.closest('.choice')?.classList.add('selected'); }
+    }
+  });
+  // Q4 slider
+  if (A.q4 != null) {
+    const sl = document.getElementById('q4sl');
+    if (sl) { sl.value = A.q4; updateSlider(A.q4); }
+  }
+  // Free-text fields
+  if (A.q5 === 'other' && A.q5_other) {
+    const o = document.getElementById('q5-other-in');
+    if (o) { o.value = A.q5_other; o.style.display = 'block'; }
+  }
+  if (A.q7a) { const o = document.getElementById('q7a-in'); if (o) o.value = A.q7a; }
+  if (A.q8_other) {
+    const cb = document.getElementById('q8-other-cb');
+    const o = document.getElementById('q8-other-in');
+    if (cb) cb.checked = true;
+    if (o) { o.value = A.q8_other; o.style.display = 'block'; }
+  }
+  // Identity
+  if (A.name)  { const e = document.getElementById('cf-name');  if (e) e.value = A.name; }
+  if (A.phone) { const e = document.getElementById('cf-phone'); if (e) e.value = A.phone; }
+  if (A.email) { const e = document.getElementById('cf-email'); if (e) e.value = A.email; }
+  // Rebuild Q9 price blocks if user had q8 selections
+  if (Array.isArray(A.q8) && A.q8.length && document.getElementById('q9-content')) {
+    buildPriceSlide();
+    if (A.priceRanges) {
+      Object.entries(A.priceRanges).forEach(([cat,val]) => {
+        const i = PRICE_VALS.indexOf(val);
+        if (i >= 0) {
+          const sl = document.querySelector(`#q9-content input[oninput*="'${cat}'"]`);
+          if (sl) { sl.value = i; updatePriceSlider(cat, i); }
+        }
+      });
+    }
+  }
 }
 
 /* === SUBMIT ===
@@ -1542,22 +1629,31 @@ function restartSurvey() {
    will NOT be saved anywhere. */
 const ENDPOINT = 'https://script.google.com/macros/s/AKfycbz_8JEzagFI9ZazrWj1oBRORLYpps8oZFvkaLvxACgCGX22DVA3EPbWtISDt2uQ7w73Ew/exec';
 
-async function submitSurvey() {
-  const nameEl  = document.getElementById('cf-name');
+/* Validates identity inputs and stores them in A.
+   Called by the Next button on slide-identity (now slide #2). */
+function saveIdentity() {
+  const nameEl = document.getElementById('cf-name');
   const phoneEl = document.getElementById('cf-phone');
   const emailEl = document.getElementById('cf-email');
-
   const name  = nameEl.value.trim();
   const phone = phoneEl.value.replace(/\D/g,'');
   const email = emailEl.value.trim();
-
-  if (!name)              { shake('Please add your name.'); nameEl.focus(); return; }
-  if (phone.length !== 10){ shake('Please add a valid 10-digit mobile number.'); phoneEl.focus(); return; }
+  if (!name) { shake('Please add your name.'); nameEl.focus(); return; }
+  if (phone.length !== 10) { shake('Please add a valid 10-digit mobile number.'); phoneEl.focus(); return; }
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { shake("That email doesn't look right."); emailEl.focus(); return; }
-
-  A.name  = name;
-  A.phone = phone;
+  A.name = name; A.phone = phone;
   if (email) A.email = email;
+  saveProgress();
+  next();
+}
+
+async function submitSurvey() {
+  // Sanity check - if identity is somehow missing, jump back
+  if (!A.name || !A.phone) {
+    const idIdx = seq.indexOf('slide-identity');
+    if (idIdx !== -1) { showSlide(idIdx, 'bck'); shake('We need your details first.'); }
+    return;
+  }
   A.submitted_at = new Date().toISOString();
   A.user_agent   = navigator.userAgent;
 
@@ -1568,26 +1664,22 @@ async function submitSurvey() {
   } catch(e) {}
 
   const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  const original = btn.innerHTML;
-  btn.innerHTML = 'Sending...';
+  if (btn) { btn.disabled = true; btn.dataset.orig = btn.innerHTML; btn.innerHTML = 'Sending...'; }
 
   try {
     if (ENDPOINT && ENDPOINT.startsWith('http')) {
-      // URLSearchParams body is a "simple request" - no CORS preflight needed,
-      // so Apps Script accepts it without extra config.
       await fetch(ENDPOINT, {
         method: 'POST',
         mode: 'no-cors',
         body: new URLSearchParams({ data: JSON.stringify(A) })
       });
     }
+    clearProgress();   // wipe localStorage after successful submit
     if(!seq.includes('slide-done')) seq.push('slide-done');
     next();
     launchConfetti();
   } catch(e) {
-    btn.disabled = false;
-    btn.innerHTML = original;
+    if (btn) { btn.disabled = false; btn.innerHTML = btn.dataset.orig || 'Submit'; }
     shake('Network hiccup. Try again?');
   }
 }
@@ -1738,6 +1830,32 @@ document.addEventListener('DOMContentLoaded',()=>{
   updateSlider(50);
   initStars('a3-st','a3');
   buildQ6Cards();
+
+  // === Restore previous session if there's saved progress ===
+  const saved = loadProgress();
+  if (saved && saved.idx > 0 && Array.isArray(saved.seq) && saved.seq.length > 1) {
+    Object.assign(A, saved.A);
+    seq = saved.seq;
+    // Give DOM a tick to settle, then restore inputs + jump to saved slide
+    setTimeout(() => {
+      try {
+        restoreFormFromState();
+        const targetIdx = Math.min(saved.idx, seq.length - 1);
+        const targetId  = seq[targetIdx];
+        const targetEl  = document.getElementById(targetId);
+        const heroEl    = document.getElementById('slide-hero');
+        if (targetEl && heroEl && targetId !== 'slide-hero') {
+          heroEl.classList.remove('active');
+          targetEl.classList.add('active');
+          idx = targetIdx;
+          updateNav(targetId);
+          restoreSlideState(targetId);
+          window.scrollTo(0, 0);
+          showToast('Welcome back. Picking up where you left off.');
+        }
+      } catch(e) { console.warn('Resume failed:', e); }
+    }, 80);
+  }
 
   document.addEventListener('click',      firstInteractionHandler);
   document.addEventListener('touchstart', firstInteractionHandler, {passive:true});
